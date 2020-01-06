@@ -3,15 +3,29 @@ const mathFunctions = {
     createGridObject: () => {
         const grid ={};
 
-        for (let y = -10; y <= 10; y++) {
-            grid[y] = {};
-            for (let x = -10; x <= 10; x++) {
-                grid[y][x] = 'value';
+        for (let x = -10; x <= 10; x++) {
+            grid[x] = {};
+            for (let y = -10; y <= 10; y++) {
+                grid[x][y] = false;
             }
             //     console.log("hi");
         }
-    console.log(grid,'grid')
+    // console.log(grid,'grid')
+    return grid
+    },
+
+    translate: (x, y, deltaX, deltaY) => {
+        let endX = x + deltaX;
+        let endY = y + deltaY;
+        return [endX, endY]
+    },
+
+    transformGrid: (grid, x, y, deltaX, deltaY) => {
+        let [endX, endY] = mathFunctions.translate(x, y, deltaX, deltaY);
+        grid[endX][endY] = true;
+        grid[x][y] = false;
     }
+
 }
 
 
