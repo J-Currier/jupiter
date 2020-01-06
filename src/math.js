@@ -20,12 +20,11 @@ const mathFunctions = {
         return [endX, endY]
     },
 
-    transformGrid: (grid, x, y, deltaX, deltaY) => {
-        let [endX, endY] = mathFunctions.translate(x, y, deltaX, deltaY);
+    transformGrid: (grid, x, y, callback, parameters) => {
+        let [endX, endY] = callback(x, y, ...parameters);
         grid[endX][endY] = true;
         grid[x][y] = false;
     }
-
 }
 
 

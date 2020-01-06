@@ -13,9 +13,9 @@ test('grid translate', () => {
     expect(mathFunctions.translate(-5, 5, 2, 2)).toEqual([-3, 7])
 });
 
-test('grid translate', () => {
+test('grid transform', () => {
     const grid = mathFunctions.createGridObject();
-    mathFunctions.transformGrid(grid, -5, 5, 2, 2);
+    mathFunctions.transformGrid(grid, -5, 5, mathFunctions.translate, [2, 2]);
     expect(grid[-3][7]).toEqual(true);
     expect(grid[-5][5]).toEqual(false);
 });
