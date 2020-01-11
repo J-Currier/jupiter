@@ -56,7 +56,7 @@ function Canvas() {
     function drawCircle(centerX, centerY, myColour) {
     //   var centerX = 1100;
     //   var centerY = 900 ;
-      var radius = 700;
+      var radius = 50;
 
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
