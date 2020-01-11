@@ -20,6 +20,24 @@ const mathFunctions = {
         return [endX, endY]
     },
 
+    reflect: (x, y, horizontal, axis) => {
+        let endX = x;
+        let endY = y;
+        if (horizontal) {
+            endX = axis + (axis - x);
+        } else {
+            endY = axis + (axis - y);
+        };
+        return [endX, endY];
+    },
+
+    rotation: (x,y, clockwise, centre) => {
+        // to do 
+        let endX;
+        let endY;
+        return [endX, endY];
+    },
+
     transformGrid: (grid, x, y, callback, parameters) => {
         let [endX, endY] = callback(x, y, ...parameters);
         grid[endX][endY] = true;

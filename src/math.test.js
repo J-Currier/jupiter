@@ -8,9 +8,22 @@ test('math grid', () => {
     expect(Object.values(grid).length).toBe(21);
 });
 
-test('grid translate', () => {
-    const grid = mathFunctions.createGridObject()
+test('math translate', () => {
     expect(mathFunctions.translate(-5, 5, 2, 2)).toEqual([-3, 7])
+});
+
+test('math reflect', () => {
+    expect(mathFunctions.reflect(-5, 5, true, 0)).toEqual([5, 5]);
+    expect(mathFunctions.reflect(-5, 5, true, 2)).toEqual([9, 5]);
+    expect(mathFunctions.reflect(5, 0, true, 2)).toEqual([-1, 0]);
+    expect(mathFunctions.reflect(2, 2, false, 0)).toEqual([2, -2]);
+    expect(mathFunctions.reflect(2, 2, false, -3)).toEqual([2, -8]);
+    expect(mathFunctions.reflect(0, -3, false, 1)).toEqual([0, 5]);
+    expect(mathFunctions.reflect(0, -3, false, -3)).toEqual([0, -3]);
+});
+
+test('math rotate', () => {
+    expect(mathFunctions.rotate(-1,-1, true, 0)).toEqual([-1,1]);
 });
 
 test('grid transform', () => {
