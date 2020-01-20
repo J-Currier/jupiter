@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import {Canvas} from './canvasComp.js'
 import Sideboard from './SideboardComp.js'
+import {Circle} from './circleComp.js'
+
 
 function App() {
-
+  const [circleInfo, setCircleInfo] = useState({
+    centerX: 1100,
+    centerY: 900,
+    radius: 50,
+    fillColour: 'green',
+    borderColor: '#003300',
+    borderWidth: 10
+  })
 
   return (
     <div className="App">
       <header>
         Graph Hopper
       </header>
-      <Canvas />
+      <div className='wrapper'>
+        <Canvas />
+        <Circle circleInfo = {circleInfo} />
+      </div>
       <Sideboard />
-    
     </div>
   );
 }

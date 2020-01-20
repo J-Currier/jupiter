@@ -1,16 +1,8 @@
 import React, { useEffect } from 'react';
 import './canvasComp.css';
-import mathFunctions from './math.js'
 
 function Canvas() {
     useEffect(() => {
-        // ctx.moveTo(1000, 0);
-        // ctx.lineTo(1000, 2000);
-        // ctx.stroke();
-        // Box width
-        // Box height
-
-
         var canvas = document.getElementById("myCanvas");
         var context = canvas.getContext("2d");
         canvas.width = 2000;
@@ -33,8 +25,6 @@ function Canvas() {
             context.stroke();
         }
 
-        
-
         function drawAxis(){
             console.log('red line')
                 context.beginPath();
@@ -50,31 +40,11 @@ function Canvas() {
                 context.moveTo(0, 1000);
                 context.lineTo(2000, 1000);
                 context.stroke();
-
         }
-
-    function drawCircle(centerX, centerY, myColour) {
-    //   var centerX = 1100;
-    //   var centerY = 900 ;
-      var radius = 50;
-
-      context.beginPath();
-      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      context.fillStyle = myColour;
-      context.fill();
-      context.lineWidth = 20;
-      context.strokeStyle = '#003300';
-      context.stroke();
-    }
         
-            drawBoard();    
-            drawAxis();   
-            drawCircle(1100, 900, 'green'); 
-            // drawCircle( ...mathFunctions.translate (1100, 900, 100, 0), 'red');
-
+        drawBoard();    
+        drawAxis();   
     });
-
-
 
     return (
       <div className="Canvas">
