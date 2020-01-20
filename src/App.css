@@ -40,3 +40,9 @@
 .directional {
   width: 8vmin;
 }
+
+.wrapper {
+  position: relative;
+  width: 60vmin;
+  height: 60vmin;
+}
