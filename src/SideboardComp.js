@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 // import { ReactComponent as IconUp } from './images/kuba_arrow_button_set_3.svg'
 // import { ReactComponent as IconLeft } from './images/kuba_arrow_button_set_1.svg'
@@ -12,8 +12,9 @@ import IconUndo from './images/arrow-curved-blue.svg'
 
 function Sideboard(props) {
 
+    const [step, setStep] = useState(0); // todo
+
     function HandleClick(e) {
-        
         buttonInfo[e.target.name].fx();
     };
     const buttonInfo = {
@@ -21,8 +22,8 @@ function Sideboard(props) {
         down: {icon: IconDown, fx: ()=>{console.log("Down")}},
         left: {icon: IconLeft, fx: ()=>{console.log("<--")}},
         right: {icon: IconRight, fx: ()=>{console.log("Droit")}},
-        undo: {icon: IconUndo, fx: ()=>{console.log("undo")}},
-        redo: {icon: IconUndo, fx: ()=>{console.log("redo")}}
+        undo: {icon: IconUndo, fx: setStep},
+        redo: {icon: IconUndo, fx: setStep}
     };
 
     const buttons = [];
