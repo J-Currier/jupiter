@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import {Canvas} from './components/canvasComp'
+import { Canvas } from './components/canvasComp'
 import Sideboard from './components/SideboardComp'
-import {Circle} from './components/circleComp.js'
+import { Circle } from './components/circleComp.js'
 
 
 function App() {
@@ -20,11 +20,13 @@ function App() {
       <header>
         Graph Hopper
       </header>
-      <div className='wrapper'>
-        <Canvas />
-        <Circle circleInfo = {circleInfo} />
-      </div>
-      <Sideboard />
+      <main>
+        <div className='wrapper'>
+          <Canvas />
+          <Circle circleInfo={circleInfo} />
+        </div>
+        <Sideboard />
+      </main>
     </div>
   );
 }

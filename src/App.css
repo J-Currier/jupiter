@@ -45,4 +45,15 @@
   position: relative;
   width: 60vmin;
   height: 60vmin;
+  justify-self: right;
 }
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sideboard {
+  justify-self: left;
+}
+
