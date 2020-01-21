@@ -4,11 +4,11 @@ import React, {useState} from 'react';
 // import { ReactComponent as IconLeft } from './images/kuba_arrow_button_set_1.svg'
 // import { ReactComponent as IconRight } from './images/kuba_arrow_button_set_2.svg'
 // import { ReactComponent as IconDown } from './images/kuba_arrow_button_set_4.svg'
-import IconUp from './images/kuba_arrow_button_set_3.svg'
-import IconLeft from './images/kuba_arrow_button_set_1.svg'
-import IconRight from './images/kuba_arrow_button_set_2.svg'
-import IconDown from './images/kuba_arrow_button_set_4.svg'
-import IconUndo from './images/arrow-curved-blue.svg'
+import IconUp from '../images/kuba_arrow_button_set_3.svg'
+import IconLeft from '../images/kuba_arrow_button_set_1.svg'
+import IconRight from '../images/kuba_arrow_button_set_2.svg'
+import IconDown from '../images/kuba_arrow_button_set_4.svg'
+import IconUndo from '../images/arrow-curved-blue.svg'
 
 function Sideboard(props) {
 
