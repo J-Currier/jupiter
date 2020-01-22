@@ -18,8 +18,8 @@ function App() {
   const [centerX, setCenterX] = useState(1100)
   const [centerY, setCenterY] = useState(900)
   const [radius, setRadius] = useState(50)
-  const [fillColour, setFillColour] = useState('rgb(137, 235, 52)')
-  const [borderColour, setBorderColour] = useState('rgb(0, 0, 0)')
+  const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 0.8)')
+  const [borderColour, setBorderColour] = useState('rgba(0, 0, 0, 0.8)')
   const [borderWidth, setBorderWidth] = useState(10)
   const [shapeClassName, setShapeClassName] = useState('Circle')
 
@@ -37,7 +37,6 @@ function App() {
   }
 
   const moveCircle = (newX, newY) => {
-    console.log(newX, newY)
     setCenterX(newX)
     setCenterY(newY)
   }

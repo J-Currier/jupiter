@@ -22,9 +22,6 @@ function Circle(props) {
         
         drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth); 
     });
-    console.log(borderColour)
-
-
 
     return (
       <div className={shapeClassName}>

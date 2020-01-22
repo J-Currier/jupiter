@@ -3,7 +3,7 @@ import './gridComp.css';
 
 function Grid() {
     useEffect(() => {
-        var canvas = document.getElementById("myCanvas");
+        var canvas = document.getElementById("myGrid");
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
@@ -43,11 +43,10 @@ function Grid() {
         
         drawBoard();    
         drawAxis();   
-    });
-
+    }, []);
     return (
-      <div className="Canvas">
-          <canvas id="myCanvas"></canvas>
+      <div className="grid">
+          <canvas id="myGrid"></canvas>
       </div>
     );
 }
