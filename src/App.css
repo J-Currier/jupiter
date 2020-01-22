@@ -49,13 +49,31 @@
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+  background-color: rgba(238, 238, 238, 0.4);
+  background-image: url("./images/planetImage.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: color;
 }
 
 .sideboard {
   justify-self: left;
   
+}
+
+.winner {
+  font-size: 500%;
+  color: rgba(137, 235, 52, 1);
+  font-family: 'Bangers', cursive;
+  height: 60vh;
+  vertical-align: middle;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(0,0,0,.2);
 }
 
 

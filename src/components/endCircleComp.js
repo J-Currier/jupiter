@@ -31,9 +31,9 @@ function Circle(props) {
 }
 
 function EndPtCircle(props) {
-    let {endPtX, endPtY, radius, fillColour, borderColour, borderWidth} = props.circleInfo
+    let {endPtX, endPtY, radius, fillColour, borderColour, borderWidth, shapeClassName} = props.circleInfo
     useEffect(() => {
-        var canvas = document.getElementById("myEndPt");
+        var canvas = document.getElementById("myCircle");
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
@@ -53,8 +53,8 @@ function EndPtCircle(props) {
     });
 
     return (
-      <div >
-          <canvas id="myEndPt"></canvas>
+      <div className={shapeClassName}>
+          <canvas id="myCircle"></canvas>
       </div>
     );
 }

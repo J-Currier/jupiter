@@ -19,6 +19,13 @@
         top: 0;
         left: 0;
  }
+ #myEndPt {
+  width: 60vmin;
+  height: 60vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
  .fade-out {
 	-webkit-animation: fade-out 0.5s ease-out both;
 	        animation: fade-out 0.5s ease-out both;
@@ -74,4 +81,12 @@
   .fade-in {
 	-webkit-animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+#myEndCircle {
+  width: 60vmin;
+  height: 60vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

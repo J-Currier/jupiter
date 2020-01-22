@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Grid } from './components/gridComp'
 import Sideboard from './components/SideboardComp'
-import { Circle } from './components/circleComp.js'
+import { Circle, EndPtCircle } from './components/circleComp.js'
 
 
 function App() {
@@ -23,6 +23,10 @@ function App() {
   const [borderWidth, setBorderWidth] = useState(10)
   const [shapeClassName, setShapeClassName] = useState('Circle')
 
+  const [endPtX, setEndPtX] = useState(800)
+  const [endPtY, setEndPtY] = useState(1100)
+  const [gameDiv, setGameDiv] = useState('wrapper')
+
   const changeClass = (newName) => {
     setShapeClassName(newName)
   }
@@ -36,6 +40,41 @@ function App() {
 
   }
 
+  const LevelCheck = () => {
+    if ((centerX == endPtX) && (centerY == endPtY)) {
+      return (
+        <main>
+          <div className='wrapper'>
+            <Grid />
+            <EndPtCircle circleInfo={endPtInfo} />
+            <Circle circleInfo={circleInfo} />
+          </div>
+          <Sideboard
+          buttonFunction={handleClick} />
+        <div className='winner'>
+          Portal Locked! <br />
+          You Win
+        </div>
+          </main>
+      )} else {
+          return (
+            <main>
+            <div className='wrapper'>
+              <Grid />
+              <EndPtCircle circleInfo={endPtInfo} />
+              <Circle circleInfo={circleInfo} />
+            </div>
+            <Sideboard
+            buttonFunction={handleClick} />
+            </main>
+
+        
+          ) 
+        }
+        
+  }
+  
+
   const moveCircle = (newX, newY) => {
     setCenterX(newX)
     setCenterY(newY)
@@ -44,27 +83,30 @@ function App() {
     "centerX": centerX,
     "centerY": centerY,
     "radius": radius,
-    "fillColour": fillColour,
+    "fillColour": fillColour ,
     "borderColour": borderColour,
     "borderWidth": borderWidth,
     "shapeClassName": shapeClassName
-
   }
-  console.log(circleInfo)
+
+  let endPtInfo = {
+    "endPtX": endPtX,
+    "endPtY": endPtY,
+    "radius": radius,
+    "fillColour": 'rgba(255, 77, 0, 1)',
+    "borderColour": borderColour,
+    "borderWidth": borderWidth,
+    "shapeClassName": "endPtCircle"
+  }
+
 
   return (
     <div className="App">
-      <header>
+      {/* <header>
         Graph Hopper
-      </header>
-      <main>
-        <div className='wrapper'>
-          <Grid />
-          <Circle circleInfo={circleInfo} />
-        </div>
-        <Sideboard
-          buttonFunction={handleClick} />
-      </main>
+      </header> */}
+      <LevelCheck />
+        
     </div>
   );
 }
