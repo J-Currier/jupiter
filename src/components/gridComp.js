@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import './canvasComp.css';
+import './gridComp.css';
 
-function Canvas() {
+function Grid() {
     useEffect(() => {
         var canvas = document.getElementById("myCanvas");
         var context = canvas.getContext("2d");
@@ -26,7 +26,6 @@ function Canvas() {
         }
 
         function drawAxis(){
-            console.log('red line')
                 context.beginPath();
                 context.strokeStyle = 'red';
                 context.lineWidth = 10;
@@ -53,4 +52,4 @@ function Canvas() {
     );
 }
 
-export {Canvas}
+export {Grid}

@@ -16,13 +16,13 @@ function Sideboard(props) {
     const [step, setStep] = useState(0); // todo
 
     function HandleClick(e) {
-        buttonInfo[e.target.name].fx();
+        buttonInfo[e.target.name].fx(e)
     };
     const buttonInfo = {
-        up: {icon: IconUp, fx: ()=>{console.log("up")}},
-        left: {icon: IconLeft, fx: ()=>{console.log("<--")}},
-        right: {icon: IconRight, fx: ()=>{console.log("Droit")}},
-        down: {icon: IconDown, fx: ()=>{console.log("Down")}},
+        up: {icon: IconUp, fx: (e)=>{props.buttonFunction(e, 0, -100)}},
+        left: {icon: IconLeft, fx: (e)=>{props.buttonFunction(e, -100, 0)}},
+        right: {icon: IconRight, fx: (e)=>{props.buttonFunction(e, 100, 0)}},
+        down: {icon: IconDown, fx: (e)=>{props.buttonFunction(e, 0, 100)}},
         undo: {icon: IconUndo, fx: setStep},
         redo: {icon: IconUndo, fx: setStep}
     };

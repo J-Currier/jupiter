@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './circleComp.css';
 
 function Circle(props) {
-    let {centerX, centerY, radius, fillColour, borderColor, borderWidth} = props.circleInfo
+    let {centerX, centerY, radius, fillColour, borderColour, borderWidth, shapeClassName} = props.circleInfo
     useEffect(() => {
         var canvas = document.getElementById("myCircle");
         var context = canvas.getContext("2d");
@@ -16,17 +16,18 @@ function Circle(props) {
             context.fillStyle = fillColour;
             context.fill();
             context.lineWidth = borderWidth;
-            context.strokeStyle = borderColor;
+            context.strokeStyle = borderColour;
             context.stroke();
         }
         
-        drawCircle(centerX, centerY, radius, fillColour, borderColor, borderWidth); 
+        drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth); 
     });
+    console.log(borderColour)
 
 
 
     return (
-      <div className="Circle">
+      <div className={shapeClassName}>
           <canvas id="myCircle"></canvas>
       </div>
     );
