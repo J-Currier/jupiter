@@ -43,27 +43,29 @@ function Sideboard(props) {
         };
     };
 
-    const timeButtons = [];
-    for(let index in buttonInfo) {
-        if (index==="undo" || index==="redo") {
-            timeButtons.push(
-                <img 
-                    onClick={HandleClick} 
-                    key={index} 
-                    name={index}
-                    id={index} 
-                    className="time button" 
-                    src= {buttonInfo[index].icon}
-                ></img>
-            );
-        };
-    };
+    // const timeButtons = [];
+    // for(let index in buttonInfo) {
+    //     if (index==="undo" || index==="redo") {
+    //         timeButtons.push(
+    //             <img 
+    //                 onClick={HandleClick} 
+    //                 key={index} 
+    //                 name={index}
+    //                 id={index} 
+    //                 className="time button" 
+    //                 src= {buttonInfo[index].icon}
+    //             ></img>
+    //         );
+    //     };
+    // };
 
-
+    
+    const factor = <input type="number" min='0' max='18' onChange={props.factorHandle} value={props.moveFactor} id="factorBox"/>
     return (
         <div id="sideboard">   
+            {factor}
             {buttons}
-            {timeButtons}
+            {/* {timeButtons} */}
         </div>
     )
 }
