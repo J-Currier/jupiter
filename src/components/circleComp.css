@@ -114,8 +114,8 @@
             transform: scale3d(1, 1, 1);
   }
   30% {
-    -webkit-transform: scale3d(1.25, 0.75, 1);
-            transform: scale3d(1.25, 0.75, 1);
+    -webkit-transform: scale3d(1, 0.75, 1);
+            transform: scale3d(1, 0.75, 1);
   }
   40% {
     -webkit-transform: scale3d(0.75, 1.25, 1);
