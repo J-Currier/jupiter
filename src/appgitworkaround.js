@@ -58,36 +58,42 @@ function App() {
 
   }
 
-  const Game = () => {
-    return (
-      <main>
-        <div className='wrapper'>
-          <Grid />
-          <EndPtCircle circleInfo={endPtInfo} />
-          <Circle circleInfo={circleInfo} />
-        </div>
-        <Sideboard
-          buttonFunction={handleClick} />
-        <LevelCheck />
-      </main>
-    )
-  }
   const LevelCheck = () => {
 
     
     if ((centerX == endPtX) && (centerY == endPtY)) {
       return (
+        <main>
+          <div className='wrapper'>
+            <Grid />
+            <EndPtCircle circleInfo={endPtInfo} />
+            <Circle circleInfo={circleInfo} />
+          </div>
+          <Sideboard
+          buttonFunction={handleClick} />
         <div className='winner'>
           Portal Locked! <br />
           You Win
         </div>
-      )
-    } else {
-      return (
-        <div></div>
-      )
-    }
+          </main>
+      )} else {
+          return (
+            <main>
+            <div className='wrapper'>
+              <Grid />
+              <EndPtCircle circleInfo={endPtInfo} />
+              <Circle circleInfo={circleInfo} />
+            </div>
+            <Sideboard
+            buttonFunction={handleClick} />
+            </main>
+
+        
+          ) 
+        }
+        
   }
+  
 
   const moveCircle = (newX, newY) => {
     setCenterX(newX)
@@ -97,7 +103,7 @@ function App() {
     "centerX": centerX,
     "centerY": centerY,
     "radius": radius,
-    "fillColour": fillColour,
+    "fillColour": fillColour ,
     "borderColour": borderColour,
     "borderWidth": borderWidth,
     "shapeClassName": shapeClassName
@@ -119,8 +125,8 @@ function App() {
       {/* <header>
         Graph Hopper
       </header> */}
-      <Game />
-
+      <LevelCheck />
+        
     </div>
   );
 }
