@@ -45,17 +45,17 @@ function App() {
     let newCenterX = (deltaX*moveFactor) + centerX;
     let newCenterY = (deltaY*moveFactor) + centerY;
     if (newCenterX < 100 || newCenterX > 1900) {
-      changeClass('jello-horizontal');
+      changeClass('shake-vertical');
       newCenterX = centerX;
       setTimeout(() => {
         changeClass("Circle")
-        }, 100);
+        }, 500);
     } else if (newCenterY < 100 || newCenterY > 1900) {
-      changeClass('jello-horizontal');
+      changeClass('shake-horizontal');
       newCenterY = centerY;
       setTimeout(() => {
         changeClass("Circle")
-        }, 100);
+        }, 500);
     } else {
     await changeClass("fade-out")
     await setTimeout(() => {
@@ -70,19 +70,22 @@ function App() {
     setMoveFactor(e.target.value)
 }
 
-  const Game = () => {
+  const Game = (props) => {
     return (
       <main>
         <div className='wrapper'>
           <Grid />
           <EndPtCircle circleInfo={endPtInfo} />
-          <Circle circleInfo={circleInfo} />
+          <Circle circleInfo={circleInfo}
+           />
         </div>
         <Sideboard
           buttonFunction={handleClick}
           factorHandle={factorHandle}
-          moveFactor={moveFactor} />
-        <LevelCheck />
+          moveFactor={moveFactor}
+
+          key='sideboard' />
+        <LevelCheck key='levelCHeck'/>
       </main>
     )
   }
@@ -133,7 +136,7 @@ function App() {
       {/* <header>
         Graph Hopper
       </header> */}
-      <Game />
+      <Game key='Game' />
 
     </div>
   );

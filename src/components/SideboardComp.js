@@ -60,10 +60,25 @@ function Sideboard(props) {
     // };
 
     
-    const factor = <input type="number" min='0' max='18' onChange={props.factorHandle} value={props.moveFactor} id="factorBox"/>
+    function Factor(props) {
+        return(
+            <input 
+                type="number" 
+                min='0' 
+                max='18' 
+                onChange={props.factorHandle} 
+                value={props.moveFactor} 
+                id="factorBox"
+                key="factorKey"
+            />
+        )
+    }
     return (
         <div id="sideboard">   
-            {factor}
+            <Factor key='FactorKey'
+                moveFactor={props.moveFactor}
+                factorHandle={props.factorHandle}
+            />
             {buttons}
             {/* {timeButtons} */}
         </div>
