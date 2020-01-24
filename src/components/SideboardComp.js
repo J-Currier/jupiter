@@ -70,6 +70,7 @@ function Sideboard(props) {
                 value={props.moveFactor} 
                 id="factorBox"
                 key="factorKey"
+                autoFocus= {true}
             />
         )
     }

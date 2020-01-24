@@ -68,6 +68,7 @@ function App() {
 
   function factorHandle(e) {
     setMoveFactor(e.target.value)
+    
 }
 
   const Game = (props) => {
