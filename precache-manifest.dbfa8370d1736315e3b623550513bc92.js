@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "015c58183b668baf0aa485e16bfe5cf8",
+    "revision": "18e60988b61930ea80c4521b6e10acb8",
     "url": "/jupiter/index.html"
   },
   {
-    "revision": "052cf912969330a4b766",
-    "url": "/jupiter/static/css/main.0472857c.chunk.css"
+    "revision": "025e382807db5b0b4889",
+    "url": "/jupiter/static/css/main.f6b9b103.chunk.css"
   },
   {
     "revision": "ac6a35b5af085bbc38a3",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jupiter/static/js/2.3720566d.chunk.js.LICENSE"
   },
   {
-    "revision": "052cf912969330a4b766",
-    "url": "/jupiter/static/js/main.798a96d4.chunk.js"
+    "revision": "025e382807db5b0b4889",
+    "url": "/jupiter/static/js/main.a2352933.chunk.js"
   },
   {
     "revision": "a4c3f0ff392f825abfc7",
@@ -42,5 +42,9 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2659d3c4931584617d1e9c55bfe30ac1",
     "url": "/jupiter/static/media/kuba_arrow_button_set_4.2659d3c4.svg"
+  },
+  {
+    "revision": "72375e849695b531b74a121eee3275fd",
+    "url": "/jupiter/static/media/planetImage.72375e84.png"
   }
 ]);
