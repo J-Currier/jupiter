@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/jupiter/static/css/main.f6b9b103.chunk.css",
-    "main.js": "/jupiter/static/js/main.a2352933.chunk.js",
-    "main.js.map": "/jupiter/static/js/main.a2352933.chunk.js.map",
+    "main.css": "/jupiter/static/css/main.49f33668.chunk.css",
+    "main.js": "/jupiter/static/js/main.e753418c.chunk.js",
+    "main.js.map": "/jupiter/static/js/main.e753418c.chunk.js.map",
     "runtime-main.js": "/jupiter/static/js/runtime-main.f95c9c89.js",
     "runtime-main.js.map": "/jupiter/static/js/runtime-main.f95c9c89.js.map",
     "static/js/2.3720566d.chunk.js": "/jupiter/static/js/2.3720566d.chunk.js",
     "static/js/2.3720566d.chunk.js.map": "/jupiter/static/js/2.3720566d.chunk.js.map",
     "index.html": "/jupiter/index.html",
-    "precache-manifest.dbfa8370d1736315e3b623550513bc92.js": "/jupiter/precache-manifest.dbfa8370d1736315e3b623550513bc92.js",
+    "precache-manifest.edf67a48957a25e63f69de9ea79cc294.js": "/jupiter/precache-manifest.edf67a48957a25e63f69de9ea79cc294.js",
     "service-worker.js": "/jupiter/service-worker.js",
-    "static/css/main.f6b9b103.chunk.css.map": "/jupiter/static/css/main.f6b9b103.chunk.css.map",
+    "static/css/main.49f33668.chunk.css.map": "/jupiter/static/css/main.49f33668.chunk.css.map",
     "static/js/2.3720566d.chunk.js.LICENSE": "/jupiter/static/js/2.3720566d.chunk.js.LICENSE",
     "static/media/arrow-curved-blue.svg": "/jupiter/static/media/arrow-curved-blue.8c03b2bc.svg",
     "static/media/kuba_arrow_button_set_1.svg": "/jupiter/static/media/kuba_arrow_button_set_1.ba5217d3.svg",
@@ -22,7 +22,7 @@
   "entrypoints": [
     "static/js/runtime-main.f95c9c89.js",
     "static/js/2.3720566d.chunk.js",
-    "static/css/main.f6b9b103.chunk.css",
-    "static/js/main.a2352933.chunk.js"
+    "static/css/main.49f33668.chunk.css",
+    "static/js/main.e753418c.chunk.js"
   ]
 }
