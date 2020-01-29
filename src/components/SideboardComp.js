@@ -1,9 +1,4 @@
 import React, {useState} from 'react';
-
-// import { ReactComponent as IconUp } from './images/kuba_arrow_button_set_3.svg'
-// import { ReactComponent as IconLeft } from './images/kuba_arrow_button_set_1.svg'
-// import { ReactComponent as IconRight } from './images/kuba_arrow_button_set_2.svg'
-// import { ReactComponent as IconDown } from './images/kuba_arrow_button_set_4.svg'
 import IconUp from '../images/kuba_arrow_button_set_3.svg'
 import IconLeft from '../images/kuba_arrow_button_set_1.svg'
 import IconRight from '../images/kuba_arrow_button_set_2.svg'
@@ -59,9 +54,8 @@ function Sideboard(props) {
     //     };
     // };
 
-    
-    function Factor(props) {
-        return(
+    return (
+        <div id="sideboard">   
             <input 
                 type="number" 
                 min='0' 
@@ -69,16 +63,6 @@ function Sideboard(props) {
                 onChange={props.factorHandle} 
                 value={props.moveFactor} 
                 id="factorBox"
-                key="factorKey"
-                autoFocus= {true}
-            />
-        )
-    }
-    return (
-        <div id="sideboard">   
-            <Factor key='FactorKey'
-                moveFactor={props.moveFactor}
-                factorHandle={props.factorHandle}
             />
             {buttons}
             {/* {timeButtons} */}
