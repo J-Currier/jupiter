@@ -22,9 +22,9 @@ test('math reflect', () => {
     expect(mathFunctions.reflect(0, -3, false, -3)).toEqual([0, -3]);
 });
 
-test('math rotate', () => {
-    expect(mathFunctions.rotate(-1,-1, true, 0)).toEqual([-1,1]);
-});
+// test('math rotate', () => {
+//     expect(mathFunctions.rotate(-1,-1, true, 0)).toEqual([-1,1]);
+// });
 
 test('grid transform', () => {
     const grid = mathFunctions.createGridObject();

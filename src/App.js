@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
+
 import {Grid} from './components/gridComp'
 import Sideboard from './components/SideboardComp'
 import {Circle} from './components/circleComp.js'
+
+import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
@@ -39,8 +42,7 @@ function Game (props) {
   }
 
   const handleClick = async (e, deltaX, deltaY) => {
-    let newCenterX = (deltaX*moveFactor) + centerX;
-    let newCenterY = (deltaY*moveFactor) + centerY;
+    let [newCenterX, newCenterY] = mathFunctions.translate(centerX, centerY, deltaX*moveFactor, deltaY*moveFactor)
     if (newCenterX < 100 || newCenterX > 1900) {
       changeClass('shake-vertical');
       newCenterX = centerX;

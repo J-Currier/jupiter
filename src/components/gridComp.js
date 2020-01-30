@@ -10,7 +10,7 @@ function Grid() {
         var bw = canvas.width;
         var bh = canvas.height;
 
-        function drawBoard(){
+        function drawBoard(context = document.getElementById("myGrid").getContext("2d")){
             for (var x = 0; x <= bw; x += 100) {
                 context.lineWidth = 8;
                 context.moveTo(x, 0);

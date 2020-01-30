@@ -31,12 +31,11 @@ const mathFunctions = {
         return [endX, endY];
     },
 
-    rotation: (x,y, clockwise, centre) => {
-        // to do 
-        let endX;
-        let endY;
-        return [endX, endY];
-    },
+    // rotate: (x,y, clockwise, centre) => {
+    //     let endX;
+    //     let endY;
+    //     return [endX, endY];
+    // },
 
     transformGrid: (grid, x, y, callback, parameters) => {
         let [endX, endY] = callback(x, y, ...parameters);
