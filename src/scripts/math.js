@@ -1,16 +1,28 @@
 // generate grid with a loop
 const mathFunctions = {
+    shapeMaker: (shapeType, size) => {
+        if (shapeType === 'circle') {
+            let radius = size
+            let centerX = 0
+            while(centerX < radius || centerX > 2000-radius ) {
+                centerX = (Math.floor(Math.random()*(10)))*200
+            }
+            let centerY = 0
+            while(centerY < radius || centerY > 2000-radius ) {
+                centerY = (Math.floor(Math.random()*(10)))*200
+            }
+            return [centerX, centerY, radius]
+        }
+    },
+
     createGridObject: () => {
         const grid ={};
-
         for (let x = -10; x <= 10; x++) {
             grid[x] = {};
             for (let y = -10; y <= 10; y++) {
                 grid[x][y] = false;
             }
-            //     console.log("hi");
         }
-    // console.log(grid,'grid')
     return grid
     },
 

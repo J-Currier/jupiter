@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './circleComp.css';
 
 function Circle(props) {
-    let {id, centerX, centerY, radius, fillColour, borderColour, borderWidth, shapeClassName} = props.circleInfo
+    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.circleInfo
+    let [centerX, centerY, radius] = position
     useEffect(() => {
         var canvas = document.getElementById(id);
         console.log(canvas, id, centerX, centerY, radius, fillColour, borderColour, borderWidth, shapeClassName)
