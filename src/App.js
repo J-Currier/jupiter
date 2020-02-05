@@ -9,57 +9,62 @@ import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  const getRandomNumber = () => {
-    let newPosition = (Math.floor(Math.random()*10))*200
-
-    if (newPosition === 0 || newPosition === 2000) {
-      newPosition = 300;
-    }
-    return newPosition
-  }
-
-  const getRandomEnd = (axis) => {
-    let newPositon = getRandomNumber();
-    while (newPositon === axis){
-      newPositon= getRandomNumber()
-    }
-    return newPositon;
-  }
-  const [centerX, setCenterX] = useState(getRandomNumber())
-  const [centerY, setCenterY] = useState(getRandomNumber())
-  const [radius, setRadius] = useState(50)
+  let size = (Math.floor(Math.random()*2)+1)*100
+  let startPoint = mathFunctions.shapeMaker('circle', size)
+  const [PlayerPosition, setPlayerPosition] = useState(startPoint)
   const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 1)')
   const [borderColour, setBorderColour] = useState('rgba(0, 0, 0, 1)')
   const [borderWidth, setBorderWidth] = useState(10)
   const [shapeClassName, setShapeClassName] = useState('Circle')
 
-  const [endPtX, setEndPtX] = useState(getRandomEnd(centerX))
-  const [endPtY, setEndPtY] = useState(getRandomEnd(centerY))
+  let endPoint = mathFunctions.shapeMaker('circle', size)
+  while ((Math.pow((endPoint[0]-PlayerPosition[0]), 2) + Math.pow((endPoint[1]-PlayerPosition[1]), 2)) < Math.pow((2*size), 2)) {
+    console.log(endPoint, PlayerPosition)
+    endPoint = mathFunctions.shapeMaker('circle', size)
+  }
+  const [targetPostition, setTargetPosition] = useState(endPoint)
   const [moveFactor, setMoveFactor] = useState(1)
+
+  let playerCircle = {
+  "id": "myCircle",
+  "position": PlayerPosition,
+  "fillColour": fillColour,
+  "borderColour": borderColour,
+  "borderWidth": borderWidth,
+  "shapeClassName": shapeClassName
+  }
+
+  let targetCircle = {
+    "id": "myEndPt",
+    "position": targetPostition,
+    "fillColour": 'rgba(255, 77, 0, 1)',
+    "borderColour": borderColour,
+    "borderWidth": borderWidth,
+    "shapeClassName": "endPtCircle"
+  }
 
   const changeClass = (newName) => {
     setShapeClassName(newName)
   }
 
-  const handleClick = async (e, deltaX, deltaY) => {
-    let [newCenterX, newCenterY] = mathFunctions.translate(centerX, centerY, deltaX*moveFactor, deltaY*moveFactor)
+  const translateCircle = async (e, deltaX, deltaY) => {
+    let [newCenterX, newCenterY] = mathFunctions.translate(PlayerPosition[0], PlayerPosition[1], deltaX*moveFactor, deltaY*moveFactor)
     if (newCenterX < 100 || newCenterX > 1900) {
       changeClass('shake-vertical');
-      newCenterX = centerX;
+      newCenterX = PlayerPosition[0];
       setTimeout(() => {
         changeClass("Circle")
         }, 500);
     } else if (newCenterY < 100 || newCenterY > 1900) {
       changeClass('shake-horizontal');
-      newCenterY = centerY;
+      newCenterY = PlayerPosition[1];
       setTimeout(() => {
         changeClass("Circle")
         }, 500);
     } else {
     await changeClass("fade-out")
     await setTimeout(() => {
-
-      moveCircle(newCenterX, newCenterY); 
+      setPlayerPosition([newCenterX, newCenterY, PlayerPosition[2]])
       changeClass("fade-in")
     }, 100);
     }
@@ -69,35 +74,8 @@ function Game (props) {
     setMoveFactor(e.target.value)
   }
 
-  const moveCircle = (newX, newY) => {
-    setCenterX(newX)
-    setCenterY(newY)
-  }
-
-  let circleInfo = {
-    "id": "myCircle",
-    "centerX": centerX,
-    "centerY": centerY,
-    "radius": radius,
-    "fillColour": fillColour,
-    "borderColour": borderColour,
-    "borderWidth": borderWidth,
-    "shapeClassName": shapeClassName
-  }
-
-  let endPtInfo = {
-    "id": "myEndPt",
-    "centerX": endPtX,
-    "centerY": endPtY,
-    "radius": radius,
-    "fillColour": 'rgba(255, 77, 0, 1)',
-    "borderColour": borderColour,
-    "borderWidth": borderWidth,
-    "shapeClassName": "endPtCircle"
-  }
-
   const LevelCheck = () => {
-    if ((centerX === endPtX) && (centerY === endPtY)) {
+    if (JSON.stringify(PlayerPosition) === JSON.stringify(targetPostition)) {
       return (
         <div className='winner'>
           Portal Locked! <br />
@@ -115,11 +93,11 @@ function Game (props) {
     <main>
       <div className='wrapper'>
         <Grid />
-        <Circle circleInfo={endPtInfo}/>
-        <Circle circleInfo={circleInfo}/>
+        <Circle circleInfo={targetCircle}/>
+        <Circle circleInfo={playerCircle}/>
       </div>
       <Sideboard
-        buttonFunction={handleClick}
+        buttonFunction={translateCircle}
         factorHandle={factorHandle}
         moveFactor={moveFactor}
         key='sideboard' />
