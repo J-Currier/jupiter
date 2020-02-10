@@ -6,6 +6,8 @@ import Sideboard from './components/SideboardComp'
 import {Circle} from './components/circleComp.js'
 import {Square} from './components/squareComp.js'
 import {Triangle} from './components/triangleComp.js'
+import {Heart} from './components/heartComp.js'
+
 
 import mathFunctions from './scripts/math.js'
 
@@ -106,7 +108,7 @@ function Game (props) {
         <Grid />
         <Circle circleInfo={targetCircle}/>
         <Circle circleInfo={playerCircle}/>
-        <Triangle shapeInfo={squareInfo}/>
+        <Heart shapeInfo={squareInfo}/>
 
 
       </div>
