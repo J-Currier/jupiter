@@ -4,6 +4,7 @@ import './App.css';
 import {Grid} from './components/gridComp'
 import Sideboard from './components/SideboardComp'
 import {Circle} from './components/circleComp.js'
+import {Square} from './components/squareComp.js'
 
 import mathFunctions from './scripts/math.js'
 
@@ -41,6 +42,16 @@ function Game (props) {
     "borderColour": borderColour,
     "borderWidth": borderWidth,
     "shapeClassName": "endPtCircle"
+  }
+
+  let squareInfo = {
+    "id": "mySquare",
+    'position': [1000, 1000, 200],
+    "fillColour": 'rgba(0, 0, 0, 1)',
+    "borderColour": 'rgba(0, 0, 0, 1)',
+    "borderWidth": borderWidth,
+    "shapeClassName": shapeClassName,
+    'orientation': 4,
   }
 
   const changeClass = (newName) => {
@@ -95,6 +106,9 @@ function Game (props) {
         <Grid />
         <Circle circleInfo={targetCircle}/>
         <Circle circleInfo={playerCircle}/>
+        <Square shapeInfo={squareInfo}/>
+
+
       </div>
       <Sideboard
         buttonFunction={translateCircle}
