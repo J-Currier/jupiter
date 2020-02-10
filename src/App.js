@@ -5,6 +5,7 @@ import {Grid} from './components/gridComp'
 import Sideboard from './components/SideboardComp'
 import {Circle} from './components/circleComp.js'
 import {Square} from './components/squareComp.js'
+import {Triangle} from './components/triangleComp.js'
 
 import mathFunctions from './scripts/math.js'
 
