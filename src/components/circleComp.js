@@ -23,8 +23,9 @@ function Circle(props) {
         }
         
         drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth); 
-    }, [centerX, centerY]);
-    
+        console.log(position, 'position circle')
+
+    }, [centerX, centerY, radius]);
     return (
       <div className={shapeClassName}>
           <canvas id={id}></canvas>

@@ -46,12 +46,11 @@ function Game (props) {
 
   let squareInfo = {
     "id": "mySquare",
-    'position': [1000, 1000, 200],
+    'position': [1000, 1000, 200, 4],
     "fillColour": 'rgba(0, 0, 0, 1)',
     "borderColour": 'rgba(0, 0, 0, 1)',
     "borderWidth": borderWidth,
-    "shapeClassName": shapeClassName,
-    'orientation': 4,
+    "shapeClassName": 'endPtsquare',
   }
 
   const changeClass = (newName) => {

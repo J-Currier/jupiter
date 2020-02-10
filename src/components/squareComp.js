@@ -3,14 +3,16 @@ import './circleComp.css';
 
 function Square(props) {
     // postion is array of anchorX, anchorY, length
-    let {id, position, fillColour, borderColour, borderWidth, shapeClassName, orientation} = props.shapeInfo //props.circleInfo -> props.shapeInfo
+    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo //props.circleInfo -> props.shapeInfo
+    let [anchorX, anchorY, size, orientaion] = position
+
     useEffect(() => {
         var canvas = document.getElementById(id);
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
 
-        let cornerArray = determineCorners(position[0], position[1], position[2], orientation);
+        let cornerArray = determineCorners(position[0], position[1], position[2], position[3]);
 
         function drawSquare( fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
@@ -28,8 +30,10 @@ function Square(props) {
         }
             
         drawSquare(fillColour, borderColour, borderWidth); 
+        console.log(position, 'position square use effect')
 
-    }, [position[0], position[1]]);
+    }, [anchorX, anchorY, size, orientaion]);
+
     
     return (
       <div className={shapeClassName}>
@@ -48,7 +52,7 @@ function determineCorners (anchorX, anchorY, length, orientation) {
     if (orientation === 3) {
         return  [[anchorX, anchorY],[anchorX - length, anchorY],[anchorX-length, anchorY+length],[anchorX, anchorY+length]];
     }
-    if (orientation === 4) {
+    if (orientation  === 4) {
         return [[anchorX, anchorY],[anchorX - length, anchorY],[anchorX-length, anchorY-length],[anchorX, anchorY-length]];
     }
 }
