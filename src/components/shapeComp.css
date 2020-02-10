@@ -1,21 +1,4 @@
-
-#myCircle {
-  width: 60vmin;
-  height: 60vmin;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#mySquare {
-  width: 60vmin;
-  height: 60vmin;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#myTriangle {
+#myStartPt {
   width: 60vmin;
   height: 60vmin;
   position: absolute;

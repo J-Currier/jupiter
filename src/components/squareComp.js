@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import './circleComp.css';
+import './shapeComp.css';
 
 function Square(props) {
-    // postion is array of anchorX, anchorY, length
-    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo //props.circleInfo -> props.shapeInfo
+    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo
     let [anchorX, anchorY, size, orientaion] = position
+    // anchorX = anchorX+50;
+    // anchorY = anchorY +50;
 
     useEffect(() => {
         var canvas = document.getElementById(id);
@@ -12,27 +13,27 @@ function Square(props) {
         canvas.width = 2000;
         canvas.height = 2000;
 
-        let cornerArray = determineCorners(position[0], position[1], position[2], position[3]);
+        let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
 
-        function drawSquare( fillColour, borderColour, borderWidth) {
+        function drawSquare(fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
             context.beginPath();
             context.moveTo(cornerArray[0][0], cornerArray[0][1]);
             context.lineTo(cornerArray[1][0], cornerArray[1][1]);
             context.lineTo(cornerArray[2][0], cornerArray[2][1]);
             context.lineTo(cornerArray[3][0], cornerArray[3][1]);
-            context.fill();
+            context.lineTo(cornerArray[0][0], cornerArray[0][1]);
+
             context.fillStyle = fillColour;
-            
+            context.fill();
             context.lineWidth = borderWidth;
             context.strokeStyle = borderColour;
             context.stroke();
         }
             
         drawSquare(fillColour, borderColour, borderWidth); 
-        console.log(position, 'position square use effect')
-
-    }, [anchorX, anchorY, size, orientaion]);
+        console.log(position, id)
+    }, [position]);
 
     
     return (
