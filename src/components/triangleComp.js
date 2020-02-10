@@ -4,14 +4,19 @@ import './circleComp.css';
 function Triangle(props) {
     console.log('triangle')
     // postion is array of anchorX, anchorY, length
-    let {id, position, fillColour, borderColour, borderWidth, shapeClassName, orientation} = props.shapeInfo //props.circleInfo -> props.shapeInfo
+    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo //props.circleInfo -> props.shapeInfo
+    let [anchorX, anchorY, size, orientation] = position
+    let length1= size*2;
+    let length2= 400
+
     useEffect(() => {
         var canvas = document.getElementById(id);
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
-
-        let cornerArray = determineCorners(position[0], position[1], position[2], orientation);
+        console.log(anchorX, anchorY, length1, length2, orientation, 'preca')
+        let cornerArray = determineCorners(anchorX, anchorY, length1, length2, orientation);
+        console.log(cornerArray, 'cornerarray')
 
         function drawTriangle( fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
@@ -29,7 +34,7 @@ function Triangle(props) {
             
         drawTriangle(fillColour, borderColour, borderWidth); 
 
-    }, [position[0], position[1]]);
+    }, [anchorX, anchorY, size, orientation]);
     
     return (
       <div className={shapeClassName}>
@@ -38,21 +43,21 @@ function Triangle(props) {
     );
 }
 
-// function determineCorners (anchorX, anchorY, length, orientation) {
-//     if (orientation === 1) {
-//         return  [[anchorX, anchorY],[anchorX + length, anchorY],[anchorX+length, anchorY-length],[anchorX, anchorY-length]];
-//     }
-//     if (orientation === 2) {
-//         return  [[anchorX, anchorY],[anchorX + length, anchorY],[anchorX+length, anchorY+length],[anchorX, anchorY+length]];
-//     }
-//     if (orientation === 3) {
-//         return  [[anchorX, anchorY],[anchorX - length, anchorY],[anchorX-length, anchorY+length],[anchorX, anchorY+length]];
-//     }
-//     if (orientation === 4) {
-//         return [[anchorX, anchorY],[anchorX - length, anchorY],[anchorX-length, anchorY-length],[anchorX, anchorY-length]];
-//     }
-// }
+function determineCorners (anchorX, anchorY, length1, length2, orientation) {
+    if (orientation === 1) {
+        return  [[anchorX, anchorY],[anchorX + length2, anchorY],[anchorX, anchorY-length1]];
+    }
+    if (orientation === 2) {
+        return  [[anchorX, anchorY],[anchorX + length1, anchorY],[anchorX, anchorY+length2]];
+    }
+    if (orientation === 3) {
+        return  [[anchorX, anchorY],[anchorX, anchorY + length1],[anchorX-length2, anchorY]];
+    }
+    if (orientation === 4) {
+        return [[anchorX, anchorY],[anchorX - length1, anchorY],[anchorX, anchorY - length2]];
+    }
+}
 
 
 
-// export {Square, determineCorners}
+export {Triangle, determineCorners}

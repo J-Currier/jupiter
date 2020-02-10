@@ -23,6 +23,14 @@
   left: 0;
 }
 
+#myRectangle {
+  width: 60vmin;
+  height: 60vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #myEndPt {
   width: 60vmin;
   height: 60vmin;

@@ -30,7 +30,6 @@ function Square(props) {
         }
             
         drawSquare(fillColour, borderColour, borderWidth); 
-        console.log(position, 'position square use effect')
 
     }, [anchorX, anchorY, size, orientaion]);
 

@@ -5,12 +5,13 @@ import {Grid} from './components/gridComp'
 import Sideboard from './components/SideboardComp'
 import {Circle} from './components/circleComp.js'
 import {Square} from './components/squareComp.js'
+import {Triangle} from './components/triangleComp.js'
 
 import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  let size = (Math.floor(Math.random()*2)+1)*100
+  let size = (Math.floor(Math.random()*2)+1)*100;
   let startPoint = mathFunctions.shapeMaker('circle', size)
   const [PlayerPosition, setPlayerPosition] = useState(startPoint)
   const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 1)')
@@ -105,7 +106,7 @@ function Game (props) {
         <Grid />
         <Circle circleInfo={targetCircle}/>
         <Circle circleInfo={playerCircle}/>
-        <Square shapeInfo={squareInfo}/>
+        <Triangle shapeInfo={squareInfo}/>
 
 
       </div>
