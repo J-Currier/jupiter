@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import './circleComp.css';
 
 function Square(props) {
-    console.log('square')
     // postion is array of anchorX, anchorY, length
     let {id, position, fillColour, borderColour, borderWidth, shapeClassName, orientation} = props.shapeInfo //props.circleInfo -> props.shapeInfo
     useEffect(() => {
@@ -12,10 +11,8 @@ function Square(props) {
         canvas.height = 2000;
 
         let cornerArray = determineCorners(position[0], position[1], position[2], orientation);
-        console.log(position, 'ue')
 
         function drawSquare( fillColour, borderColour, borderWidth) {
-            console.log('ssss')
             context.clearRect(0, 0, canvas.width, canvas.height)
             context.beginPath();
             context.moveTo(cornerArray[0][0], cornerArray[0][1]);
