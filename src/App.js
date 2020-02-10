@@ -104,13 +104,6 @@ function Game (props) {
     <main>
       <div className='wrapper'>
         <Grid />
-<<<<<<< HEAD
-        <Circle circleInfo={targetCircle}/>
-        <Circle circleInfo={playerCircle}/>
-        <Heart shapeInfo={squareInfo}/>
-
-
-=======
         {shape === 'circle' &&  <Circle shapeInfo={target}/>}
         {shape === 'circle' &&  <Circle shapeInfo={player}/>}
         {shape === 'square' &&  <Square shapeInfo={target}/>}
@@ -119,7 +112,6 @@ function Game (props) {
         {shape === 'triangle' &&  <Triangle shapeInfo={player}/>}
         {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}
         {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>} */}
->>>>>>> a1216dde3e062e7a205a82b2369463f507732c9f
       </div>
       <Sideboard
         buttonFunction={translate}
