@@ -13,32 +13,39 @@ import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  let size = (Math.floor(Math.random()*2)+1)*100;
-  let startPoint = mathFunctions.shapeMaker('circle', size)
-  const [PlayerPosition, setPlayerPosition] = useState(startPoint)
+  let shapesArray = ['circle', 'square'];
+  let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+  const [shape, setShape] = useState(randomShape);
+
+  let size = ((Math.floor(Math.random()*4)+1)*100);
+  let startOrientation = (Math.floor(Math.random()*4)+1);
+  
+  let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  const [playerPosition, setPlayerPosition] = useState([startAnchorX, startAnchorY, size, startOrientation]);
+  
+  let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
+  while ((Math.pow((endAnchorX-startAnchorX), 2) + Math.pow((endAnchorY-startAnchorY), 2)) < Math.pow((2*size), 2)) {
+    [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
+  }
+  const [targetPostition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, startOrientation])
+  
   const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 1)')
-  const [borderColour, setBorderColour] = useState('rgba(0, 0, 0, 1)')
+  const [borderColour, setBorderColour] = useState('rgba(255, 255, 255, 1)')
   const [borderWidth, setBorderWidth] = useState(10)
   const [shapeClassName, setShapeClassName] = useState('Circle')
 
-  let endPoint = mathFunctions.shapeMaker('circle', size)
-  while ((Math.pow((endPoint[0]-PlayerPosition[0]), 2) + Math.pow((endPoint[1]-PlayerPosition[1]), 2)) < Math.pow((2*size), 2)) {
-    console.log(endPoint, PlayerPosition)
-    endPoint = mathFunctions.shapeMaker('circle', size)
-  }
-  const [targetPostition, setTargetPosition] = useState(endPoint)
   const [moveFactor, setMoveFactor] = useState(1)
 
-  let playerCircle = {
-  "id": "myCircle",
-  "position": PlayerPosition,
+  let player = {
+  "id": "myStartPt",
+  "position": playerPosition,
   "fillColour": fillColour,
   "borderColour": borderColour,
   "borderWidth": borderWidth,
   "shapeClassName": shapeClassName
   }
 
-  let targetCircle = {
+  let target = {
     "id": "myEndPt",
     "position": targetPostition,
     "fillColour": 'rgba(255, 77, 0, 1)',
@@ -47,40 +54,31 @@ function Game (props) {
     "shapeClassName": "endPtCircle"
   }
 
-  let squareInfo = {
-    "id": "mySquare",
-    'position': [1000, 1000, 200, 4],
-    "fillColour": 'rgba(0, 0, 0, 1)',
-    "borderColour": 'rgba(0, 0, 0, 1)',
-    "borderWidth": borderWidth,
-    "shapeClassName": 'endPtsquare',
-  }
-
   const changeClass = (newName) => {
     setShapeClassName(newName)
   }
 
-  const translateCircle = async (e, deltaX, deltaY) => {
-    let [newCenterX, newCenterY] = mathFunctions.translate(PlayerPosition[0], PlayerPosition[1], deltaX*moveFactor, deltaY*moveFactor)
-    if (newCenterX < 100 || newCenterX > 1900) {
-      changeClass('shake-vertical');
-      newCenterX = PlayerPosition[0];
-      setTimeout(() => {
-        changeClass("Circle")
-        }, 500);
-    } else if (newCenterY < 100 || newCenterY > 1900) {
-      changeClass('shake-horizontal');
-      newCenterY = PlayerPosition[1];
-      setTimeout(() => {
-        changeClass("Circle")
-        }, 500);
-    } else {
-    await changeClass("fade-out")
-    await setTimeout(() => {
-      setPlayerPosition([newCenterX, newCenterY, PlayerPosition[2]])
-      changeClass("fade-in")
-    }, 100);
-    }
+  const translate = async (e, deltaX, deltaY) => {
+    let [newAnchorX, newAnchorY] = mathFunctions.translate(playerPosition[0], playerPosition[1], deltaX*moveFactor, deltaY*moveFactor)
+    // if (newAnchorX < size || newAnchorX > 2000-size) {
+    //   changeClass('shake-vertical');
+    //   newAnchorX = playerPosition[0];
+    //   setTimeout(() => {
+    //     changeClass("Circle")
+    //     }, 500);
+    // } else if (newAnchorY < size || newAnchorY > 2000-size) {
+    //   changeClass('shake-horizontal');
+    //   newAnchorY = playerPosition[1];
+    //   setTimeout(() => {
+    //     changeClass("Circle")
+    //     }, 500);
+    // } else {
+      await changeClass("fade-out")
+      await setTimeout(() => {
+        setPlayerPosition([newAnchorX, newAnchorY, playerPosition[2], playerPosition[3]])
+        changeClass("fade-in")
+      }, 100);
+    // }
   }
 
   const factorHandle = (e) => {
@@ -88,7 +86,7 @@ function Game (props) {
   }
 
   const LevelCheck = () => {
-    if (JSON.stringify(PlayerPosition) === JSON.stringify(targetPostition)) {
+    if (JSON.stringify(playerPosition) === JSON.stringify(targetPostition)) {
       return (
         <div className='winner'>
           Portal Locked! <br />
@@ -106,14 +104,25 @@ function Game (props) {
     <main>
       <div className='wrapper'>
         <Grid />
+<<<<<<< HEAD
         <Circle circleInfo={targetCircle}/>
         <Circle circleInfo={playerCircle}/>
         <Heart shapeInfo={squareInfo}/>
 
 
+=======
+        {shape === 'circle' &&  <Circle shapeInfo={target}/>}
+        {shape === 'circle' &&  <Circle shapeInfo={player}/>}
+        {shape === 'square' &&  <Square shapeInfo={target}/>}
+        {shape === 'square' &&  <Square shapeInfo={player}/>}
+        {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
+        {shape === 'triangle' &&  <Triangle shapeInfo={player}/>}
+        {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}
+        {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>} */}
+>>>>>>> a1216dde3e062e7a205a82b2369463f507732c9f
       </div>
       <Sideboard
-        buttonFunction={translateCircle}
+        buttonFunction={translate}
         factorHandle={factorHandle}
         moveFactor={moveFactor}
         key='sideboard' />

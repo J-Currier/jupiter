@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
-import './circleComp.css';
+import './shapeComp.css';
 
 function Circle(props) {
-    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.circleInfo
-    let [centerX, centerY, radius] = position
+    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo;
+    let [centerX, centerY, size, orientaion] = position;
+    let radius = size/2;
     useEffect(() => {
         var canvas = document.getElementById(id);
-        console.log(canvas, id, centerX, centerY, radius, fillColour, borderColour, borderWidth, shapeClassName)
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
 
-        function drawCircle(centerX, centerY, radius, fillColour, borderColor, borderWidth) {
+        function drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
             context.beginPath();
             context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
@@ -23,9 +23,8 @@ function Circle(props) {
         }
         
         drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth); 
-        console.log(position, 'position circle')
-
-    }, [centerX, centerY, radius]);
+        console.log(position, id)
+    }, [position]);
     return (
       <div className={shapeClassName}>
           <canvas id={id}></canvas>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './circleComp.css';
+import './shapeComp.css';
 
 function Triangle(props) {
     console.log('triangle')
