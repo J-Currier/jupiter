@@ -8,6 +8,18 @@
     height: 60vmin;
   }
 
+nav {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    align-items: start;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* nav button {
+    align-self: initial;
+} */
 #factorBox {
     border:solid 3px rgba(137, 235, 52, 1);
     /* -moz-border-radius: 8px; */

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import IconUp from '../images/kuba_arrow_button_set_3.svg'
-import IconLeft from '../images/kuba_arrow_button_set_1.svg'
-import IconRight from '../images/kuba_arrow_button_set_2.svg'
-import IconDown from '../images/kuba_arrow_button_set_4.svg'
-// import IconUndo from '../images/arrow-curved-blue.svg'
+import IconUp from '../../images/kuba_arrow_button_set_3.svg'
+import IconLeft from '../../images/kuba_arrow_button_set_1.svg'
+import IconRight from '../../images/kuba_arrow_button_set_2.svg'
+import IconDown from '../../images/kuba_arrow_button_set_4.svg'
+import IconUndo from '../../images/arrow-curved-blue.svg'
 import './Sideboard.css'
 
 function Sideboard(props) {
@@ -58,6 +58,11 @@ function Sideboard(props) {
 
     return (
         <div id="sideboard">
+            <nav>
+            <button>Translation</button>
+            <button>Rotation</button>
+            <button>Reflection</button>
+            </nav>
             <input
                 type="number"
                 min='0'
