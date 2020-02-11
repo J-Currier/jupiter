@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import {Grid} from './components/gridComp'
-import Sideboard from './components/SideboardComp'
-import {Circle} from './components/circleComp.js'
-import {Square} from './components/squareComp.js'
-import {Triangle} from './components/triangleComp.js'
-import {Heart} from './components/heartComp.js'
+import {Grid} from './components/grid/gridComp'
+import Sideboard from './components/Sideboard/SideboardComp'
+import {Circle} from './components/shapes/circleComp.js'
+import {Square} from './components/shapes/squareComp.js'
+import {Triangle} from './components/shapes/triangleComp.js'
+import {Heart} from './components/shapes/heartComp.js'
 
 
 import mathFunctions from './scripts/math.js'
