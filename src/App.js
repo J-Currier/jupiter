@@ -15,6 +15,7 @@ import mathFunctions from './scripts/math.js'
 function Game (props) {
   let shapesArray = ['circle', 'square'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+  randomShape = 'heart'
   const [shape, setShape] = useState(randomShape);
 
   let size = ((Math.floor(Math.random()*4)+1)*100);
@@ -108,6 +109,9 @@ function Game (props) {
         {shape === 'circle' &&  <Circle shapeInfo={player}/>}
         {shape === 'square' &&  <Square shapeInfo={target}/>}
         {shape === 'square' &&  <Square shapeInfo={player}/>}
+        {shape === 'heart' &&  <Heart shapeInfo={target}/>}
+        {shape === 'heart' &&  <Heart shapeInfo={player}/>}
+
         {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
         {shape === 'triangle' &&  <Triangle shapeInfo={player}/>}
         {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}
