@@ -1,25 +1,15 @@
-#sideboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;  
-    grid-template-rows: 1fr 20fr;
-    justify-items: center; 
-    align-items: center;
-    width: 30vmin;
-    height: 60vmin;
-  }
-
-nav {
+#translation {
     display: grid;
     grid-column-start: 1;
     grid-column-end: 4;
-    align-items: start;
+    grid-template-columns: 1fr 1fr 1fr;  
+    grid-template-rows: 1fr 2fr 2fr 2fr 2fr;
+    justify-items: center; 
+    align-items: center;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-}
+    height: 100%
+  }
 
-/* nav button {
-    align-self: initial;
-} */
 #factorBox {
     border:solid 3px rgba(137, 235, 52, 1);
     /* -moz-border-radius: 8px; */

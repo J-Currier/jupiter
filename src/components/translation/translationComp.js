@@ -1,6 +1,17 @@
 import React, { PureComponent } from 'react'
+import IconUp from '../../images/kuba_arrow_button_set_3.svg'
+import IconLeft from '../../images/kuba_arrow_button_set_1.svg'
+import IconRight from '../../images/kuba_arrow_button_set_2.svg'
+import IconDown from '../../images/kuba_arrow_button_set_4.svg'
+import IconUndo from '../../images/arrow-curved-blue.svg'
+import './translation.css'
+
 
 function Translation(props) {
+
+    function handleClick(e) {
+        buttonInfo[e.target.name].fx(e)
+    };
 
     const buttonInfo = {
         up: { icon: IconUp, fx: (e) => { props.buttonFunction(e, 0, -100) } },
@@ -26,7 +37,7 @@ function Translation(props) {
 
 
     return(
-        <div>
+        <div id= "translation">
             Translation
             <input
                 type="number"
@@ -42,3 +53,5 @@ function Translation(props) {
     )
     
 }
+
+export default Translation
