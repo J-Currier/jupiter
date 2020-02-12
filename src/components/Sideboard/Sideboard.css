@@ -6,7 +6,22 @@
     align-items: center;
     width: 30vmin;
     height: 60vmin;
+    border-style: solid;
+
   }
+.tab {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    height: 100%;
+    border-style: solid;
+}
+
+ h1 {
+     font-size: 100%;
+     grid-column-start: 1;
+     grid-column-end: 4;    
+}
 
 nav {
     display: grid;
@@ -71,4 +86,11 @@ nav {
 
 #undo {
     transform: scaleX(-1)
+}
+
+.tab-button {
+    width: 90%;
+    margin: 4px;
+    font-size: 0.5vw;
+
 }

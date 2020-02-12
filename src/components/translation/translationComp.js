@@ -37,7 +37,7 @@ function Translation(props) {
 
 
     return(
-        <div id= "translation">
+        <div id= "translation" className='tab'>
             Translation
             <input
                 type="number"
