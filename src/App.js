@@ -7,7 +7,7 @@ import {Circle} from './components/shapes/circleComp.js'
 import {Square} from './components/shapes/squareComp.js'
 import {Triangle} from './components/shapes/triangleComp.js'
 import {Heart} from './components/shapes/heartComp.js'
-
+import Translation from './components/translation/translationComp'
 
 import mathFunctions from './scripts/math.js'
 
@@ -16,6 +16,8 @@ function Game (props) {
   let shapesArray = ['circle', 'square'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
   const [shape, setShape] = useState(randomShape);
+  const [tab, setTab] = useState(null)
+
 
   let size = ((Math.floor(Math.random()*4)+1)*100);
   let startOrientation = (Math.floor(Math.random()*4)+1);
@@ -100,6 +102,12 @@ function Game (props) {
     }
   }
 
+  const changeTab = (e) => {
+    if(e.target.id === "translation-button"){
+      setTab("translation")
+  }
+  }
+
   return (
     <main>
       <div className='wrapper'>
@@ -114,11 +122,13 @@ function Game (props) {
         {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>} */}
       </div>
       <Sideboard
+        changeTab={changeTab}
         buttonFunction={translate}
         factorHandle={factorHandle}
         moveFactor={moveFactor}
         key='sideboard' />
-      <LevelCheck key='levelCHeck'/>
+        {/* {tab === 'translation' &&  <Translation />} */}
+      <LevelCheck key='levelCheck'/>
     </main>
   )
 }
