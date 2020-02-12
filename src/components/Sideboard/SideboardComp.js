@@ -8,7 +8,7 @@ import './Sideboard.css'
 
 function Sideboard(props) {
 
-    // const [step, setStep] = useState(0);
+    const [step, setStep] = useState(0);
 
     function handleClick(e) {
         buttonInfo[e.target.name].fx(e)
@@ -35,26 +35,26 @@ function Sideboard(props) {
         );
     };
 
-    // const undoButtons = [
-    //     <img 
-    //         onClick={() => setStep(initial => initial -1)} 
-    //         key="undo"
-    //         name="undo"
-    //         alt="undo"
-    //         id="undo"
-    //         className="undo button" 
-    //         src= {IconUndo}
-    //     ></img>,
-    //     <img 
-    //         onClick={() => setStep(initial => initial +1)} 
-    //         key="redo"
-    //         name="redo"
-    //         alt="redo"
-    //         id="redo"
-    //         className="undo button" 
-    //         src= {IconUndo}
-    //     ></img>
-    // ];
+    const undoButtons = [
+        <img 
+            onClick={() => setStep(initial => initial -1)} 
+            key="undo"
+            name="undo"
+            alt="undo"
+            id="undo"
+            className="undo button" 
+            src= {IconUndo}
+        ></img>,
+        <img 
+            onClick={() => setStep(initial => initial +1)} 
+            key="redo"
+            name="redo"
+            alt="redo"
+            id="redo"
+            className="undo button" 
+            src= {IconUndo}
+        ></img>
+    ];
 
     return (
         <div id="sideboard">
