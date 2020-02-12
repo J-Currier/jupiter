@@ -55,7 +55,7 @@ function Heart(props) {
     );
 
     ctx.closePath();
-    ctx.fillStyle = #FFFFFF;
+    ctx.fillStyle = "#FFFFFF";
     ctx.fill();
     ctx.restore();
 
