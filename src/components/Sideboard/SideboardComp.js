@@ -68,18 +68,14 @@ function Sideboard(props) {
             <button id="rotation-button">Rotation</button>
             <button id="reflection-button">Reflection</button>
             </nav>
-            {tab === 'translation' &&  <Translation buttonFunction = {props.buttonFunction} />}
+            {tab === 'translation' &&  
+                <Translation 
+                buttonFunction = {props.buttonFunction}
+                moveFactor = {props.moveFactor}
+                factorHandle = {props.factorHandle}
+                />}
 
-            {/* <input
-                type="number"
-                min='0'
-                max='18'
-                onChange={props.factorHandle}
-                value={props.moveFactor}
-                id="factorBox"
-            /> */}
-            {/* {buttons} */}
-            {/* {undoButtons} */}
+
         </div>
     )
 }
