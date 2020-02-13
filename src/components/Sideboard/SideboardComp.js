@@ -6,6 +6,8 @@ import React, { useState } from 'react';
 // import IconUndo from '../../images/arrow-curved-blue.svg'
 import './Sideboard.css'
 import Translation from '../translation/translationComp'
+import Rotation from '../rotation/rotationComp'
+import Reflection from '../reflection/reflectionComp'
 
 function Sideboard(props) {
 
@@ -15,6 +17,10 @@ function Sideboard(props) {
     function handleClick(e) {
         if(e.target.id === "translation-button"){
             setTab("translation")
+        }else if(e.target.id === "reflection-button"){
+            setTab("reflection")
+        }else if(e.target.id === "rotation-button"){
+            setTab("rotation")
         }
     };
 
@@ -64,22 +70,30 @@ function Sideboard(props) {
     return (
         <div id="sideboard">
             <nav>
-            <button id="translation-button" onClick = {handleClick}>Translation</button>
-            <button id="rotation-button">Rotation</button>
-            <button id="reflection-button">Reflection</button>
+            <button id="translation-button" className='tab-button' onClick = {handleClick}>Translation</button>
+            <button id="rotation-button" className='tab-button' onClick = {handleClick}>Rotation</button>
+            <button id="reflection-button" className='tab-button' onClick = {handleClick}>Reflection</button>
             </nav>
-            {tab === 'translation' &&  <Translation buttonFunction = {props.buttonFunction} />}
+            {tab === 'translation' &&  
+                <Translation 
+                buttonFunction = {props.buttonFunction}
+                moveFactor = {props.moveFactor}
+                factorHandle = {props.factorHandle}
+                />}
+            {tab === 'rotation' &&  
+                <Rotation 
+                // buttonFunction = {props.buttonFunction}
+                // moveFactor = {props.moveFactor}
+                // factorHandle = {props.factorHandle}
+                />}
+            {tab === 'reflection' &&  
+                <Reflection 
+                // buttonFunction = {props.buttonFunction}
+                // moveFactor = {props.moveFactor}
+                // factorHandle = {props.factorHandle}
+                />}
 
-            {/* <input
-                type="number"
-                min='0'
-                max='18'
-                onChange={props.factorHandle}
-                value={props.moveFactor}
-                id="factorBox"
-            /> */}
-            {/* {buttons} */}
-            {/* {undoButtons} */}
+
         </div>
     )
 }

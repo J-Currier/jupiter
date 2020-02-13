@@ -1,0 +1,35 @@
+#rotation {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr  1fr;
+    grid-template-rows: 1fr 3fr 3fr;
+    border-style: solid;
+    justify-items: center;
+}
+
+#rotation input,
+select {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+#rotation img,
+#rotation input {
+    grid-row-start: 2;
+    align-self: end;
+    max-width: 30px;
+}
+
+select {
+    grid-row-start: 3;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    justify-self: center;
+    margin: 5px;
+    min-width: 50px;
+}
+
+#rotate-right {
+    transform: scaleX(-1);
+}
