@@ -1,6 +1,16 @@
 import React, { useEffect } from 'react';
 import './shapeComp.css';
 
+function determineCorners (x, y, d, orientation) {
+    const orientations = {
+        1: [[x, y], [x + d, y], [x + d, y - d], [x, y - d]],
+        2: [[x, y], [x + d, y], [x + d, y + d], [x, y + d]],
+        3: [[x, y], [x - d, y], [x - d, y + d], [x, y + d]],
+        4: [[x, y], [x - d, y], [x - d, y - d], [x, y - d]]
+    };
+    return orientations[orientation]
+};
+
 function Square(props) {
     let {
         id,
@@ -11,16 +21,6 @@ function Square(props) {
         shapeClassName
     } = props.shapeInfo;
     let [anchorX, anchorY, size, orientaion] = position;
-    
-    const determineCorners = (x, y, d, orientation) => {
-        const orientations = {
-            1: [[x, y], [x + d, y], [x + d, y - d], [x, y - d]],
-            2: [[x, y], [x + d, y], [x + d, y + d], [x, y + d]],
-            3: [[x, y], [x - d, y], [x - d, y + d], [x, y + d]],
-            4: [[x, y], [x - d, y], [x - d, y - d], [x, y - d]]
-        };
-        return orientations[orientation]
-    }
 
     let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
 
@@ -68,4 +68,4 @@ function Square(props) {
     );
 }
 
-export { Square }
+export { Square, determineCorners }
