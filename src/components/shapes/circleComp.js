@@ -2,9 +2,17 @@ import React, { useEffect } from 'react';
 import './shapeComp.css';
 
 function Circle(props) {
-    let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo;
+    let {
+        id,
+        position,
+        fillColour,
+        borderColour,
+        borderWidth,
+        shapeClassName
+    } = props.shapeInfo;
     let [centerX, centerY, size, orientaion] = position;
-    let radius = size/2;
+    // orientation unused in circle
+    let radius = size / 2;
     useEffect(() => {
         var canvas = document.getElementById(id);
         var context = canvas.getContext("2d");
@@ -21,15 +29,15 @@ function Circle(props) {
             context.strokeStyle = borderColour;
             context.stroke();
         }
-        
-        drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth); 
-        console.log(position, id)
+
+        drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth);
     }, [position]);
+
     return (
-      <div className={shapeClassName}>
-          <canvas id={id}></canvas>
-      </div>
+        <div className={shapeClassName}>
+            <canvas id={id}></canvas>
+        </div>
     );
 }
 
-export {Circle}
+export { Circle }

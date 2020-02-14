@@ -2,9 +2,9 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import SideboardComp from './SideboardComp';
+import Translation from './translationComp';
 
-describe('sideboard load', () => {
+describe('component', () => {
 
   let container = null;
 
@@ -21,13 +21,23 @@ describe('sideboard load', () => {
     container = null;
   });
 
-  test('click button', () => {
-    // setup mock button function
-    const mockFx = jest.fn(); // mock function
+  test('render', () => {
     act(() => {
       render(
-        <SideboardComp
-          buttonFunction={mockFx}
+        <Translation
+        />, container
+      );
+    });
+  });
+
+  test('click button', () => {
+    // setup mock button function
+    const mockButtonFx = jest.fn(); // mock function
+    // const mockFactorHandle = jest.fn(); // mock function
+    act(() => {
+      render(
+        <Translation
+          buttonFunction={mockButtonFx}
         />, container
       );
     });
@@ -40,29 +50,29 @@ describe('sideboard load', () => {
     act(() => {
       up.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFx.mock.calls.length).toBe(1);
-    expect(mockFx.mock.calls[0][1]).toBe(0);
-    expect(mockFx.mock.calls[0][2]).toBe(-100);
+    expect(mockButtonFx.mock.calls.length).toBe(1);
+    expect(mockButtonFx.mock.calls[0][1]).toBe(0);
+    expect(mockButtonFx.mock.calls[0][2]).toBe(-100);
     // click down
     act(() => {
       down.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFx.mock.calls.length).toBe(2);
-    expect(mockFx.mock.calls[1][1]).toBe(0);
-    expect(mockFx.mock.calls[1][2]).toBe(100);
+    expect(mockButtonFx.mock.calls.length).toBe(2);
+    expect(mockButtonFx.mock.calls[1][1]).toBe(0);
+    expect(mockButtonFx.mock.calls[1][2]).toBe(100);
     // click left
     act(() => {
       left.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFx.mock.calls.length).toBe(3);
-    expect(mockFx.mock.calls[2][1]).toBe(-100);
-    expect(mockFx.mock.calls[2][2]).toBe(0);
+    expect(mockButtonFx.mock.calls.length).toBe(3);
+    expect(mockButtonFx.mock.calls[2][1]).toBe(-100);
+    expect(mockButtonFx.mock.calls[2][2]).toBe(0);
     // click right
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFx.mock.calls.length).toBe(4);
-    expect(mockFx.mock.calls[3][1]).toBe(100);
-    expect(mockFx.mock.calls[3][2]).toBe(0);
+    expect(mockButtonFx.mock.calls.length).toBe(4);
+    expect(mockButtonFx.mock.calls[3][1]).toBe(100);
+    expect(mockButtonFx.mock.calls[3][2]).toBe(0);
   });
 });

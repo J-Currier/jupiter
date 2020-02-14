@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import {Grid} from './components/gridComp'
-import Sideboard from './components/SideboardComp'
-import {Circle} from './components/circleComp.js'
-import {Square} from './components/squareComp.js'
-import {Triangle} from './components/triangleComp.js'
-import {Heart} from './components/heartComp.js'
-
+import {Grid} from './components/grid/gridComp'
+import Sideboard from './components/Sideboard/SideboardComp'
+import {Circle} from './components/shapes/circleComp.js'
+import {Square} from './components/shapes/squareComp.js'
+import {Triangle} from './components/shapes/triangleComp.js'
+import {Heart} from './components/shapes/heartComp.js'
+import Translation from './components/translation/translationComp'
 
 import mathFunctions from './scripts/math.js'
 
@@ -17,6 +17,8 @@ function Game (props) {
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
   // randomShape = 'heart'
   const [shape, setShape] = useState(randomShape);
+  const [tab, setTab] = useState(null)
+
 
   let size = ((Math.floor(Math.random()*4)+1)*100);
   let startOrientation = (Math.floor(Math.random()*4)+1);
@@ -101,6 +103,12 @@ function Game (props) {
     }
   }
 
+  const changeTab = (e) => {
+    if(e.target.id === "translation-button"){
+      setTab("translation")
+  }
+  }
+
   return (
     <main>
       <div className='wrapper'>
@@ -118,11 +126,13 @@ function Game (props) {
         {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>} */}
       </div>
       <Sideboard
+        changeTab={changeTab}
         buttonFunction={translate}
         factorHandle={factorHandle}
         moveFactor={moveFactor}
         key='sideboard' />
-      <LevelCheck key='levelCHeck'/>
+        {/* {tab === 'translation' &&  <Translation />} */}
+      <LevelCheck key='levelCheck'/>
     </main>
   )
 }
