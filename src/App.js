@@ -15,9 +15,9 @@ import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  let shapesArray = ['circle', 'square'];
+  let shapesArray = ['circle', 'square', 'star'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
-  randomShape = 'star'
+  // randomShape = 'star'
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null)
 
