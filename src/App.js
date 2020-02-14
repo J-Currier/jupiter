@@ -7,14 +7,17 @@ import {Circle} from './components/shapes/circleComp.js'
 import {Square} from './components/shapes/squareComp.js'
 import {Triangle} from './components/shapes/triangleComp.js'
 import {Heart} from './components/shapes/heartComp.js'
+import {Star} from './components/shapes/starComp.js'
+
 import Translation from './components/translation/translationComp'
 
 import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  let shapesArray = ['circle', 'square'];
+  let shapesArray = ['circle', 'square', 'star'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+  // randomShape = 'star'
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null)
 
@@ -118,6 +121,11 @@ function Game (props) {
         {shape === 'circle' &&  <Circle moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={player}/>}
         {shape === 'square' &&  <Square shapeInfo={target}/>}
         {shape === 'square' &&  <Square shapeInfo={player}/>}
+        {shape === 'heart' &&  <Heart shapeInfo={target}/>}
+        {shape === 'heart' &&  <Heart shapeInfo={player}/>}
+        {shape === 'star' &&  <Star shapeInfo={target}/>}
+        {shape === 'star' &&  <Star shapeInfo={player}/>}
+
         {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
         {shape === 'triangle' &&  <Triangle shapeInfo={player}/>}
         {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}

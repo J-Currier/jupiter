@@ -1,3 +1,5 @@
+<<<<<<< HEAD:src/components/heartComp.test.js
+=======
 // import React, { useEffect } from 'react';
 // import './circleComp.css';
 
@@ -55,7 +57,7 @@ function Heart(props) {
     );
 
     ctx.closePath();
-    ctx.fillStyle = #FFFFFF;
+    ctx.fillStyle = "#FFFFFF";
     ctx.fill();
     ctx.restore();
 
@@ -105,3 +107,4 @@ function Heart(props) {
 
 
 export {Heart}
+>>>>>>> 890f1238e7ee9684a5b7273dfbe0905f3eb19e30:src/components/shapes/heartComp.test.js
