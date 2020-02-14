@@ -5,6 +5,14 @@ function Circle(props) {
     let {id, position, fillColour, borderColour, borderWidth, shapeClassName} = props.shapeInfo;
     let [centerX, centerY, size, orientaion] = position;
     let radius = size/2;
+    
+    if (centerY < radius || centerY > 2000-radius) {
+        props.moveBack_shakeVertical();
+    }
+    if (centerX < radius || centerX > 2000-radius) {
+        props.moveBack_shakeHorizontal();
+    }
+
     useEffect(() => {
         var canvas = document.getElementById(id);
         var context = canvas.getContext("2d");

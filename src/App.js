@@ -23,6 +23,8 @@ function Game (props) {
   let startOrientation = (Math.floor(Math.random()*4)+1);
   
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  const [playerPositionsArray, setPlayerPositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerAcceptablePositionsArray, setplayerAcceptablePositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
   const [playerPosition, setPlayerPosition] = useState([startAnchorX, startAnchorY, size, startOrientation]);
   
   let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
@@ -61,26 +63,26 @@ function Game (props) {
   }
 
   const translate = async (e, deltaX, deltaY) => {
-    let [newAnchorX, newAnchorY] = mathFunctions.translate(playerPosition[0], playerPosition[1], deltaX*moveFactor, deltaY*moveFactor)
-    // if (newAnchorX < size || newAnchorX > 2000-size) {
-    //   changeClass('shake-vertical');
-    //   newAnchorX = playerPosition[0];
-    //   setTimeout(() => {
-    //     changeClass("Circle")
-    //     }, 500);
-    // } else if (newAnchorY < size || newAnchorY > 2000-size) {
-    //   changeClass('shake-horizontal');
-    //   newAnchorY = playerPosition[1];
-    //   setTimeout(() => {
-    //     changeClass("Circle")
-    //     }, 500);
-    // } else {
-      await changeClass("fade-out")
-      await setTimeout(() => {
-        setPlayerPosition([newAnchorX, newAnchorY, playerPosition[2], playerPosition[3]])
-        changeClass("fade-in")
-      }, 100);
-    // }
+    let [newAnchorX, newAnchorY] = mathFunctions.translate(playerPosition[0], playerPosition[1], deltaX*moveFactor, deltaY*moveFactor);
+    playerPositionsArray.push([newAnchorX, newAnchorY, playerPosition[2], playerPosition[3]]);
+    playerAcceptablePositionsArray.push([newAnchorX, newAnchorY, playerPosition[2], playerPosition[3]]);
+    await changeClass("fade-out")
+    await setTimeout(() => {
+      setPlayerPosition([newAnchorX, newAnchorY, playerPosition[2], playerPosition[3]])
+      changeClass("fade-in")
+    }, 100);
+  }
+
+  const moveBack_shakeVertical = async () => {
+    playerAcceptablePositionsArray.pop();
+      await setPlayerPosition(playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]);      
+      changeClass('shake-vertical');
+  }
+
+  const moveBack_shakeHorizontal = async () => {
+    playerAcceptablePositionsArray.pop();
+      await setPlayerPosition(playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]);      
+      changeClass('shake-horizontal');
   }
 
   const factorHandle = (e) => {
@@ -112,8 +114,8 @@ function Game (props) {
     <main>
       <div className='wrapper'>
         <Grid />
-        {shape === 'circle' &&  <Circle shapeInfo={target}/>}
-        {shape === 'circle' &&  <Circle shapeInfo={player}/>}
+        {shape === 'circle' &&  <Circle moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={target}/>}
+        {shape === 'circle' &&  <Circle moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={player}/>}
         {shape === 'square' &&  <Square shapeInfo={target}/>}
         {shape === 'square' &&  <Square shapeInfo={player}/>}
         {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
