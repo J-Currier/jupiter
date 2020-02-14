@@ -36,8 +36,8 @@ function Game (props) {
   }
   const [targetPostition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, startOrientation])
   
-  const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 1)')
-  const [borderColour, setBorderColour] = useState('rgba(255, 255, 255, 1)')
+  const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 0.8)')
+  const [borderColour, setBorderColour] = useState('rgba(255, 255, 255, 0.8)')
   const [borderWidth, setBorderWidth] = useState(10)
   const [shapeClassName, setShapeClassName] = useState('Circle')
 
@@ -55,7 +55,7 @@ function Game (props) {
   let target = {
     "id": "myEndPt",
     "position": targetPostition,
-    "fillColour": 'rgba(255, 77, 0, 1)',
+    "fillColour": 'rgba(255, 77, 0, 0.8)',
     "borderColour": borderColour,
     "borderWidth": borderWidth,
     "shapeClassName": "endPtCircle"
@@ -119,8 +119,8 @@ function Game (props) {
         <Grid />
         {shape === 'circle' &&  <Circle moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={target}/>}
         {shape === 'circle' &&  <Circle moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={player}/>}
-        {shape === 'square' &&  <Square shapeInfo={target}/>}
-        {shape === 'square' &&  <Square shapeInfo={player}/>}
+        {shape === 'square' &&  <Square moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={target}/>}
+        {shape === 'square' &&  <Square moveBack_shakeVertical={moveBack_shakeVertical} moveBack_shakeHorizontal={moveBack_shakeHorizontal} shapeInfo={player}/>}
         {shape === 'heart' &&  <Heart shapeInfo={target}/>}
         {shape === 'heart' &&  <Heart shapeInfo={player}/>}
         {shape === 'star' &&  <Star shapeInfo={target}/>}
