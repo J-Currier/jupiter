@@ -214,7 +214,18 @@ function Shape(props) {
       borderWidth,
       radius
     );
-  }, [position]);
+  }, [
+    position,
+    id,
+    width,
+    height,
+    shape,
+    corners,
+    fillColour,
+    borderColour,
+    borderWidth,
+    radius
+  ]);
 
   return (
     <div className={shapeClassName}>
