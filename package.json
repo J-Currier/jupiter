@@ -39,5 +39,13 @@
   "devDependencies": {
     "jest-canvas-mock": "^2.2.0",
     "pretty": "^2.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "./src/App.js",
+      "!./src/index.js",
+      "!./src/serviceWorker.js",
+      "./src/**/*.js"
+    ]
   }
 }
