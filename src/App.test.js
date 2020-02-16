@@ -28,5 +28,6 @@ describe('app integration', () => {
         />, container
       );
     });
+    expect(container.App).toMatchSnapshot();
   });
 });
