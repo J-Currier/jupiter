@@ -1,11 +1,11 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
+import pretty from "pretty";
 
-import SideboardComp from './SideboardComp';
+import SideboardComp from "./SideboardComp";
 
-describe('sideboard load', () => {
-
+describe("sideboard load", () => {
   let container = null;
 
   beforeEach(() => {
@@ -21,16 +21,13 @@ describe('sideboard load', () => {
     container = null;
   });
 
-  test('render', () => {
+  test("render", () => {
     act(() => {
-      render(
-        <SideboardComp
-        />, container
-      );
+      render(<SideboardComp />, container);
     });
   });
 
-  test('click button', () => {
+  test("click button", () => {
     // setup mock button function
     const mockButtonFx = jest.fn(); // mock function
     const mockFactorHandle = jest.fn(); // mock function
@@ -40,7 +37,8 @@ describe('sideboard load', () => {
           buttonFunction={mockButtonFx}
           factorHandle={mockFactorHandle}
           moveFactor={1}
-        />, container
+        />,
+        container
       );
     });
     // identify the buttons
@@ -52,6 +50,7 @@ describe('sideboard load', () => {
     act(() => {
       translationBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
     // translation buttons
     const up = document.getElementById("up");
     const down = document.getElementById("down");

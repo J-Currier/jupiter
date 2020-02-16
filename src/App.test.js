@@ -1,7 +1,7 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
+import pretty from "pretty";
 
 import App from "./App";
 
@@ -25,6 +25,7 @@ describe("app integration", () => {
     act(() => {
       render(<App />, container);
     });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 
   test("integration with sideboard click", () => {
@@ -62,5 +63,6 @@ describe("app integration", () => {
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 });

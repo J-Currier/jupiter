@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sideboard load click button 1`] = `
+"<div id=\\"sideboard\\">
+  <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+  <div id=\\"translation\\" class=\\"tab\\">Translation<input type=\\"number\\" min=\\"0\\" max=\\"18\\" id=\\"factorBox\\" value=\\"1\\"><img name=\\"up\\" alt=\\"up\\" id=\\"up\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_3.svg\\"><img name=\\"left\\" alt=\\"left\\" id=\\"left\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_1.svg\\"><img name=\\"right\\" alt=\\"right\\" id=\\"right\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_2.svg\\"><img name=\\"down\\" alt=\\"down\\" id=\\"down\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_4.svg\\"></div>
+</div>"
+`;

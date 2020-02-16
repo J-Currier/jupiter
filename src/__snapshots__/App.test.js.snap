@@ -1,3 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`app integration render app 1`] = `undefined`;
+exports[`app integration integration with sideboard click 1`] = `
+"<div class=\\"App\\">
+  <main>
+    <div class=\\"wrapper\\">
+      <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+    </div>
+    <div id=\\"sideboard\\">
+      <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+      <div id=\\"translation\\" class=\\"tab\\">Translation<input type=\\"number\\" min=\\"0\\" max=\\"18\\" id=\\"factorBox\\" value=\\"1\\"><img name=\\"up\\" alt=\\"up\\" id=\\"up\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_3.svg\\"><img name=\\"left\\" alt=\\"left\\" id=\\"left\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_1.svg\\"><img name=\\"right\\" alt=\\"right\\" id=\\"right\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_2.svg\\"><img name=\\"down\\" alt=\\"down\\" id=\\"down\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_4.svg\\"></div>
+    </div>
+    <div></div>
+  </main>
+</div>"
+`;
+
+exports[`app integration render app 1`] = `
+"<div class=\\"App\\">
+  <main>
+    <div class=\\"wrapper\\">
+      <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"Circle\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+    </div>
+    <div id=\\"sideboard\\">
+      <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+    </div>
+    <div></div>
+  </main>
+</div>"
+`;
