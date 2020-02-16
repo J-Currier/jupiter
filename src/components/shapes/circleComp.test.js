@@ -16,6 +16,8 @@ describe('load', () => {
     container = null;
   });
   test('load', () => {
+    const moveBack_shakeVertical = jest.fn();
+    const moveBack_shakeHorizontal = jest.fn();
     let shapeInfo = {
       "id": "circle",
       "position": [0, 0, 100, 1],
@@ -27,6 +29,8 @@ describe('load', () => {
     render(
       <Circle
         shapeInfo={shapeInfo}
+        moveBack_shakeVertical={moveBack_shakeVertical}
+        moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       />, container
     );
   });
