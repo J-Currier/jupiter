@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './shapeComp.css';
+import css from './shapeComp.module.css';
 
 function determineCorners (x, y, d, orientation) {
     const orientations = {
