@@ -8,6 +8,7 @@ import {Square} from './components/shapes/squareComp.js'
 import {Triangle} from './components/shapes/triangleComp.js'
 import {Heart} from './components/shapes/heartComp.js'
 import {Star} from './components/shapes/starComp.js'
+import {Rectangle} from './components/shapes/rectangleComp.js'
 
 import Translation from './components/translation/translationComp'
 
@@ -15,7 +16,7 @@ import mathFunctions from './scripts/math.js'
 
 
 function Game (props) {
-  let shapesArray = ['circle', 'square', 'star'];
+  let shapesArray = ['circle', 'square', 'star', 'rectangle'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
   // randomShape = 'star'
   const [shape, setShape] = useState(randomShape);
@@ -125,11 +126,12 @@ function Game (props) {
         {shape === 'heart' &&  <Heart shapeInfo={player}/>}
         {shape === 'star' &&  <Star shapeInfo={target}/>}
         {shape === 'star' &&  <Star shapeInfo={player}/>}
+        {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}
+        {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>}
 
         {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
-        {shape === 'triangle' &&  <Triangle shapeInfo={player}/>}
-        {shape === 'rectangle' &&  <Rectangle shapeInfo={target}/>}
-        {shape === 'rectangle' &&  <Rectangle shapeInfo={player}/>} */}
+        {shape === 'triangle' &&  <Triangle shapeInfo={player}/>} */}
+       
       </div>
       <Sideboard
         changeTab={changeTab}
