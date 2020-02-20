@@ -17,6 +17,68 @@ exports[`app integration integration with sideboard click 1`] = `
 </div>"
 `;
 
+exports[`app integration integration with sideboard click 2`] = `
+"<div class=\\"App\\">
+  <main>
+    <div class=\\"wrapper\\">
+      <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+    </div>
+    <div id=\\"sideboard\\">
+      <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+      <div id=\\"rotation\\" class=\\"tab\\">
+        <h1>Rotation</h1><img id=\\"rotate-left\\" src=\\"rotate-arrow.svg\\"><input><input><img id=\\"rotate-right\\" src=\\"rotate-arrow.svg\\"><select id=\\"rotateDrop\\">
+          <option>90°</option>
+          <option>180°</option>
+          <option>270°</option>
+        </select>
+      </div>
+    </div>
+    <div></div>
+  </main>
+</div>"
+`;
+
+exports[`app integration integration with sideboard click 3`] = `
+"<div class=\\"App\\">
+  <main>
+    <div class=\\"wrapper\\">
+      <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+    </div>
+    <div id=\\"sideboard\\">
+      <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+      <div class=\\"tab\\">
+        <h1>Reflection</h1><select id=\\"reflectDrop\\">
+          <option>-9</option>
+          <option>-8</option>
+          <option>-7</option>
+          <option>-6</option>
+          <option>-5</option>
+          <option>-4</option>
+          <option>-3</option>
+          <option>-2</option>
+          <option>-1</option>
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+        </select>
+      </div>
+    </div>
+    <div></div>
+  </main>
+</div>"
+`;
+
 exports[`app integration render app 1`] = `
 "<div class=\\"App\\">
   <main>
