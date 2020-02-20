@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import css from "./shapeComp.module.css";
+import "./shapeComp.css";
 
 function determineCorners(x, y, size, orientation, shape) {
   let [d1, d2] = size;
@@ -133,29 +133,29 @@ function draw(
   const canvas = document.getElementById(id);
   canvas.width = width;
   canvas.height = height;
-  const context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.beginPath();
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
   let pointCount = 0;
   switch (shape) {
     case "circle":
-      context.arc(corners[0][0], corners[0][1], radius, 0, 2 * Math.PI, false);
+      ctx.arc(corners[0][0], corners[0][1], radius, 0, 2 * Math.PI, false);
       break;
     default:
       for (const point of corners) {
         if (pointCount++ === 0) {
-          context.moveTo(point[0], point[1]);
+          ctx.moveTo(point[0], point[1]);
         } else {
-          context.lineTo(point[0], point[1]);
+          ctx.lineTo(point[0], point[1]);
         }
       }
   }
-  context.fillStyle = fillColour;
-  context.fill();
-  context.lineWidth = borderWidth;
-  context.strokeStyle = borderColour;
-  context.stroke();
-  return context;
+  ctx.fillStyle = fillColour;
+  ctx.fill();
+  ctx.lineWidth = borderWidth;
+  ctx.strokeStyle = borderColour;
+  ctx.stroke();
+  return ctx;
 }
 
 function checkBounds(

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import css from './shapeComp.module.css';
+import './shapeComp.css';
 
 function Heart(props) {
     // postion is array of anchorX, anchorY, length
