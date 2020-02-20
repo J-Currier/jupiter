@@ -5,8 +5,8 @@ exports[`app integration integration with sideboard click 1`] = `
   <main>
     <div class=\\"wrapper\\">
       <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
-      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
       <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
     </div>
     <div id=\\"sideboard\\">
       <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
@@ -22,8 +22,8 @@ exports[`app integration integration with sideboard click 2`] = `
   <main>
     <div class=\\"wrapper\\">
       <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
-      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
       <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
     </div>
     <div id=\\"sideboard\\">
       <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
@@ -45,8 +45,8 @@ exports[`app integration integration with sideboard click 3`] = `
   <main>
     <div class=\\"wrapper\\">
       <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
-      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
       <div class=\\"fade-out\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
     </div>
     <div id=\\"sideboard\\">
       <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
@@ -84,8 +84,8 @@ exports[`app integration render app 1`] = `
   <main>
     <div class=\\"wrapper\\">
       <div class=\\"grid\\"><canvas id=\\"myGrid\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
-      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
       <div class=\\"Circle\\"><canvas id=\\"myStartPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
+      <div class=\\"endPtCircle\\"><canvas id=\\"myEndPt\\" width=\\"2000\\" height=\\"2000\\"></canvas></div>
     </div>
     <div id=\\"sideboard\\">
       <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
