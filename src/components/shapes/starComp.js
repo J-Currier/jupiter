@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./shapeComp.module.css";
+import css from "./shapeComp.module.css";
 
 function Star(props) {
   let {
