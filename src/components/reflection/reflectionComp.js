@@ -13,7 +13,7 @@ function Reflection(props) {
     const selector = () => {
         const array = [];
         for(let i = -9; i < 10; i++) {
-        array.push(<option>{i}</option>)
+        array.push(<option key ={i}>{i}</option>)
         }
         return array
     }
@@ -22,7 +22,7 @@ function Reflection(props) {
 
         <div className='tab'>
             <h1>Reflection</h1>
-            <select>
+            <select id="reflectDrop">
                 {selector()}
             </select>
         </div>
