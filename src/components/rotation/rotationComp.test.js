@@ -2,10 +2,9 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
-import Rotation from './rotationComp';
+import Rotation from "./rotationComp";
 
-describe('component', () => {
-
+describe("component", () => {
   let container = null;
 
   beforeEach(() => {
@@ -21,35 +20,29 @@ describe('component', () => {
     container = null;
   });
 
-  test('render', () => {
+  test("render", () => {
     act(() => {
-      render(
-        <Rotation
-        />, container
-      );
+      render(<Rotation />, container);
     });
   });
 
-  test('change dropdown', () => {
+  test("change dropdown", () => {
     // setup mock button function
     // const mockDropdownFx = jest.fn(); // mock function
     act(() => {
       render(
         <Rotation
-          // buttonFunction={mockButtonFx}
-        />, container
+        // buttonFunction={mockButtonFx}
+        />,
+        container
       );
     });
     const rotateDrop = document.getElementById("rotateDrop");
-    const angles = [
-      "90°",
-      "180°",
-      "270°"
-    ];
+    const angles = ["90°", "180°", "270°"];
     expect(rotateDrop.value).toBe("90°");
     for (const angleStr of angles) {
       act(() => {
-        rotateDrop.value=angleStr;
+        rotateDrop.value = angleStr;
       });
       expect(rotateDrop.value).toBe(angleStr);
     }
