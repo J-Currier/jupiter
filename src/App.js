@@ -6,18 +6,19 @@ import Sideboard from "./components/Sideboard/SideboardComp";
 import { Circle } from "./components/shapes/circleComp.js";
 import { Square } from "./components/shapes/squareComp.js";
 import { Triangle } from "./components/shapes/triangleComp.js";
-import { Heart } from "./components/shapes/heartComp.js";
+// import { Heart } from "./components/shapes/heartComp.js";
 import { Star } from "./components/shapes/starComp.js";
 import { Rectangle } from "./components/shapes/rectangleComp.js";
-
-import Translation from "./components/translation/translationComp";
 
 import mathFunctions from "./scripts/math.js";
 
 function Game(props) {
-  let shapesArray = ["circle", "square", "star", "rectangle"];
+  let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+<<<<<<< HEAD
   randomShape = 'rectangle'
+=======
+>>>>>>> 70aea68a8d93c4e2c6d4504ebd7cb8a341e94fd5
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null);
 
@@ -155,47 +156,36 @@ function Game(props) {
     }
   };
 
+  const shapeCompsObj = {
+    circle: Circle,
+    square: Square,
+    triangle: Triangle,
+    rectangle: Rectangle,
+    star: Star
+    // heart: Heart
+  };
+  const ShapeComp = shapeCompsObj[shape];
+  const playerComp = (
+    <ShapeComp
+      moveBack_shakeVertical={moveBack_shakeVertical}
+      moveBack_shakeHorizontal={moveBack_shakeHorizontal}
+      shapeInfo={player}
+    />
+  );
+  const targetComp = (
+    <ShapeComp
+      moveBack_shakeVertical={moveBack_shakeVertical}
+      moveBack_shakeHorizontal={moveBack_shakeHorizontal}
+      shapeInfo={target}
+    />
+  );
+
   return (
     <main>
       <div className="wrapper">
         <Grid />
-        {shape === "circle" && (
-          <Circle
-            moveBack_shakeVertical={moveBack_shakeVertical}
-            moveBack_shakeHorizontal={moveBack_shakeHorizontal}
-            shapeInfo={target}
-          />
-        )}
-        {shape === "circle" && (
-          <Circle
-            moveBack_shakeVertical={moveBack_shakeVertical}
-            moveBack_shakeHorizontal={moveBack_shakeHorizontal}
-            shapeInfo={player}
-          />
-        )}
-        {shape === "square" && (
-          <Square
-            moveBack_shakeVertical={moveBack_shakeVertical}
-            moveBack_shakeHorizontal={moveBack_shakeHorizontal}
-            shapeInfo={target}
-          />
-        )}
-        {shape === "square" && (
-          <Square
-            moveBack_shakeVertical={moveBack_shakeVertical}
-            moveBack_shakeHorizontal={moveBack_shakeHorizontal}
-            shapeInfo={player}
-          />
-        )}
-        {shape === "heart" && <Heart shapeInfo={target} />}
-        {shape === "heart" && <Heart shapeInfo={player} />}
-        {shape === "star" && <Star shapeInfo={target} />}
-        {shape === "star" && <Star shapeInfo={player} />}
-        {shape === "rectangle" && <Rectangle shapeInfo={target} />}
-        {shape === "rectangle" && <Rectangle shapeInfo={player} />}
-
-        {/* {shape === 'triangle' &&  <Triangle shapeInfo={target}/>}
-                {shape === 'triangle' &&  <Triangle shapeInfo={player}/>} */}
+        {playerComp}
+        {targetComp}
       </div>
       <Sideboard
         changeTab={changeTab}
@@ -204,7 +194,6 @@ function Game(props) {
         moveFactor={moveFactor}
         key="sideboard"
       />
-      {/* {tab === 'translation' &&  <Translation />} */}
       <LevelCheck key="levelCheck" />
     </main>
   );

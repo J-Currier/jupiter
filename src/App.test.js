@@ -38,7 +38,7 @@ describe("app integration", () => {
     const rotationBtn = document.getElementById("rotation-button");
     const reflectionBtn = document.getElementById("reflection-button");
 
-    // click translation
+    // translation
     act(() => {
       translationBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
@@ -63,6 +63,34 @@ describe("app integration", () => {
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+
+    // rotation
+    act(() => {
+      rotationBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    const rotateDrop = document.getElementById("rotateDrop");
+    const angles = ["90°", "180°", "270°"];
+    expect(rotateDrop.value).toBe("90°");
+    for (const angleStr of angles) {
+      act(() => {
+        rotateDrop.value = angleStr;
+      });
+      expect(rotateDrop.value).toBe(angleStr);
+    }
+    expect(pretty(container.innerHTML)).toMatchSnapshot();
+
+    // reflection
+    act(() => {
+      reflectionBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    const reflectDrop = document.getElementById("reflectDrop");
+    for (let i = -9; i <= 9; i++) {
+      act(() => {
+        reflectDrop.value = i;
+      });
+      expect(reflectDrop.value).toBe(i.toString());
+    }
     expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
 });

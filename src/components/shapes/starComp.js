@@ -11,8 +11,6 @@ function Star(props) {
     shapeClassName
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
-  anchorX = 1000;
-  anchorY = 1000;
 
   useEffect(() => {
     var canvas = document.getElementById(id);
