@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import css from "./shapeComp.module.css";
+import "./shapeComp.css";
 
 function Triangle(props) {
   // postion is array of anchorX, anchorY, length
@@ -34,7 +34,7 @@ function Triangle(props) {
       context.moveTo(cornerArray[0][0], cornerArray[0][1]);
       context.lineTo(cornerArray[1][0], cornerArray[1][1]);
       context.lineTo(cornerArray[2][0], cornerArray[2][1]);
-      context.moveTo(cornerArray[0][0], cornerArray[0][1]);
+      context.lineTo(cornerArray[0][0], cornerArray[0][1]);
       context.fillStyle = fillColour;
       context.fill();
 
