@@ -35,8 +35,8 @@ function Triangle(props) {
       context.lineTo(cornerArray[1][0], cornerArray[1][1]);
       context.lineTo(cornerArray[2][0], cornerArray[2][1]);
       context.moveTo(cornerArray[0][0], cornerArray[0][1]);
-      context.fill();
       context.fillStyle = fillColour;
+      context.fill();
 
       context.lineWidth = borderWidth;
       context.strokeStyle = borderColour;
