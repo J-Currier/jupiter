@@ -37,7 +37,8 @@
   }
 }
 
-.directional, .time {
+.directional,
+.time {
   width: 8vmin;
 }
 
@@ -78,19 +79,15 @@ main {
 }
 .sideboard {
   justify-self: left;
-  
 }
 
 .winner {
   font-size: 500%;
   color: rgba(137, 235, 52, 1);
-  font-family: 'Bangers', cursive;
+  font-family: "Bangers", cursive;
   height: 60vh;
   vertical-align: middle;
   width: 100%;
   position: absolute;
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
-
-
-
