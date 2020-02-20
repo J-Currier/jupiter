@@ -40,7 +40,8 @@ const mathFunctions = {
         return [endX, endY];
     },
 
-    // rotate: (x,y, clockwise, centre) => {
+    // rotate: (anchorX, anchorY, rotationPt, magnitude) => {
+        
     //     let endX;
     //     let endY;
     //     return [endX, endY];

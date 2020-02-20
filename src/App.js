@@ -18,7 +18,7 @@ import mathFunctions from './scripts/math.js'
 function Game (props) {
   let shapesArray = ['circle', 'square', 'star', 'rectangle'];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
-  // randomShape = 'star'
+  randomShape = 'rectangle'
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null)
 
@@ -76,6 +76,8 @@ function Game (props) {
       changeClass("fade-in")
     }, 100);
   }
+
+  
 
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
