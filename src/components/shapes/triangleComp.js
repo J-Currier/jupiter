@@ -12,8 +12,8 @@ function Triangle(props) {
     shapeClassName
   } = props.shapeInfo; //props.circleInfo -> props.shapeInfo
   let [anchorX, anchorY, size, orientation] = position;
-  let length1 = size * 2;
-  let length2 = 400;
+  let length1 = size ;
+  let length2 = size <=100 ? 100 : size/2;
 
   useEffect(() => {
     var canvas = document.getElementById(id);
