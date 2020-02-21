@@ -45,7 +45,7 @@ function Rectangle(props) {
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
-        let myArr = [['t', [100, 0]], ['t', [0, 100]]];
+        let myArr = [['r', [90, 1100, 900]]];
         // let myArr = [1,2,3];
         console.log('in use effect');
 
@@ -77,8 +77,18 @@ function Rectangle(props) {
                 for (let item of myArr) {
                     console.log(item[1][0])
                     if(item[0] == 't') {
-                                context.translate(item[1][0], item[1][1] )
-                            }
+                        context.translate(item[1][0], item[1][1] )
+                    }
+                    if(item[0] == 'r') {
+                        console.log('rotate')
+                        console.log(item[1][0]*Math.PI/180)
+                        context.beginPath();
+                        context.translate(item[1][1],item[1][2]);
+                        context.rotate(item[1][0]*Math.PI/180);
+                        context.translate(-item[1][1],-item[1][2])
+
+                       
+                    }
             //         console.log(myArr[i][1][1])
             //         // context.translate(myArr[i][1][0], myArr[i][1][1] )
                 }
