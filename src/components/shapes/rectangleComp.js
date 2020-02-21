@@ -45,6 +45,10 @@ function Rectangle(props) {
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
+        let myArr = [['t', [100 ,0]]]
+        // let myArr = [1,2,3];
+        console.log('in use effect');
+
 
         function drawRectangle(fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
@@ -56,8 +60,26 @@ function Rectangle(props) {
             context.lineTo(cornerArray[0][0], cornerArray[0][1]);
             context.fillStyle = fillColour;
             context.fill();
+            context.translate(100,0)
+
             context.lineWidth = borderWidth;
             context.strokeStyle = borderColour;
+            // if( shapeClassName !== 'endPtCircle') {
+            //     console.log('if statement');
+            //     for (let i = 0; i < myArr.length;  i++) {
+            //         console.log(myArr[i], 'in the for')
+            //         console.log(myArr[i][1][0])
+            //         console.log(myArr[i][1][1])
+            //         // context.translate(myArr[i][1][0], myArr[i][1][1] )
+            //     }
+
+            // }
+            // for (i in myArr, i<myArr.length,  i++) {
+            //     if(myArr[i][0] == 't') {
+            //         context.translate(myArr[i][1][0], myArr[i][1][1] )
+            //     }
+            // }
+
             context.stroke();
         }
 

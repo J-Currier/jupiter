@@ -15,17 +15,18 @@ import mathFunctions from "./scripts/math.js";
 function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
-<<<<<<< HEAD
   randomShape = 'rectangle'
-=======
->>>>>>> 70aea68a8d93c4e2c6d4504ebd7cb8a341e94fd5
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null);
 
-  let size = (Math.floor(Math.random() * 4) + 1) * 100;
+  // let size = (Math.floor(Math.random() * 4) + 1) * 100;
+  let size = 400;
+
   let startOrientation = Math.floor(Math.random() * 4) + 1;
 
-  let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  // let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  let [startAnchorX, startAnchorY] = [1000, 1000];
+
   const [playerPositionsArray, setPlayerPositionsArray] = useState([
     [startAnchorX, startAnchorY, size, startOrientation]
   ]);
