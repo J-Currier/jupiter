@@ -45,7 +45,7 @@ function Rectangle(props) {
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
-        let myArr = [['t', [100 ,0]]]
+        let myArr = [['t', [100, 0]], ['t', [0, 100]]];
         // let myArr = [1,2,3];
         console.log('in use effect');
 
@@ -58,31 +58,37 @@ function Rectangle(props) {
             context.lineTo(cornerArray[2][0], cornerArray[2][1]);
             context.lineTo(cornerArray[3][0], cornerArray[3][1]);
             context.lineTo(cornerArray[0][0], cornerArray[0][1]);
+            
             context.fillStyle = fillColour;
             context.fill();
-            context.translate(100,0)
+            
 
             context.lineWidth = borderWidth;
             context.strokeStyle = borderColour;
-            // if( shapeClassName !== 'endPtCircle') {
-            //     console.log('if statement');
-            //     for (let i = 0; i < myArr.length;  i++) {
-            //         console.log(myArr[i], 'in the for')
-            //         console.log(myArr[i][1][0])
+            
+
+            context.stroke();
+        }
+        // context.translate(-300, -200);
+        if( shapeClassName !== 'endPtCircle') {
+            console.log(myArr);
+
+                console.log('if statement');
+                for (let item of myArr) {
+                    console.log(item[1][0])
+                    if(item[0] == 't') {
+                                context.translate(item[1][0], item[1][1] )
+                            }
             //         console.log(myArr[i][1][1])
             //         // context.translate(myArr[i][1][0], myArr[i][1][1] )
-            //     }
+                }
 
-            // }
+            }
             // for (i in myArr, i<myArr.length,  i++) {
             //     if(myArr[i][0] == 't') {
             //         context.translate(myArr[i][1][0], myArr[i][1][1] )
             //     }
             // }
-
-            context.stroke();
-        }
-
         drawRectangle(fillColour, borderColour, borderWidth);
     }, [position]);
 

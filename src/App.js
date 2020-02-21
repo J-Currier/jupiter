@@ -23,6 +23,7 @@ function Game(props) {
   let size = 400;
 
   let startOrientation = Math.floor(Math.random() * 4) + 1;
+  startOrientation = 1;
 
   // let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
   let [startAnchorX, startAnchorY] = [1000, 1000];
