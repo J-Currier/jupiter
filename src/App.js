@@ -86,7 +86,7 @@ function Game(props) {
     setShapeClassName(newName);
   };
 
-  const translate = async (e, deltaX, deltaY) => {
+  const translate = async (deltaX, deltaY) => {
     let [newAnchorX, newAnchorY] = mathFunctions.translate(
       playerPosition[0],
       playerPosition[1],
@@ -172,6 +172,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={player}
+      translate={translate}
     />
   );
   const targetComp = (
@@ -179,6 +180,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={target}
+      translate={translate}
     />
   );
 

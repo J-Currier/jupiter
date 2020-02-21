@@ -39,13 +39,12 @@ function Rectangle(props) {
         cornerArray[3][0] < 0 || cornerArray[3][0] > 2000) {
         props.moveBack_shakeHorizontal();
     }
-
     useEffect(() => {
         var canvas = document.getElementById(id);
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
-        let myArr = [['r', [90, 1100, 900]]];
+        let myArr = [['t', [400, 0]], ['t', [0, 100]], ['r', [90, 1000, 1000]]];
         // let myArr = [1,2,3];
         console.log('in use effect');
 
@@ -69,24 +68,54 @@ function Rectangle(props) {
 
             context.stroke();
         }
+
         // context.translate(-300, -200);
         if( shapeClassName !== 'endPtCircle') {
-            console.log(myArr);
+            
 
+            console.log(myArr);
+                let xReflec = false;
+                let yReflect = false;
+                let xFactor = 1
+                let yFactor = 1
+                let xMag = 0;
+                let yMag =0;
+
+            
                 console.log('if statement');
                 for (let item of myArr) {
                     console.log(item[1][0])
                     if(item[0] == 't') {
-                        context.translate(item[1][0], item[1][1] )
+                        context.translate((item[1][0]*xFactor), (item[1][1]*yFactor));
+                        xMag = ((item[1][0]*xFactor) + xMag);
+                        yMag = ((item[1][1]*yFactor) + yMag)
+                        console.log('xmag', xMag);
+                        console.log('ymag', yMag);
+                        
                     }
                     if(item[0] == 'r') {
-                        console.log('rotate')
+                        console.log('rotate');
                         console.log(item[1][0]*Math.PI/180)
                         context.beginPath();
-                        context.translate(item[1][1],item[1][2]);
+                        context.translate(((item[1][1]*xFactor)-xMag),((item[1][2]*yFactor)+yMag));
                         context.rotate(item[1][0]*Math.PI/180);
-                        context.translate(-item[1][1],-item[1][2])
+                        context.translate((-(item[1][1]*xFactor)+xMag),(-(item[1][2]*yFactor)+yMag))
                     }
+                    if(item[0] == 'f') {  
+                        console.log('reflection');
+                        context.translate((item[1][0]*xFactor), (item[1][1]*yFactor));
+                        context.scale(item[2][0], item[2][1]);
+                        context.translate((-item[1][0]*xFactor), (-item[1][1]*yFactor));
+                        if (item[2][0] == -1) {
+                            xReflec = !xReflec;
+                            xFactor = xFactor*-1;
+                        };
+                        if (item[2][1] == -1) {
+                            yReflect = !yReflect;
+                            yFactor = yFactor*-1;
+
+                        };
+                    } 
                 }
 
             }
