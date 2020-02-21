@@ -86,11 +86,7 @@ function Rectangle(props) {
                         context.translate(item[1][1],item[1][2]);
                         context.rotate(item[1][0]*Math.PI/180);
                         context.translate(-item[1][1],-item[1][2])
-
-                       
                     }
-            //         console.log(myArr[i][1][1])
-            //         // context.translate(myArr[i][1][0], myArr[i][1][1] )
                 }
 
             }
