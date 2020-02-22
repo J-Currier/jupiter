@@ -164,6 +164,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={player}
+      anchorDot = {true}
     />
   );
   const targetComp = (
@@ -171,6 +172,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={target}
+      anchorDot = {true}
     />
   );
 
