@@ -21,12 +21,12 @@ function Square(props) {
         shapeClassName
     } = props.shapeInfo;
     let [anchorX, anchorY, size, orientaion] = position;
+    let anchorDot = props.anchorDot;
 
     let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
 
     for (let corner of cornerArray) {
         if (corner[1] < 0 || corner[1] > 2000) {
-            console.log('hi')
             props.moveBack_shakeVertical();
             break;
         }
@@ -34,7 +34,6 @@ function Square(props) {
 
     for (let corner of cornerArray) {
         if (corner[0] < 0 || corner[0] > 2000) {
-            console.log('hi')
             props.moveBack_shakeHorizontal();
             break;
         }
@@ -61,7 +60,18 @@ function Square(props) {
             context.stroke();
         }
 
+        function drawAnchorDot(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
+            context.beginPath();
+            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+            context.fillStyle = fillColour;
+            context.fill();
+            context.lineWidth = borderWidth;
+            context.strokeStyle = borderColour;
+            context.stroke();
+        }
+
         drawSquare(fillColour, borderColour, borderWidth);
+        if (anchorDot) drawAnchorDot(anchorX, anchorY, size/20, 'white', 'white', borderWidth);
     }, [position]);
 
     return (
