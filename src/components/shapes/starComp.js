@@ -11,14 +11,29 @@ function Star(props) {
     shapeClassName
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
+  
+  let cornerArray = determineCorners(anchorX, anchorY, size, orientation);
 
+  for (let corner of cornerArray) {
+    if (corner[1] < 0 || corner[1] > 2000) {
+        props.moveBack_shakeVertical();
+        break;
+    }
+  }
+
+  for (let corner of cornerArray) {
+    if (corner[0] < 0 || corner[0] > 2000) {
+        props.moveBack_shakeHorizontal();
+        break;
+    }
+  }
+  
   useEffect(() => {
     var canvas = document.getElementById(id);
     var context = canvas.getContext("2d");
     canvas.width = 2000;
     canvas.height = 2000;
 
-    let cornerArray = determineCorners(anchorX, anchorY, size, orientation);
 
     function drawStar(fillColour, borderColour, borderWidth) {
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -42,7 +57,19 @@ function Star(props) {
       context.stroke();
     }
 
+    function drawAnchorDot(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = fillColour;
+      context.fill();
+      context.lineWidth = borderWidth;
+      context.strokeStyle = borderColour;
+      context.stroke();
+    }
+
+    
     drawStar(fillColour, borderColour, borderWidth);
+    drawAnchorDot(anchorX, anchorY, size/20, 'white', 'white', borderWidth);
   }, [position]);
 
   return (
@@ -56,57 +83,57 @@ function determineCorners(anchorX, anchorY, length, orientation) {
   if (orientation === 1) {
     return [
       [anchorX, anchorY],
-      [anchorX + 175, anchorY - 125],
-      [anchorX + 375, anchorY],
-      [anchorX + 300, anchorY - 200],
-      [anchorX + 425, anchorY - 350],
-      [anchorX + 250, anchorY - 350],
-      [anchorX + 175, anchorY - 525],
-      [anchorX + 100, anchorY - 350],
-      [anchorX - 75, anchorY - 350],
-      [anchorX + 50, anchorY - 200]
+      [anchorX + (length/525)*175, anchorY - (length/525)*125],
+      [anchorX + (length/525)*375, anchorY],
+      [anchorX + (length/525)*300, anchorY - (length/525)*200],
+      [anchorX + (length/525)*425, anchorY - (length/525)*350],
+      [anchorX + (length/525)*250, anchorY - (length/525)*350],
+      [anchorX + (length/525)*175, anchorY - (length/525)*525],
+      [anchorX + (length/525)*100, anchorY - (length/525)*350],
+      [anchorX - (length/525)*75, anchorY - (length/525)*350],
+      [anchorX + (length/525)*50, anchorY - (length/525)*200]
     ];
   }
   if (orientation === 2) {
     return [
       [anchorX, anchorY],
-      [anchorX + 125, anchorY + 175],
-      [anchorX, anchorY + 375],
-      [anchorX + 200, anchorY + 300],
-      [anchorX + 350, anchorY + 425],
-      [anchorX + 350, anchorY + 250],
-      [anchorX + 525, anchorY + 175],
-      [anchorX + 350, anchorY + 100],
-      [anchorX + 350, anchorY - 75],
-      [anchorX + 200, anchorY + 50]
+      [anchorX + (length/525)*125, anchorY + (length/525)*175],
+      [anchorX, anchorY + (length/525)*375],
+      [anchorX + (length/525)*200, anchorY + (length/525)*300],
+      [anchorX + (length/525)*350, anchorY + (length/525)*425],
+      [anchorX + (length/525)*350, anchorY + (length/525)*250],
+      [anchorX + (length/525)*525, anchorY + (length/525)*175],
+      [anchorX + (length/525)*350, anchorY + (length/525)*100],
+      [anchorX + (length/525)*350, anchorY - (length/525)*75],
+      [anchorX + (length/525)*200, anchorY + (length/525)*50]
     ];
   }
   if (orientation === 3) {
     return [
       [anchorX, anchorY],
-      [anchorX - 175, anchorY + 125],
-      [anchorX - 375, anchorY],
-      [anchorX - 300, anchorY + 200],
-      [anchorX - 425, anchorY + 350],
-      [anchorX - 250, anchorY + 350],
-      [anchorX - 175, anchorY + 525],
-      [anchorX - 100, anchorY + 350],
-      [anchorX + 75, anchorY + 350],
-      [anchorX - 50, anchorY + 200]
+      [anchorX - (length/525)*175, anchorY + (length/525)*125],
+      [anchorX - (length/525)*375, anchorY],
+      [anchorX - (length/525)*300, anchorY + (length/525)*200],
+      [anchorX - (length/525)*425, anchorY + (length/525)*350],
+      [anchorX - (length/525)*250, anchorY + (length/525)*350],
+      [anchorX - (length/525)*175, anchorY + (length/525)*525],
+      [anchorX - (length/525)*100, anchorY + (length/525)*350],
+      [anchorX + (length/525)*75, anchorY + (length/525)*350],
+      [anchorX - (length/525)*50, anchorY + (length/525)*200]
     ];
   }
   if (orientation === 4) {
     return [
       [anchorX, anchorY],
-      [anchorX - 125, anchorY - 175],
-      [anchorX, anchorY - 375],
-      [anchorX - 200, anchorY - 300],
-      [anchorX - 350, anchorY - 425],
-      [anchorX - 350, anchorY - 250],
-      [anchorX - 525, anchorY - 175],
-      [anchorX - 350, anchorY - 100],
-      [anchorX - 350, anchorY + 75],
-      [anchorX - 200, anchorY - 50]
+      [anchorX - (length/525)*125, anchorY - (length/525)*175],
+      [anchorX, anchorY - (length/525)*375],
+      [anchorX - (length/525)*200, anchorY - (length/525)*300],
+      [anchorX - (length/525)*350, anchorY - (length/525)*425],
+      [anchorX - (length/525)*350, anchorY - (length/525)*250],
+      [anchorX - (length/525)*525, anchorY - (length/525)*175],
+      [anchorX - (length/525)*350, anchorY - (length/525)*100],
+      [anchorX - (length/525)*350, anchorY + (length/525)*75],
+      [anchorX - (length/525)*200, anchorY - (length/525)*50]
     ];
   }
 }
