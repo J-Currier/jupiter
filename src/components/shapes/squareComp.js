@@ -24,17 +24,20 @@ function Square(props) {
 
     let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
 
-    if (cornerArray[0][1] < 0 || cornerArray[0][1] > 2000 ||
-        cornerArray[1][1] < 0 || cornerArray[1][1] > 2000 ||
-        cornerArray[2][1] < 0 || cornerArray[2][1] > 2000 ||
-        cornerArray[3][1] < 0 || cornerArray[3][1] > 2000) {
-        props.moveBack_shakeVertical();
+    for (let corner of cornerArray) {
+        if (corner[1] < 0 || corner[1] > 2000) {
+            console.log('hi')
+            props.moveBack_shakeVertical();
+            break;
+        }
     }
-    if (cornerArray[0][0] < 0 || cornerArray[0][0] > 2000 ||
-        cornerArray[1][0] < 0 || cornerArray[1][0] > 2000 ||
-        cornerArray[2][0] < 0 || cornerArray[2][0] > 2000 ||
-        cornerArray[3][0] < 0 || cornerArray[3][0] > 2000) {
-        props.moveBack_shakeHorizontal();
+
+    for (let corner of cornerArray) {
+        if (corner[0] < 0 || corner[0] > 2000) {
+            console.log('hi')
+            props.moveBack_shakeHorizontal();
+            break;
+        }
     }
 
     useEffect(() => {
