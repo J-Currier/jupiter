@@ -51,7 +51,7 @@ function Game(props) {
     startOrientation
   ]);
 
-  const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.8)");
+  const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
   const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.7)");
   const [borderWidth, setBorderWidth] = useState(10);
   const [shapeClassName, setShapeClassName] = useState("Circle");
@@ -70,7 +70,7 @@ function Game(props) {
   let target = {
     id: "myEndPt",
     position: targetPostition,
-    fillColour: "rgba(255, 77, 0, 0.8)",
+    fillColour: "rgba(255, 77, 0, 0.6)",
     borderColour: borderColour,
     borderWidth: borderWidth,
     shapeClassName: "endPtCircle"
