@@ -99,16 +99,6 @@ function determineCorners(x, y, d1, d2, orientation) {
       [x, y],
       [x - d1, y],
       [x, y - d2]
-    ],
-    5: [
-      [x, y],
-      [x + d2, y],
-      [x, y + d1]
-    ],
-    6: [
-      [x, y],
-      [x - d2, y],
-      [x, y - d1]
     ]
   };
   return orientations[orientation];
