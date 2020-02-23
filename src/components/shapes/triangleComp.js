@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./shapeComp.css";
+import shapesFunctions from "./shapesFunctions.js";
 
 function Triangle(props) {
   let {
@@ -68,7 +69,7 @@ function Triangle(props) {
     }
 
     drawTriangle(fillColour, borderColour, borderWidth);
-    if (anchorDot) drawAnchorDot(anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+    if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
   }, [anchorX, anchorY, size, orientation]);
 
   return (

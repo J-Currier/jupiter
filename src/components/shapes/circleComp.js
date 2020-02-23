@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './shapeComp.css';
+import shapesFunctions from "./shapesFunctions.js";
 
 function determineAnchor (centerX, centerY, radius, orientaion) {
     const orientations = {
@@ -60,7 +61,7 @@ function Circle(props) {
         }
 
         drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth);
-        if (anchorDot) drawAnchorDot(anchor[0], anchor[1], size/20, 'white', 'white', borderWidth);
+        if (anchorDot) shapesFunctions.drawAnchorDot(context, anchor[0], anchor[1], size/20, 'white', 'white', borderWidth);
     }, [position]);
 
     return (

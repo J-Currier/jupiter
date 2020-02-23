@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './shapeComp.css';
+import shapesFunctions from "./shapesFunctions.js";
 
 function determineCorners (x, y, d, orientation) {
     const orientations = {
@@ -71,7 +72,7 @@ function Square(props) {
         }
 
         drawSquare(fillColour, borderColour, borderWidth);
-        if (anchorDot) drawAnchorDot(anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+        if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
     }, [position]);
 
     return (

@@ -1,4 +1,4 @@
-// generate grid with a loop
+
 const mathFunctions = {
     shapeMaker: (size) => {
         let anchorX = 0

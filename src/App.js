@@ -52,7 +52,7 @@ function Game(props) {
   ]);
 
   const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.8)");
-  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.8)");
+  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.7)");
   const [borderWidth, setBorderWidth] = useState(10);
   const [shapeClassName, setShapeClassName] = useState("Circle");
 
@@ -180,8 +180,8 @@ function Game(props) {
     <main>
       <div className="wrapper">
         <Grid />
-        {playerComp}
         {targetComp}
+        {playerComp}
       </div>
       <Sideboard
         changeTab={changeTab}

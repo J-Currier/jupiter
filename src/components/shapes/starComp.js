@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./shapeComp.css";
+import shapesFunctions from "./shapesFunctions.js";
 
 function Star(props) {
   let {
@@ -70,7 +71,7 @@ function Star(props) {
 
     
     drawStar(fillColour, borderColour, borderWidth);
-    if (anchorDot) drawAnchorDot(anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+    if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
   }, [position]);
 
   return (
