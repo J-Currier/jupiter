@@ -1,7 +1,9 @@
-@import URL("https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c&");
-
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+input, select, textarea, button{
+  font-family:inherit;
 }
 
 .App {
@@ -91,6 +93,7 @@ main {
   font-size: 500%;
   color: rgba(137, 235, 52, 1);
   font-family: "Bangers", cursive;
+  /* font-display: block; */
   height: 60vh;
   vertical-align: middle;
   width: 100%;
