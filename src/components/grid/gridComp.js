@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './gridComp.css';
 
-function Grid() {
+function Grid(props) {
     useEffect(() => {
         var canvas = document.getElementById("myGrid");
         var context = canvas.getContext("2d");
@@ -40,9 +40,29 @@ function Grid() {
                 context.lineTo(2000, 1000);
                 context.stroke();
         }
+
+        function axesNumbers() {
+            // context.font = "65px Calibri bold";
+            context.font=`65px '${props.font}'`
+            // context.font = "65px 'M PLUS Rounded 1c'";
+            context.fillStyle = "white";
+            for (var x = 100; x <= 900; x += 100) {
+                if (x !==1000) context.fillText(`${(x/100)-10}`, x-15, 980);
+            }
+            for (var x = 1100; x <= 1900; x += 100) {
+                if (x !==1000) context.fillText(`${(x/100)-10}`, x+10, 1060);
+            }
+            for (var y = 100; y <= 900; y += 100) {
+                if (y !==1000) context.fillText(`${10-(y/100)}`, 1020, y+15);
+            }
+            for (var y = 1100; y <= 1900; y += 100) {
+                if (y !==1000) context.fillText(`${10-(y/100)}`, 925, y+15);
+            }
+        }
         
         drawBoard();    
-        drawAxis();   
+        drawAxis();
+        axesNumbers();  
     }, []);
     return (
       <div className="grid">

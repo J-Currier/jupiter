@@ -16,11 +16,10 @@ import mathFunctions from "./scripts/math.js";
 function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
-  randomShape ='triangle'
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null);
 
-  let size = (Math.floor(Math.random() * 4) + 1) * 100;
+  let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
   let startOrientation = Math.floor(Math.random() * 4) + 1;
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
@@ -53,8 +52,8 @@ function Game(props) {
     startOrientation
   ]);
 
-  const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.8)");
-  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.8)");
+  const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
+  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.7)");
   const [borderWidth, setBorderWidth] = useState(10);
   const [shapeClassName, setShapeClassName] = useState("Circle");
 
@@ -72,7 +71,7 @@ function Game(props) {
   let target = {
     id: "myEndPt",
     position: targetPostition,
-    fillColour: "rgba(255, 77, 0, 0.8)",
+    fillColour: "rgba(255, 77, 0, 0.6)",
     borderColour: borderColour,
     borderWidth: borderWidth,
     shapeClassName: "endPtCircle"
@@ -166,6 +165,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={player}
+      anchorDotSize = {9}
     />
   );
   const targetComp = (
@@ -173,16 +173,20 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={target}
+      anchorDotSize={9}
     />
   );
 
+  const font='M PLUS Rounded 1c';
   return (
     <main>
         <CallStack />
       <div className="wrapper">
-        <Grid />
-        {playerComp}
+        <Grid 
+          font={font}
+        />
         {targetComp}
+        {playerComp}
       </div>
       <Sideboard
         changeTab={changeTab}
