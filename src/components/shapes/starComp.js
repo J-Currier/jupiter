@@ -12,7 +12,7 @@ function Star(props) {
     shapeClassName
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
-  let anchorDot = props.anchorDot;
+  let anchorDotSize = props.anchorDotSize;
   
   let cornerArray = determineCorners(anchorX, anchorY, size, orientation);
 
@@ -71,7 +71,7 @@ function Star(props) {
 
     
     drawStar(fillColour, borderColour, borderWidth);
-    if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+    if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);
   }, [position]);
 
   return (

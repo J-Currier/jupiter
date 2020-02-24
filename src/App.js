@@ -18,7 +18,7 @@ function Game(props) {
   const [shape, setShape] = useState(randomShape);
   const [tab, setTab] = useState(null);
 
-  let size = (Math.floor(Math.random() * 4) + 1) * 100;
+  let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
   let startOrientation = Math.floor(Math.random() * 4) + 1;
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
@@ -164,7 +164,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={player}
-      anchorDot = {true}
+      anchorDotSize = {9}
     />
   );
   const targetComp = (
@@ -172,7 +172,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={target}
-      anchorDot = {true}
+      anchorDotSize = {9}
     />
   );
 

@@ -22,7 +22,7 @@ function Circle(props) {
         shapeClassName
     } = props.shapeInfo;
     let [centerX, centerY, size, orientaion] = position;
-    let anchorDot = props.anchorDot;
+    let anchorDotSize = props.anchorDotSize;
     let radius = size/2;
     let anchor = determineAnchor (centerX, centerY, radius, orientaion);
     
@@ -61,7 +61,7 @@ function Circle(props) {
         }
 
         drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth);
-        if (anchorDot) shapesFunctions.drawAnchorDot(context, anchor[0], anchor[1], size/20, 'white', 'white', borderWidth);
+        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchor[0], anchor[1], anchorDotSize, 'white', 'white', borderWidth);
     }, [position]);
 
     return (

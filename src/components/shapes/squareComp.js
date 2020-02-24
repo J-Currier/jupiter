@@ -22,7 +22,7 @@ function Square(props) {
         shapeClassName
     } = props.shapeInfo;
     let [anchorX, anchorY, size, orientaion] = position;
-    let anchorDot = props.anchorDot;
+    let anchorDotSize = props.anchorDotSize;
 
     let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
 
@@ -72,7 +72,7 @@ function Square(props) {
         }
 
         drawSquare(fillColour, borderColour, borderWidth);
-        if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);
     }, [position]);
 
     return (

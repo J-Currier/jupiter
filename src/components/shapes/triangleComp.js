@@ -12,7 +12,7 @@ function Triangle(props) {
     shapeClassName
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
-  let anchorDot = props.anchorDot;
+  let anchorDotSize = props.anchorDotSize;
   let length1 = size ;
   let length2 = size <=100 ? 100 : size/2;
   
@@ -69,7 +69,7 @@ function Triangle(props) {
     }
 
     drawTriangle(fillColour, borderColour, borderWidth);
-    if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/20, 'white', 'white', borderWidth);
+    if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);
   }, [anchorX, anchorY, size, orientation]);
 
   return (

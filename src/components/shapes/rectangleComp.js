@@ -23,7 +23,7 @@ function Rectangle(props) {
         shapeClassName
     } = props.shapeInfo;
     let [anchorX, anchorY, size, orientaion] = position;
-    let anchorDot = props.anchorDot;
+    let anchorDotSize = props.anchorDotSize;
     size = Math.round(size/2);
 
     let cornerArray = determineCorners(anchorX, anchorY, size, orientaion);
@@ -64,7 +64,7 @@ function Rectangle(props) {
         }
 
         drawRectangle(fillColour, borderColour, borderWidth);
-        if (anchorDot) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, size/10, 'white', 'white', borderWidth);
+        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);
     }, [position]);
 
     return (
