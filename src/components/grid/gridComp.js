@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './gridComp.css';
 
-function Grid() {
+function Grid(props) {
     useEffect(() => {
         var canvas = document.getElementById("myGrid");
         var context = canvas.getContext("2d");
@@ -42,7 +42,9 @@ function Grid() {
         }
 
         function axesNumbers() {
-            context.font = "65px Calibri bold";
+            // context.font = "65px Calibri bold";
+            context.font=`65px '${props.font}'`
+            // context.font = "65px 'M PLUS Rounded 1c'";
             context.fillStyle = "white";
             for (var x = 100; x <= 900; x += 100) {
                 if (x !==1000) context.fillText(`${(x/100)-10}`, x-15, 980);

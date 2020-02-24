@@ -172,14 +172,17 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={target}
-      anchorDotSize = {9}
+      anchorDotSize={9}
     />
   );
 
+  const font='M PLUS Rounded 1c';
   return (
     <main>
       <div className="wrapper">
-        <Grid />
+        <Grid 
+          font={font}
+        />
         {targetComp}
         {playerComp}
       </div>
