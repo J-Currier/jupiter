@@ -9,6 +9,7 @@ import { Triangle } from "./components/shapes/triangleComp.js";
 // import { Heart } from "./components/shapes/heartComp.js";
 import { Star } from "./components/shapes/starComp.js";
 import { Rectangle } from "./components/shapes/rectangleComp.js";
+import CallStack from './components/callStack/callStack'
 
 import mathFunctions from "./scripts/math.js";
 
@@ -177,6 +178,7 @@ function Game(props) {
 
   return (
     <main>
+        <CallStack />
       <div className="wrapper">
         <Grid />
         {playerComp}

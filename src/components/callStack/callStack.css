@@ -1,0 +1,25 @@
+.call-stack{
+    width: 30vmin;
+    height: 60vmin;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    border-style: solid;
+}
+
+img {
+    height: 6vh;
+}
+
+.calling-card {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+.calling-card:nth-of-type(2n) {
+    background: grey;
+  }
+
+
+.call-stack button {
+    align-self: end;    
+}

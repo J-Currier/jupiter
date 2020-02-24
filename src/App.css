@@ -81,6 +81,10 @@ main {
   justify-self: left;
 }
 
+.call-stack {
+  justify-self: right
+}
+
 .winner {
   font-size: 500%;
   color: rgba(137, 235, 52, 1);
