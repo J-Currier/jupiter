@@ -4,15 +4,18 @@ import './gridComp.css';
 function Grid(props) {
     useEffect(() => {
         var canvas = document.getElementById("myGrid");
+        let body = document.getElementsByTagName("body");
+        console.log(body[0].clientWidth, body[0].clientHeight)
+        console.log(canvas.clientWidth)
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
         var bw = canvas.width;
         var bh = canvas.height;
+        context.lineWidth = 5;
 
         function drawBoard(context = document.getElementById("myGrid").getContext("2d")){
             for (var x = 0; x <= bw; x += 100) {
-                context.lineWidth = 8;
                 context.moveTo(x, 0);
                 context.lineTo(x, bh);
             }

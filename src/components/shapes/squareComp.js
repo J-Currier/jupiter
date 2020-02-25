@@ -61,16 +61,6 @@ function Square(props) {
             context.stroke();
         }
 
-        function drawAnchorDot(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fillStyle = fillColour;
-            context.fill();
-            context.lineWidth = borderWidth;
-            context.strokeStyle = borderColour;
-            context.stroke();
-        }
-
         drawSquare(fillColour, borderColour, borderWidth);
         if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);
     }, [position]);

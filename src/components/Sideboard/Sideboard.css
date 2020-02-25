@@ -1,14 +1,14 @@
+
 #sideboard {
+    width: 98%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;  
-    grid-template-rows: 1fr 20fr;
-    justify-items: center; 
+    justify-items: center;
     align-items: center;
-    width: 30vmin;
-    height: 60vmin;
     border-style: solid;
-
-  }
+    border-width: 1px;
+}
 .tab {
     grid-column-start: 1;
     grid-column-end: 4;
@@ -17,7 +17,7 @@
     border-style: solid;
 }
 
- h1 {
+h1 {
      font-size: 100%;
      grid-column-start: 1;
      grid-column-end: 4;    
@@ -25,8 +25,8 @@
 
 nav {
     display: grid;
-    grid-column-start: 1;
-    grid-column-end: 4;
+    /* grid-column-start: 1;
+    grid-column-end: 4; */
     align-items: start;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;

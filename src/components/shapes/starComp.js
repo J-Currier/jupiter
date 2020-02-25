@@ -58,17 +58,6 @@ function Star(props) {
       context.strokeStyle = borderColour;
       context.stroke();
     }
-
-    function drawAnchorDot(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
-      context.beginPath();
-      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      context.fillStyle = fillColour;
-      context.fill();
-      context.lineWidth = borderWidth;
-      context.strokeStyle = borderColour;
-      context.stroke();
-    }
-
     
     drawStar(fillColour, borderColour, borderWidth);
     if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchorX, anchorY, anchorDotSize, 'white', 'white', borderWidth);

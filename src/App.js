@@ -53,7 +53,7 @@ function Game(props) {
   ]);
 
   const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
-  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 0.7)");
+  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 1)");
   const [borderWidth, setBorderWidth] = useState(10);
   const [shapeClassName, setShapeClassName] = useState("Circle");
 
@@ -180,21 +180,23 @@ function Game(props) {
   const font='M PLUS Rounded 1c';
   return (
     <main>
-        <CallStack />
-      <div className="wrapper">
+      <div className="canvasWrapper">
         <Grid 
           font={font}
         />
         {targetComp}
         {playerComp}
       </div>
-      <Sideboard
-        changeTab={changeTab}
-        buttonFunction={translate}
-        factorHandle={factorHandle}
-        moveFactor={moveFactor}
-        key="sideboard"
-      />
+      <div className="controlerWrapper">
+        <Sideboard
+          changeTab={changeTab}
+          buttonFunction={translate}
+          factorHandle={factorHandle}
+          moveFactor={moveFactor}
+          key="sideboard"
+        />
+        <CallStack />
+      </div>
       <LevelCheck key="levelCheck" />
     </main>
   );

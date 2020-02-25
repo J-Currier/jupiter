@@ -35,22 +35,13 @@ function Circle(props) {
 
     useEffect(() => {
         var canvas = document.getElementById(id);
+        console.log(canvas.clientWidth)
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
 
         function drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
             context.clearRect(0, 0, canvas.width, canvas.height)
-            context.beginPath();
-            context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-            context.fillStyle = fillColour;
-            context.fill();
-            context.lineWidth = borderWidth;
-            context.strokeStyle = borderColour;
-            context.stroke();
-        }
-
-        function drawAnchorDot(centerX, centerY, radius, fillColour, borderColour, borderWidth) {
             context.beginPath();
             context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
             context.fillStyle = fillColour;

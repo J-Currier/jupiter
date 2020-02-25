@@ -2,6 +2,22 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
+html, body {
+  width: 100%;
+  height: 100%; 
+}
+
+body {
+  background-image: url("./images/planetImage.png");
+  background-color: rgba(238, 238, 238, 0.4);
+  background-blend-mode: color;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	height: 100%;
+	overflow: hidden;
+}
+
 input, select, textarea, button{
   font-family:inherit;
 }
@@ -50,54 +66,88 @@ input, select, textarea, button{
   width: 8vmin;
 }
 
-.wrapper {
-  position: relative;
-  width: 60vmin;
-  height: 60vmin;
-  justify-self: right;
+@media screen and (min-width: 1450px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 700px;
+      height: 700px;
+  }
 }
+
+@media screen and (max-width: 1450px) and (min-width: 1350px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 650px;
+      height: 650px;
+  }
+}
+
+@media screen and (max-width: 1350px) and (min-width: 1250px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 600px;
+      height: 600px;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 1150px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 550px;
+      height: 550px;
+  }
+}
+
+@media screen and (max-width: 1150px) and (min-width: 1050px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 500px;
+      height: 500px;
+  }
+}
+
+@media screen and (max-width: 1050px) and (min-width: 950px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 450px;
+      height: 450px;
+  }
+}
+
+@media screen and (max-width: 950px) and (min-width: 850px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 400px;
+      height: 400px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 350px;
+      height: 350px;
+  }
+}
+
+.canvasWrapper {
+  position: relative;
+  justify-self: right;
+  margin: 5px;
+}
+
+.controlerWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 5px;
+}
+
 main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-color: rgba(238, 238, 238, 0.4);
-  background-image: url("./images/planetImage.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-blend-mode: color;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   align-items: center;
-}
-
-#myStartPt {
-  width: 60vmin;
-  height: 60vmin;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#myEndPt {
-  width: 60vmin;
-  height: 60vmin;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.sideboard {
-  justify-self: left;
-}
-
-.call-stack {
-  justify-self: right
+  padding: 40px 10px 5px 10px;
 }
 
 .winner {
   font-size: 500%;
   color: rgba(137, 235, 52, 1);
   font-family: "Bangers", cursive;
-  /* font-display: block; */
   height: 60vh;
   vertical-align: middle;
   width: 100%;
