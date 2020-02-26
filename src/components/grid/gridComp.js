@@ -31,35 +31,31 @@ function Grid(props) {
         function drawAxis(){
                 context.beginPath();
                 context.strokeStyle = 'red';
-                context.lineWidth = 10;
                 context.moveTo(1000, 0);
                 context.lineTo(1000, 2000);
                 context.stroke();
 
                 context.beginPath();
                 context.strokeStyle = 'red';
-                context.lineWidth = 10;
                 context.moveTo(0, 1000);
                 context.lineTo(2000, 1000);
                 context.stroke();
         }
 
         function axesNumbers() {
-            // context.font = "65px Calibri bold";
-            context.font=`65px '${props.font}'`
-            // context.font = "65px 'M PLUS Rounded 1c'";
+            context.font = "65px Calibri bold";
             context.fillStyle = "white";
             for (var x = 100; x <= 900; x += 100) {
-                if (x !==1000) context.fillText(`${(x/100)-10}`, x-15, 980);
+                if (x !==1000) context.fillText(`${(x/100)-10}`, x-15, 985);
             }
             for (var x = 1100; x <= 1900; x += 100) {
                 if (x !==1000) context.fillText(`${(x/100)-10}`, x+10, 1060);
             }
             for (var y = 100; y <= 900; y += 100) {
-                if (y !==1000) context.fillText(`${10-(y/100)}`, 1020, y+15);
+                if (y !==1000) context.fillText(`${10-(y/100)}`, 1015, y+15);
             }
             for (var y = 1100; y <= 1900; y += 100) {
-                if (y !==1000) context.fillText(`${10-(y/100)}`, 925, y+15);
+                if (y !==1000) context.fillText(`${10-(y/100)}`, 930, y+15);
             }
         }
         

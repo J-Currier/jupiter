@@ -8,8 +8,8 @@ html, body {
 }
 
 body {
-  background-image: url("./images/planetImage.png");
   background-color: rgba(238, 238, 238, 0.4);
+  background-image: url("./images/planetImage.png");
   background-blend-mode: color;
 	background-repeat: no-repeat;
 	background-size: cover;

@@ -54,7 +54,7 @@ function Game(props) {
 
   const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
   const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 1)");
-  const [borderWidth, setBorderWidth] = useState(10);
+  const [borderWidth, setBorderWidth] = useState(6);
   const [shapeClassName, setShapeClassName] = useState("Circle");
 
   const [moveFactor, setMoveFactor] = useState(1);
@@ -181,9 +181,7 @@ function Game(props) {
   return (
     <main>
       <div className="canvasWrapper">
-        <Grid 
-          font={font}
-        />
+        <Grid/>
         {targetComp}
         {playerComp}
       </div>
