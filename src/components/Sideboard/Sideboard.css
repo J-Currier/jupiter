@@ -4,6 +4,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;  
+    grid-template-rows: 1fr 11fr;
     justify-items: center;
     align-items: center;
     border-style: solid;
@@ -25,9 +26,9 @@ h1 {
 
 nav {
     display: grid;
-    /* grid-column-start: 1;
-    grid-column-end: 4; */
-    align-items: start;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    height: 100%;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -35,11 +36,11 @@ nav {
 /* nav button {
     align-self: initial;
 } */
-#factorBox {
+/* #factorBox {
     border:solid 3px rgba(137, 235, 52, 1);
     /* -moz-border-radius: 8px; */
     /* -webkit-border-radius: 8px; */
-    border-radius: 8px;
+   /* border-radius: 8px;
     background: transparent;
     color: rgba(137, 235, 52, 1);
     font-size:2em;
@@ -47,14 +48,14 @@ nav {
     grid-column-start: 2;
     grid-row-start: 3;
     width:90%;
-}
+} */
 
 /* #factorBox::-webkit-inner-spin-button, 
 #factorBox::-webkit-outer-spin-button { 
   -webkit-appearance: none;
 } */
 
-#up {
+/* #up {
     grid-row-start: 2;
 }
 #up,
@@ -91,6 +92,6 @@ nav {
 .tab-button {
     width: 90%;
     margin: 4px;
-    font-size: 0.5vw;
+    font-size: 0.5vw; */
 
-}
+/* } */

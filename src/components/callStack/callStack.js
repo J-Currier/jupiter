@@ -1,18 +1,23 @@
 import React, { useState } from 'react'
 import './callStack.css'
 import rotation from '../../images/rotate-arrow.svg'
+import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 
-export function CallCard(img, fx, cardId) {
+export function CallCard(props) {
     let image
-    if (img == 'rotation') {
+    let desc
+    if (props.img === 'rotation') {
         image = rotation
-    } else {
+    } else if (props.img === 'translation' && props.direction === 'left') {
+        image = translateLeft
+    }  
+    else {
         image = "not an image"
     }
     return(
-        <div className="calling-card" id={cardId}>
+        <div className="calling-card" id={props.cardId}>
             <img src={image}></img>
             description
             <button>X</button>
@@ -41,25 +46,27 @@ function CallStack(fx) {
     return(
         <div  className='call-stack'>
             <CallCard 
-            image = {'rotation'} 
+            img = {'rotation'} 
+            direction = {'left'}
             fx = {() => {}} 
             cardId = {1}/>
             <CallCard 
-            img = {'words'} 
+            img = {'translation'} 
+            direction = {'left'}
             fx = {() => {}} 
             cardId = {2}/>
             <CallCard 
-            img = {'img'} 
+            img = {'translation'} 
+            direction = {'left'}
             fx = {() => {}} 
             cardId = {3}/>
             <CallCard 
-            img = {'img'} 
+            img = {'translation'} 
+            direction = {'left'}
             fx = {() => {}} 
             cardId = {4}/>
-            
             <button>CLEAR</button>
             <button>RUN</button>
-
         </div>
     )
 }
