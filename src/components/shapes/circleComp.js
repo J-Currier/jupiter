@@ -25,7 +25,6 @@ function Circle(props) {
 
     useEffect(() => {
         var canvas = document.getElementById(id);
-        console.log(canvas.clientWidth)
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
