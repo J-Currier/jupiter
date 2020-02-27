@@ -2,16 +2,6 @@ import React, { useEffect } from 'react';
 import './shapeComp.css';
 import shapesFunctions from "./shapesFunctions.js";
 
-function determineAnchor (centerX, centerY, radius, orientaion) {
-    const orientations = {
-        1: [centerX+radius, centerY],
-        2: [centerX, centerY+radius],
-        3: [centerX-radius, centerY],
-        4: [centerX, centerY-radius]
-    };
-    return orientations[orientaion]
-};
-
 function Circle(props) {
     let {
         id,
@@ -21,15 +11,15 @@ function Circle(props) {
         borderWidth,
         shapeClassName
     } = props.shapeInfo;
-    let [centerX, centerY, size, orientaion] = position;
+    let [anchorX, anchorY, size, orientaion] = position;
     let anchorDotSize = props.anchorDotSize;
     let radius = size/2;
-    let anchor = determineAnchor (centerX, centerY, radius, orientaion);
+    let corner = determineCorners(anchorX, anchorY, radius, orientaion)[0];
     
-    if (centerY < radius || centerY > 2000-radius) {
+    if (anchorY < radius || anchorY > 2000-radius) {
         props.moveBack_shakeVertical();
     }
-    if (centerX < radius || centerX > 2000-radius) {
+    if (anchorX < radius || anchorX > 2000-radius) {
         props.moveBack_shakeHorizontal();
     }
 
@@ -51,8 +41,8 @@ function Circle(props) {
             context.stroke();
         }
 
-        drawCircle(centerX, centerY, radius, fillColour, borderColour, borderWidth);
-        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, anchor[0], anchor[1], anchorDotSize, 'white', 'white', borderWidth);
+        drawCircle(anchorX, anchorY, radius, fillColour, borderColour, borderWidth);
+        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, corner[0], corner[1], anchorDotSize, 'white', 'white', borderWidth);
     }, [position]);
 
     return (
@@ -62,4 +52,68 @@ function Circle(props) {
     );
 }
 
+function determineCorners(anchorX, anchorY, length, orientation) {
+    if (orientation === 1) {
+      return [[anchorX+length, anchorY]];
+    }
+    if (orientation === 2) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = anchorX + cornerY - anchorY;
+        corner[1] = anchorY - cornerX + anchorX;
+      }
+      return helper;
+    }
+  
+    if (orientation === 3) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = 2 * anchorX - cornerX;
+        corner[1] = 2 * anchorY - cornerY;
+      }
+      return helper;
+    }
+    if (orientation === 4) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = anchorY - cornerY + anchorX;
+        corner[1] = cornerX - anchorX + anchorY;
+      }
+      return helper;
+    }
+    if (orientation === (-1)) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-2)) {
+      let helper = determineCorners(anchorX, anchorY, length, 2)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-3)) {
+      let helper = determineCorners(anchorX, anchorY, length, 3)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-4)) {
+      let helper = determineCorners(anchorX, anchorY, length, 4)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+}
 export { Circle }

@@ -13,14 +13,11 @@ function Triangle(props) {
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
   let anchorDotSize = props.anchorDotSize;
-  let length1 = size ;
-  let length2 = size <=100 ? 100 : size/2;
   
   let cornerArray = determineCorners(
     anchorX,
     anchorY,
-    length1,
-    length2,
+    size,
     orientation
   );
 
@@ -69,30 +66,73 @@ function Triangle(props) {
   );
 }
 
-function determineCorners(x, y, d1, d2, orientation) {
-  const orientations = {
-    1: [
-      [x, y],
-      [x + d1, y],
-      [x, y - d2]
-    ],
-    2: [
-      [x, y],
-      [x + d1, y],
-      [x, y + d2]
-    ],
-    3: [
-      [x, y],
-      [x - d1, y],
-      [x, y + d2]
-    ],
-    4: [
-      [x, y],
-      [x - d1, y],
-      [x, y - d2]
-    ]
-  };
-  return orientations[orientation];
+function determineCorners(anchorX, anchorY, length, orientation) {
+  if (orientation === 1) {
+    return [
+      [anchorX, anchorY],
+      [anchorX + length, anchorY],
+      [anchorX, anchorY - length/2]
+    ];
+  }
+  if (orientation === 2) {
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = anchorX + cornerY - anchorY;
+      corner[1] = anchorY - cornerX + anchorX;
+    }
+    return helper;
+  }
+
+  if (orientation === 3) {
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = 2 * anchorX - cornerX;
+      corner[1] = 2 * anchorY - cornerY;
+    }
+    return helper;
+  }
+  if (orientation === 4) {
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = anchorY - cornerY + anchorX;
+      corner[1] = cornerX - anchorX + anchorY;
+    }
+    return helper;
+  }
+  if (orientation === (-1)) {
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-2)) {
+    let helper = determineCorners(anchorX, anchorY, length, 2)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-3)) {
+    let helper = determineCorners(anchorX, anchorY, length, 3)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-4)) {
+    let helper = determineCorners(anchorX, anchorY, length, 4)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
 }
 
 export { Triangle, determineCorners };

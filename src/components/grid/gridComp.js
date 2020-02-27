@@ -4,9 +4,6 @@ import './gridComp.css';
 function Grid(props) {
     useEffect(() => {
         var canvas = document.getElementById("myGrid");
-        let body = document.getElementsByTagName("body");
-        console.log(body[0].clientWidth, body[0].clientHeight)
-        console.log(canvas.clientWidth)
         var context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;

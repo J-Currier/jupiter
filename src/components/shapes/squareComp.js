@@ -2,16 +2,6 @@ import React, { useEffect } from 'react';
 import './shapeComp.css';
 import shapesFunctions from "./shapesFunctions.js";
 
-function determineCorners (x, y, d, orientation) {
-    const orientations = {
-        1: [[x, y], [x + d, y], [x + d, y - d], [x, y - d]],
-        2: [[x, y], [x + d, y], [x + d, y + d], [x, y + d]],
-        3: [[x, y], [x - d, y], [x - d, y + d], [x, y + d]],
-        4: [[x, y], [x - d, y], [x - d, y - d], [x, y - d]]
-    };
-    return orientations[orientation]
-};
-
 function Square(props) {
     let {
         id,
@@ -70,6 +60,71 @@ function Square(props) {
             <canvas id={id}></canvas>
         </div>
     );
+}
+
+function determineCorners(anchorX, anchorY, length, orientation) {
+    if (orientation === 1) {
+      return [[anchorX, anchorY], [anchorX + length, anchorY], [anchorX + length, anchorY - length], [anchorX, anchorY - length]];
+    }
+    if (orientation === 2) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = anchorX + cornerY - anchorY;
+        corner[1] = anchorY - cornerX + anchorX;
+      }
+      return helper;
+    }
+  
+    if (orientation === 3) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = 2 * anchorX - cornerX;
+        corner[1] = 2 * anchorY - cornerY;
+      }
+      return helper;
+    }
+    if (orientation === 4) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        let cornerX = corner[0];
+        let cornerY = corner[1];
+        corner[0] = anchorY - cornerY + anchorX;
+        corner[1] = cornerX - anchorX + anchorY;
+      }
+      return helper;
+    }
+    if (orientation === (-1)) {
+      let helper = determineCorners(anchorX, anchorY, length, 1)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-2)) {
+      let helper = determineCorners(anchorX, anchorY, length, 2)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-3)) {
+      let helper = determineCorners(anchorX, anchorY, length, 3)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
+    if (orientation === (-4)) {
+      let helper = determineCorners(anchorX, anchorY, length, 4)
+      for (let corner of helper) {
+        corner[0] = corner[0] - 2*(corner[0]-anchorX)
+      }
+      return helper;
+    }
 }
 
 export { Square, determineCorners }

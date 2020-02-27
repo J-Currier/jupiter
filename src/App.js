@@ -20,9 +20,11 @@ function Game(props) {
   const [tab, setTab] = useState(null);
 
   let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
-  let startOrientation = Math.floor(Math.random() * 4) + 1;
+  let randomOrientation = Math.floor(Math.random() * 8);
+  let startOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  [startAnchorX, startAnchorY] = [1400,1400]
   const [playerPositionsArray, setPlayerPositionsArray] = useState([
     [startAnchorX, startAnchorY, size, startOrientation]
   ]);

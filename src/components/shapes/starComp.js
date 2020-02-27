@@ -86,46 +86,63 @@ function determineCorners(anchorX, anchorY, length, orientation) {
     ];
   }
   if (orientation === 2) {
-    return [
-      [anchorX, anchorY],
-      [anchorX + (length/525)*125, anchorY + (length/525)*175],
-      [anchorX, anchorY + (length/525)*375],
-      [anchorX + (length/525)*200, anchorY + (length/525)*300],
-      [anchorX + (length/525)*350, anchorY + (length/525)*425],
-      [anchorX + (length/525)*350, anchorY + (length/525)*250],
-      [anchorX + (length/525)*525, anchorY + (length/525)*175],
-      [anchorX + (length/525)*350, anchorY + (length/525)*100],
-      [anchorX + (length/525)*350, anchorY - (length/525)*75],
-      [anchorX + (length/525)*200, anchorY + (length/525)*50]
-    ];
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = anchorX + cornerY - anchorY;
+      corner[1] = anchorY - cornerX + anchorX;
+    }
+    return helper;
   }
+
   if (orientation === 3) {
-    return [
-      [anchorX, anchorY],
-      [anchorX - (length/525)*175, anchorY + (length/525)*125],
-      [anchorX - (length/525)*375, anchorY],
-      [anchorX - (length/525)*300, anchorY + (length/525)*200],
-      [anchorX - (length/525)*425, anchorY + (length/525)*350],
-      [anchorX - (length/525)*250, anchorY + (length/525)*350],
-      [anchorX - (length/525)*175, anchorY + (length/525)*525],
-      [anchorX - (length/525)*100, anchorY + (length/525)*350],
-      [anchorX + (length/525)*75, anchorY + (length/525)*350],
-      [anchorX - (length/525)*50, anchorY + (length/525)*200]
-    ];
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = 2 * anchorX - cornerX;
+      corner[1] = 2 * anchorY - cornerY;
+    }
+    return helper;
   }
   if (orientation === 4) {
-    return [
-      [anchorX, anchorY],
-      [anchorX - (length/525)*125, anchorY - (length/525)*175],
-      [anchorX, anchorY - (length/525)*375],
-      [anchorX - (length/525)*200, anchorY - (length/525)*300],
-      [anchorX - (length/525)*350, anchorY - (length/525)*425],
-      [anchorX - (length/525)*350, anchorY - (length/525)*250],
-      [anchorX - (length/525)*525, anchorY - (length/525)*175],
-      [anchorX - (length/525)*350, anchorY - (length/525)*100],
-      [anchorX - (length/525)*350, anchorY + (length/525)*75],
-      [anchorX - (length/525)*200, anchorY - (length/525)*50]
-    ];
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      let cornerX = corner[0];
+      let cornerY = corner[1];
+      corner[0] = anchorY - cornerY + anchorX;
+      corner[1] = cornerX - anchorX + anchorY;
+    }
+    return helper;
+  }
+  if (orientation === (-1)) {
+    let helper = determineCorners(anchorX, anchorY, length, 1)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-2)) {
+    let helper = determineCorners(anchorX, anchorY, length, 2)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-3)) {
+    let helper = determineCorners(anchorX, anchorY, length, 3)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
+  }
+  if (orientation === (-4)) {
+    let helper = determineCorners(anchorX, anchorY, length, 4)
+    for (let corner of helper) {
+      corner[0] = corner[0] - 2*(corner[0]-anchorX)
+    }
+    return helper;
   }
 }
 
