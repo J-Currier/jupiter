@@ -6,6 +6,7 @@
     grid-template-columns: 1fr 1fr;
     border-style: solid;
     border-width: 1px;
+    background-color: rgba(255, 145, 0, 0.5);
 }
 
 img {
