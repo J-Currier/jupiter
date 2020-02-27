@@ -29,15 +29,19 @@ const mathFunctions = {
         return [endX, endY]
     },
 
-    reflect: (x, y, horizontal, axis) => {
-        let endX = x;
-        let endY = y;
-        if (horizontal) {
-            endX = axis + (axis - x);
-        } else {
-            endY = axis + (axis - y);
-        };
-        return [endX, endY];
+    reflect: (position, lineOfReflection) => {
+        let [anchorX, anchorY, size, orientation] = position;
+        let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
+        if (xRef ) {
+            orientation = orientation * -1;
+            anchorX = value - ( anchorX - value);
+        }
+        if (yRef != 0) {
+            orientation = ((orientation + 2) % 4) * -1;
+            anchorY = value - ( anchorY - value);
+        }
+        
+        return [anchorX, anchorY, size, orientation];
     },
 
     // rotate: (x,y, clockwise, centre) => {

@@ -13,13 +13,10 @@ test('math translate', () => {
 });
 
 test('math reflect', () => {
-    expect(mathFunctions.reflect(-5, 5, true, 0)).toEqual([5, 5]);
-    expect(mathFunctions.reflect(-5, 5, true, 2)).toEqual([9, 5]);
-    expect(mathFunctions.reflect(5, 0, true, 2)).toEqual([-1, 0]);
-    expect(mathFunctions.reflect(2, 2, false, 0)).toEqual([2, -2]);
-    expect(mathFunctions.reflect(2, 2, false, -3)).toEqual([2, -8]);
-    expect(mathFunctions.reflect(0, -3, false, 1)).toEqual([0, 5]);
-    expect(mathFunctions.reflect(0, -3, false, -3)).toEqual([0, -3]);
+    expect(mathFunctions.reflect([0, 0, 2, 1],[true, false, 0])).toEqual([0, 0, 2, -1]);
+    expect(mathFunctions.reflect([0, 0, 2, 1],[false, true, 0])).toEqual([0, 0, 2, -3]);
+    expect(mathFunctions.reflect([-4, 0, 2, -3],[true, false, -2])).toEqual([0, 0, 2, 3]);
+    expect(mathFunctions.reflect([0, -2, 2, -4],[false, true, -3])).toEqual([0, -4, 2, 2]);
 });
 
 // test('math rotate', () => {
