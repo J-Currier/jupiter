@@ -124,12 +124,14 @@ input, select, textarea, button{
 .canvasWrapper {
   position: relative;
   margin: 40px 5px 0px 5px;
+  background-color: rgba(255, 145, 0, 0.5);
 }
 
 .controlerWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 40px 5px 0px 5px;
+  background-color: rgba(255, 145, 0, 0.5);
 }
 
 main {
