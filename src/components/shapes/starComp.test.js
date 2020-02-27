@@ -82,6 +82,11 @@ describe("star load", () => {
       borderWidth: 10,
       shapeClassName: ""
     };
-    render(<Star shapeInfo={shapeInfo} />, container);
+    render(
+      <Star 
+        shapeInfo={shapeInfo} 
+        moveBack_shakeVertical={moveBack_shakeVertical}
+        moveBack_shakeHorizontal={moveBack_shakeHorizontal}
+      />, container);
   });
 });
