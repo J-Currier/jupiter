@@ -24,7 +24,6 @@ function Game(props) {
   let startOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
-  [startAnchorX, startAnchorY] = [1400,1400]
   const [playerPositionsArray, setPlayerPositionsArray] = useState([
     [startAnchorX, startAnchorY, size, startOrientation]
   ]);

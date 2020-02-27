@@ -14,7 +14,26 @@ function Star(props) {
   let [anchorX, anchorY, size, orientation] = position;
   let anchorDotSize = props.anchorDotSize;
   
-  let cornerArray = determineCorners(anchorX, anchorY, size, orientation);
+  let orientation1 = [
+    [anchorX, anchorY],
+    [anchorX + (size/525)*175, anchorY - (size/525)*125],
+    [anchorX + (size/525)*375, anchorY],
+    [anchorX + (size/525)*300, anchorY - (size/525)*200],
+    [anchorX + (size/525)*425, anchorY - (size/525)*350],
+    [anchorX + (size/525)*250, anchorY - (size/525)*350],
+    [anchorX + (size/525)*175, anchorY - (size/525)*525],
+    [anchorX + (size/525)*100, anchorY - (size/525)*350],
+    [anchorX - (size/525)*75, anchorY - (size/525)*350],
+    [anchorX + (size/525)*50, anchorY - (size/525)*200]
+  ]
+
+  let cornerArray = shapesFunctions.determineCorners(
+    anchorX,
+    anchorY,
+    size,
+    orientation,
+    orientation1
+  );
 
   for (let corner of cornerArray) {
     if (corner[1] < 0 || corner[1] > 2000) {
@@ -70,80 +89,4 @@ function Star(props) {
   );
 }
 
-function determineCorners(anchorX, anchorY, length, orientation) {
-  if (orientation === 1) {
-    return [
-      [anchorX, anchorY],
-      [anchorX + (length/525)*175, anchorY - (length/525)*125],
-      [anchorX + (length/525)*375, anchorY],
-      [anchorX + (length/525)*300, anchorY - (length/525)*200],
-      [anchorX + (length/525)*425, anchorY - (length/525)*350],
-      [anchorX + (length/525)*250, anchorY - (length/525)*350],
-      [anchorX + (length/525)*175, anchorY - (length/525)*525],
-      [anchorX + (length/525)*100, anchorY - (length/525)*350],
-      [anchorX - (length/525)*75, anchorY - (length/525)*350],
-      [anchorX + (length/525)*50, anchorY - (length/525)*200]
-    ];
-  }
-  if (orientation === 2) {
-    let helper = determineCorners(anchorX, anchorY, length, 1)
-    for (let corner of helper) {
-      let cornerX = corner[0];
-      let cornerY = corner[1];
-      corner[0] = anchorX + cornerY - anchorY;
-      corner[1] = anchorY - cornerX + anchorX;
-    }
-    return helper;
-  }
-
-  if (orientation === 3) {
-    let helper = determineCorners(anchorX, anchorY, length, 1)
-    for (let corner of helper) {
-      let cornerX = corner[0];
-      let cornerY = corner[1];
-      corner[0] = 2 * anchorX - cornerX;
-      corner[1] = 2 * anchorY - cornerY;
-    }
-    return helper;
-  }
-  if (orientation === 4) {
-    let helper = determineCorners(anchorX, anchorY, length, 1)
-    for (let corner of helper) {
-      let cornerX = corner[0];
-      let cornerY = corner[1];
-      corner[0] = anchorY - cornerY + anchorX;
-      corner[1] = cornerX - anchorX + anchorY;
-    }
-    return helper;
-  }
-  if (orientation === (-1)) {
-    let helper = determineCorners(anchorX, anchorY, length, 1)
-    for (let corner of helper) {
-      corner[0] = corner[0] - 2*(corner[0]-anchorX)
-    }
-    return helper;
-  }
-  if (orientation === (-2)) {
-    let helper = determineCorners(anchorX, anchorY, length, 2)
-    for (let corner of helper) {
-      corner[0] = corner[0] - 2*(corner[0]-anchorX)
-    }
-    return helper;
-  }
-  if (orientation === (-3)) {
-    let helper = determineCorners(anchorX, anchorY, length, 3)
-    for (let corner of helper) {
-      corner[0] = corner[0] - 2*(corner[0]-anchorX)
-    }
-    return helper;
-  }
-  if (orientation === (-4)) {
-    let helper = determineCorners(anchorX, anchorY, length, 4)
-    for (let corner of helper) {
-      corner[0] = corner[0] - 2*(corner[0]-anchorX)
-    }
-    return helper;
-  }
-}
-
-export { Star, determineCorners };
+export { Star };
