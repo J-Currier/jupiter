@@ -29,7 +29,7 @@ const mathFunctions = {
         return [endX, endY]
     },
 
-    reflect: (position, lineOfReflection) => {
+    reflection: (position, lineOfReflection) => {
         let [anchorX, anchorY, size, orientation] = position;
         let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
         if (xRef ) {
@@ -41,7 +41,7 @@ const mathFunctions = {
             anchorY = value - ( anchorY - value);
         }
         
-        return [anchorX, anchorY, size, orientation];
+        return [anchorX, anchorY, orientation];
     },
 
     // rotate: (x,y, clockwise, centre) => {

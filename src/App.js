@@ -113,6 +113,35 @@ function Game(props) {
     }, 100);
   };
 
+  const reflect = async (e, lineOfReflection) => { 
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.translate(
+      playerposition,
+      lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
+    );
+    playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,
+        playerPosition[2],
+        newOrientation
+      ]);
+      changeClass("fade-in");
+    }, 100);
+  };
+
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
     await setPlayerPosition(
