@@ -14,10 +14,10 @@ exports[`app integration integration with sideboard click 1`] = `
         <div id=\\"translation\\" class=\\"tab\\">Translation<input type=\\"number\\" min=\\"0\\" max=\\"18\\" id=\\"factorBox\\" value=\\"1\\"><img name=\\"up\\" alt=\\"up\\" id=\\"up\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_3.svg\\"><img name=\\"left\\" alt=\\"left\\" id=\\"left\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_1.svg\\"><img name=\\"right\\" alt=\\"right\\" id=\\"right\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_2.svg\\"><img name=\\"down\\" alt=\\"down\\" id=\\"down\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_4.svg\\"></div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><img src=\\"rotate-arrow.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"2\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"3\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"4\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
       </div>
     </div>
     <div></div>
@@ -45,10 +45,10 @@ exports[`app integration integration with sideboard click 2`] = `
         </div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><img src=\\"rotate-arrow.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"2\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"3\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"4\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
       </div>
     </div>
     <div></div>
@@ -92,10 +92,10 @@ exports[`app integration integration with sideboard click 3`] = `
         </div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><img src=\\"rotate-arrow.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"2\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"3\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"4\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
       </div>
     </div>
     <div></div>
@@ -116,10 +116,10 @@ exports[`app integration render app 1`] = `
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div>
-        <div class=\\"calling-card\\"><img src=\\"not an image\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><img src=\\"rotate-arrow.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"2\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"3\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div>
+        <div class=\\"calling-card\\" id=\\"4\\"><img src=\\"kuba_arrow_button_set_1.svg\\">description<button>X</button></div><button>CLEAR</button><button>RUN</button>
       </div>
     </div>
     <div></div>
