@@ -29,7 +29,7 @@ const mathFunctions = {
         return [endX, endY]
     },
 
-    reflection: (position, lineOfReflection) => {
+    reflect: (position, lineOfReflection) => {
         let [anchorX, anchorY, size, orientation] = position;
         let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
         if (xRef ) {
@@ -44,11 +44,25 @@ const mathFunctions = {
         return [anchorX, anchorY, orientation];
     },
 
-    // rotate: (x,y, clockwise, centre) => {
-    //     let endX;
-    //     let endY;
-    //     return [endX, endY];
-    // },
+    rotate: (orientation, magnitude, direction) => { //direction true = ccw
+        let flipFactor = 1
+        if (orientation < 0) {
+            orientation = orientation * -1;
+            direction = !direction;
+            flipFactor = -1;
+        }
+        let newOrientation;
+        if (direction ) {
+            newOrientation = ((orientation + magnitude/90) % 4) *flipFactor;
+        }
+        if (!direction ) {
+            newOrientation = ((orientation + (4 - (magnitude/90))) %4) * flipFactor;
+        }
+        if (newOrientation === 0){
+            newOrientation = 4*flipFactor;
+        }
+        return (newOrientation);
+    },
 
     transformGrid: (grid, x, y, callback, parameters) => {
         let [endX, endY] = callback(x, y, ...parameters);

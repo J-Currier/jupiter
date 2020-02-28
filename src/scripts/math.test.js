@@ -13,15 +13,25 @@ test('math translate', () => {
 });
 
 test('math reflect', () => {
-    expect(mathFunctions.reflect([0, 0, 2, 1],[true, false, 0])).toEqual([0, 0, 2, -1]);
-    expect(mathFunctions.reflect([0, 0, 2, 1],[false, true, 0])).toEqual([0, 0, 2, -3]);
-    expect(mathFunctions.reflect([-4, 0, 2, -3],[true, false, -2])).toEqual([0, 0, 2, 3]);
-    expect(mathFunctions.reflect([0, -2, 2, -4],[false, true, -3])).toEqual([0, -4, 2, 2]);
+    expect(mathFunctions.reflect([0, 0, 2, 1],[true, false, 0])).toEqual([0, 0, -1]);
+    expect(mathFunctions.reflect([0, 0, 2, 1],[false, true, 0])).toEqual([0, 0, -3]);
+    expect(mathFunctions.reflect([-4, 0, 2, -3],[true, false, -2])).toEqual([0, 0, 3]);
+    expect(mathFunctions.reflect([0, -2, 2, -4],[false, true, -3])).toEqual([0, -4, 2]);
 });
 
-// test('math rotate', () => {
-//     expect(mathFunctions.rotate(-1,-1, true, 0)).toEqual([-1,1]);
-// });
+test('math rotate', () => {
+    expect(mathFunctions.rotate(1, 90, true)).toEqual(2);
+    expect(mathFunctions.rotate(-1, 270, true)).toEqual(-2);
+    expect(mathFunctions.rotate(4, 270, true)).toEqual(3);
+    expect(mathFunctions.rotate(-4, 270, true)).toEqual(-1);
+    expect(mathFunctions.rotate(1, 90, false)).toEqual(4);
+    expect(mathFunctions.rotate(-1, 270, false)).toEqual(-4);
+    expect(mathFunctions.rotate(4, 270, false)).toEqual(1);
+    expect(mathFunctions.rotate(-4, 270, false)).toEqual(-3);
+
+
+
+});
 
 test('grid transform', () => {
     const grid = mathFunctions.createGridObject();

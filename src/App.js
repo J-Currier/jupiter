@@ -114,7 +114,7 @@ function Game(props) {
   };
 
   const reflect = async (e, lineOfReflection) => { 
-    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.translate(
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
       playerposition,
       lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
     );
