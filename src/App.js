@@ -142,6 +142,35 @@ function Game(props) {
     }, 100);
   };
 
+  const rotate = async (e, magnitude, direction) => {  //direction true= ccw
+    let [newOrientation] = mathFunctions.rotate(
+      playerposition[3],
+      magnitude, direction
+    );
+    playerPositionsArray.push([
+      playerPosition[0],
+      playerPosition[1],
+      playerPosition[2],
+      newOrientation
+    ]);
+    playerAcceptablePositionsArray.push([
+      playerPosition[0],
+      playerPosition[1],
+      playerPosition[2],
+      newOrientation
+    ]);
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        playerPosition[0],
+        playerPosition[1],
+        playerPosition[2],
+        newOrientation
+        ]);
+      changeClass("fade-in");
+    }, 100);
+  };
+
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
     await setPlayerPosition(
