@@ -9,7 +9,8 @@
     align-items: center;
     border-style: solid;
     border-width: 1px;
-    background-color: rgba(255, 145, 0, 0.5);
+    background-color: rgba(226, 171, 11, 0.35);
+
 }
 .tab {
     grid-column-start: 1;
