@@ -115,7 +115,7 @@ function Game(props) {
 
   const reflect = async (e, lineOfReflection) => { 
     let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
-      playerposition,
+      playerPosition,
       lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
     );
     playerPositionsArray.push([
@@ -144,7 +144,7 @@ function Game(props) {
 
   const rotate = async (e, magnitude, direction) => {  //direction true= ccw
     let [newOrientation] = mathFunctions.rotate(
-      playerposition[3],
+      playerPosition[3],
       magnitude, direction
     );
     playerPositionsArray.push([
