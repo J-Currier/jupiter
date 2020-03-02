@@ -17,7 +17,6 @@ function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
   const [shape, setShape] = useState(randomShape);
-  const [tab, setTab] = useState(null);
 
   let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
   let randomOrientation = Math.floor(Math.random() * 8);
@@ -204,12 +203,6 @@ function Game(props) {
     }
   };
 
-  const changeTab = e => {
-    if (e.target.id === "translation-button") {
-      setTab("translation");
-    }
-  };
-
   const shapeCompsObj = {
     circle: Circle,
     square: Square,
@@ -246,7 +239,6 @@ function Game(props) {
       </div>
       <div className="controlerWrapper">
         <Sideboard
-          changeTab={changeTab}
           buttonFunction={translate}
           factorHandle={factorHandle}
           moveFactor={moveFactor}
