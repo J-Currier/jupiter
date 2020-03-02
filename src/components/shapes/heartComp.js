@@ -9,20 +9,20 @@ function Heart(props) {
 
 
     useEffect(() => {
-        var canvas = document.getElementById(id);
-        var context = canvas.getContext("2d");
+        const canvas = document.getElementById(id);
+        const context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
 
         let cornerArray = determineCorners(anchorX, anchorY-200, 1);
     function drawHeart(cornerArray, fillColour, borderColour, borderWidth) {
 
-        var width = 300 ;
-        var height = 400;
+        const width = 300 ;
+        const height = 400;
     
         context.save();
         context.beginPath();
-        var topCurveHeight = height * 0.3;
+        const topCurveHeight = height * 0.3;
         context.moveTo(cornerArray[0], cornerArray[4]);
         // top left curve
         context.bezierCurveTo(

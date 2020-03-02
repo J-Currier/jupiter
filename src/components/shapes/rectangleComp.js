@@ -45,8 +45,8 @@ function Rectangle(props) {
     }
 
     useEffect(() => {
-        var canvas = document.getElementById(id);
-        var context = canvas.getContext("2d");
+        const canvas = document.getElementById(id);
+        const context = canvas.getContext("2d");
         canvas.width = 2000;
         canvas.height = 2000;
 
