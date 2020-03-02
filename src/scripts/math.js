@@ -30,13 +30,13 @@ const mathFunctions = {
     },
 
     reflect: (position, lineOfReflection) => {
-        let [anchorX, anchorY, size, orientation] = position;
+        let [anchorX, anchorY, , orientation] = position; // size skipped
         let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
         if (xRef ) {
             orientation = orientation * -1;
             anchorX = value - ( anchorX - value);
         }
-        if (yRef != 0) {
+        if (yRef !== 0) {
             orientation = ((orientation + 2) % 4) * -1;
             anchorY = value - ( anchorY - value);
         }

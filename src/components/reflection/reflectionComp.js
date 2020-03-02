@@ -1,10 +1,7 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import "./reflection.css";
 // import reflectY from '../../images/'
 
-function ListItem(props) {
-  return <option>{props.content}</option>;
-}
 
 function Reflection(props) {
   const selector = () => {

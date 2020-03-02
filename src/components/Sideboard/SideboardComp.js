@@ -11,7 +11,7 @@ import Reflection from '../reflection/reflectionComp'
 
 function Sideboard(props) {
 
-    const [step, setStep] = useState(0);
+    // const [step, setStep] = useState(0);
     const [tab, setTab] = useState(null)
 
     function handleClick(e) {

@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import rotate from "../../images/rotate-arrow.svg";
 import "./rotation.css";
 
@@ -12,10 +12,10 @@ function Rotation(props) {
   return (
     <div id="rotation" className="tab">
       <h1>Rotation</h1>
-      <img id="rotate-left" src={rotate}></img>
+      <img id="rotate-left" alt="left rotation button" src={rotate}></img>
       <input></input>
       <input></input>
-      <img id="rotate-right" src={rotate}></img>
+      <img id="rotate-right" alt="right rotation button" src={rotate}></img>
 
       <select id="rotateDrop">{options}</select>
     </div>
