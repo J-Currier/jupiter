@@ -12,16 +12,16 @@ const mathFunctions = {
         return [anchorX, anchorY]
     },
 
-    createGridObject: () => {
-        const grid ={};
-        for (let x = -10; x <= 10; x++) {
-            grid[x] = {};
-            for (let y = -10; y <= 10; y++) {
-                grid[x][y] = false;
-            }
-        }
-    return grid
-    },
+    // createGridObject: () => {
+    //     const grid ={};
+    //     for (let x = -10; x <= 10; x++) {
+    //         grid[x] = {};
+    //         for (let y = -10; y <= 10; y++) {
+    //             grid[x][y] = false;
+    //         }
+    //     }
+    // return grid
+    // },
 
     translate: (x, y, deltaX, deltaY) => {
         let endX = x + deltaX;
@@ -64,11 +64,11 @@ const mathFunctions = {
         return (newOrientation);
     },
 
-    transformGrid: (grid, x, y, callback, parameters) => {
-        let [endX, endY] = callback(x, y, ...parameters);
-        grid[endX][endY] = true;
-        grid[x][y] = false;
-    }
+    // transformGrid: (grid, x, y, callback, parameters) => {
+    //     let [endX, endY] = callback(x, y, ...parameters);
+    //     grid[endX][endY] = true;
+    //     grid[x][y] = false;
+    // }
 }
 
 
