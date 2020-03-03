@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-// import IconUp from '../../images/kuba_arrow_button_set_3.svg'
-// import IconLeft from '../../images/kuba_arrow_button_set_1.svg'
-// import IconRight from '../../images/kuba_arrow_button_set_2.svg'
-// import IconDown from '../../images/kuba_arrow_button_set_4.svg'
-// import IconUndo from '../../images/arrow-curved-blue.svg'
 import './Sideboard.css'
 import Translation from '../translation/translationComp'
 import Rotation from '../rotation/rotationComp'
 import Reflection from '../reflection/reflectionComp'
 
 function Sideboard(props) {
-
-    // const [step, setStep] = useState(0);
     const [tab, setTab] = useState(null)
 
     function handleClick(e) {
@@ -24,49 +17,6 @@ function Sideboard(props) {
         }
     };
 
-    // const buttonInfo = {
-    //     up: { icon: IconUp, fx: (e) => { props.buttonFunction(e, 0, -100) } },
-    //     left: { icon: IconLeft, fx: (e) => { props.buttonFunction(e, -100, 0) } },
-    //     right: { icon: IconRight, fx: (e) => { props.buttonFunction(e, 100, 0) } },
-    //     down: { icon: IconDown, fx: (e) => { props.buttonFunction(e, 0, 100) } }
-    // };
-
-    // const buttons = [];
-    // for (let index in buttonInfo) {
-    //     buttons.push(
-    //         <img
-    //             onClick={handleClick}
-    //             key={index}
-    //             name={index}
-    //             alt={index}
-    //             id={index}
-    //             className="directional button"
-    //             src={buttonInfo[index].icon}
-    //         ></img>
-    //     );
-    // };
-
-    // const undoButtons = [
-    //     <img
-    //         onClick={() => setStep(initial => initial -1)}
-    //         key="undo"
-    //         name="undo"
-    //         alt="undo"
-    //         id="undo"
-    //         className="undo button"
-    //         src= {IconUndo}
-    //     ></img>,
-    //     <img
-    //         onClick={() => setStep(initial => initial +1)}
-    //         key="redo"
-    //         name="redo"
-    //         alt="redo"
-    //         id="redo"
-    //         className="undo button"
-    //         src= {IconUndo}
-    //     ></img>
-    // ];
-
     return (
         <div id="sideboard">
             <nav>
@@ -76,24 +26,24 @@ function Sideboard(props) {
             </nav>
             {tab === 'translation' &&  
                 <Translation 
-                buttonFunction = {props.buttonFunction}
-                moveFactor = {props.moveFactor}
-                factorHandle = {props.factorHandle}
+                translate = {props.translate}
+                translationFactor = {props.translationFactor}
+                handleChange = {props.handleChange}
                 />}
             {tab === 'rotation' &&  
                 <Rotation 
-                // buttonFunction = {props.buttonFunction}
-                // moveFactor = {props.moveFactor}
-                // factorHandle = {props.factorHandle}
+                rotate={props.rotate}
+                pivotPointx={props.pivotPointx}
+                pivotPointy={props.pivotPointy}
+                rotationMag ={props.rotationMag}
+                handleChange = {props.handleChange}
                 />}
             {tab === 'reflection' &&  
                 <Reflection 
-                // buttonFunction = {props.buttonFunction}
-                // moveFactor = {props.moveFactor}
-                // factorHandle = {props.factorHandle}
+                reflect={props.reflect}
+                lineOfReflection={props.lineOfReflection}
+                handleChange = {props.handleChange}
                 />}
-
-
         </div>
     )
 }

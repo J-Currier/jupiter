@@ -13,10 +13,10 @@ function Translation(props) {
     };
 
     const buttonInfo = {
-        up: { icon: IconUp, fx: (e) => { props.buttonFunction(e, 0, -100) } },
-        left: { icon: IconLeft, fx: (e) => { props.buttonFunction(e, -100, 0) } },
-        right: { icon: IconRight, fx: (e) => { props.buttonFunction(e, 100, 0) } },
-        down: { icon: IconDown, fx: (e) => { props.buttonFunction(e, 0, 100) } }
+        up: { icon: IconUp, fx: (e) => { props.translate(e, 0, -100) } },
+        left: { icon: IconLeft, fx: (e) => { props.translate(e, -100, 0) } },
+        right: { icon: IconRight, fx: (e) => { props.translate(e, 100, 0) } },
+        down: { icon: IconDown, fx: (e) => { props.translate(e, 0, 100) } }
     };
 
     const buttons = [];
@@ -39,11 +39,12 @@ function Translation(props) {
         <div id= "translation" className='tab'>
             Translation
             <input
+                name="setTranslationFactor"
                 type="number"
                 min='0'
                 max='18'
-                onChange={props.factorHandle}
-                value={props.moveFactor}
+                onChange={props.handleChange}
+                value={props.translationFactor}
                 id="factorBox"
             />
             {buttons}

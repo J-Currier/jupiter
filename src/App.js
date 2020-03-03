@@ -57,7 +57,18 @@ function Game(props) {
   const [borderWidth, setBorderWidth] = useState(6);
   const [shapeClassName, setShapeClassName] = useState("Circle");
 
-  const [moveFactor, setMoveFactor] = useState(1);
+  const [translationFactor, setTranslationFactor] = useState(1);
+  const [pivotPointx, setPivotPointx] = useState(0);
+  const [pivotPointy, setPivotPointy] = useState(0);
+  const [rotationMag, setRotationMag] = useState("180°") ;
+  const [lineOfReflection, setLineOfReflection] = useState(0);
+  const transformFunctions = {
+    "setTranslationFactor": setTranslationFactor,
+    "setPivotPointx": setPivotPointx,
+    "setPivotPointy": setPivotPointy,
+    "setRotationMag": setRotationMag,
+    "setLineOfReflection": setLineOfReflection    
+  }
 
   let player = {
     id: "myStartPt",
@@ -85,8 +96,8 @@ function Game(props) {
     let [newAnchorX, newAnchorY] = mathFunctions.translate(
       playerPosition[0],
       playerPosition[1],
-      deltaX * moveFactor,
-      deltaY * moveFactor
+      deltaX * translationFactor,
+      deltaY * translationFactor
     );
     playerPositionsArray.push([
       newAnchorX,
@@ -112,63 +123,69 @@ function Game(props) {
     }, 100);
   };
 
-  const reflect = async (e, lineOfReflection) => { 
-    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
-      playerPosition,
-      lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
-    );
-    playerPositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
-    playerAcceptablePositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
-    await changeClass("fade-out");
-    await setTimeout(() => {
-      setPlayerPosition([
-        newAnchorX,
-        newAnchorY,
-        playerPosition[2],
-        newOrientation
-      ]);
-      changeClass("fade-in");
-    }, 100);
+  const reflect = async (e, lineOfReflection) => {
+    console.log(e.target, Number(lineOfReflection)) 
+    // let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
+    //   playerPosition,
+    //   lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
+    // );
+    // playerPositionsArray.push([
+    //   newAnchorX,
+    //   newAnchorY,
+    //   playerPosition[2],
+    //   newOrientation
+    // ]);
+    // playerAcceptablePositionsArray.push([
+    //   newAnchorX,
+    //   newAnchorY,
+    //   playerPosition[2],
+    //   newOrientation
+    // ]);
+    // await changeClass("fade-out");
+    // await setTimeout(() => {
+    //   setPlayerPosition([
+    //     newAnchorX,
+    //     newAnchorY,
+    //     playerPosition[2],
+    //     newOrientation
+    //   ]);
+    //   changeClass("fade-in");
+    // }, 100);
   };
 
   const rotate = async (e, magnitude, direction) => {  //direction true= ccw
-    let [newOrientation] = mathFunctions.rotate(
-      playerPosition[3],
-      magnitude, direction
-    );
-    playerPositionsArray.push([
-      playerPosition[0],
-      playerPosition[1],
-      playerPosition[2],
-      newOrientation
-    ]);
-    playerAcceptablePositionsArray.push([
-      playerPosition[0],
-      playerPosition[1],
-      playerPosition[2],
-      newOrientation
-    ]);
-    await changeClass("fade-out");
-    await setTimeout(() => {
-      setPlayerPosition([
-        playerPosition[0],
-        playerPosition[1],
-        playerPosition[2],
-        newOrientation
-        ]);
-      changeClass("fade-in");
-    }, 100);
+    magnitude = magnitude.slice(0, -1)
+    magnitude = Number(magnitude)
+    console.log(e.target, magnitude, direction)
+    // let [newOrientation] = mathFunctions.rotate(
+    //   playerPosition[3],
+    //   magnitude, direction
+    // );
+    // playerPositionsArray.push([
+    //   playerPosition[0],
+    //   playerPosition[1],
+    //   playerPosition[2],
+    //   newOrientation
+    // ]);
+    // playerAcceptablePositionsArray.push([
+    //   playerPosition[0],
+    //   playerPosition[1],
+    //   playerPosition[2],
+    //   newOrientation
+    // ]);
+    // await changeClass("fade-out");
+    // await setTimeout(() => {
+    //   setPlayerPosition([
+    //     playerPosition[0],
+    //     playerPosition[1],
+    //     playerPosition[2],
+    //     newOrientation
+    //     ]);
+    //   changeClass("fade-in");
+    // }, 100);
   };
+
+  
 
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
@@ -186,8 +203,9 @@ function Game(props) {
     changeClass("shake-horizontal");
   };
 
-  const factorHandle = e => {
-    setMoveFactor(e.target.value);
+  const handleChange = e => {
+    let name = e.target.name
+    transformFunctions[name](e.target.value)    
   };
 
   const LevelCheck = () => {
@@ -239,9 +257,15 @@ function Game(props) {
       </div>
       <div className="controlerWrapper">
         <Sideboard
-          buttonFunction={translate}
-          factorHandle={factorHandle}
-          moveFactor={moveFactor}
+          translate={translate}
+          rotate={rotate}
+          reflect={reflect}
+          handleChange={handleChange}
+          translationFactor={translationFactor}
+          pivotPointx={pivotPointx}
+          pivotPointy={pivotPointy}
+          rotationMag ={rotationMag}
+          lineOfReflection={lineOfReflection}
           key="sideboard"
         />
         <CallStack />
