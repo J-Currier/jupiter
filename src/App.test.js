@@ -71,7 +71,6 @@ describe("app integration", () => {
     });
     const rotateDrop = document.getElementById("rotateDrop");
     const angles = ["90°", "180°", "270°"];
-    expect(rotateDrop.value).toBe("90°");
     for (const angleStr of angles) {
       act(() => {
         rotateDrop.value = angleStr;

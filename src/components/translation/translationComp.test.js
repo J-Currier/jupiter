@@ -32,12 +32,14 @@ describe('component', () => {
 
   test('click button', () => {
     // setup mock button function
-    const mockButtonFx = jest.fn(); // mock function
-    // const mockFactorHandle = jest.fn(); // mock function
+    const mockFunction = jest.fn(); // mock function
+    const mockHandle = jest.fn(); // mock function
     act(() => {
       render(
         <Translation
-          buttonFunction={mockButtonFx}
+          translate = {mockFunction}
+          translationFactor = {1}
+          handleChange = {mockHandle}
         />, container
       );
     });
@@ -50,29 +52,29 @@ describe('component', () => {
     act(() => {
       up.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockButtonFx.mock.calls.length).toBe(1);
-    expect(mockButtonFx.mock.calls[0][1]).toBe(0);
-    expect(mockButtonFx.mock.calls[0][2]).toBe(-100);
+    expect(mockFunction.mock.calls.length).toBe(1);
+    expect(mockFunction.mock.calls[0][1]).toBe(0);
+    expect(mockFunction.mock.calls[0][2]).toBe(-100);
     // click down
     act(() => {
       down.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockButtonFx.mock.calls.length).toBe(2);
-    expect(mockButtonFx.mock.calls[1][1]).toBe(0);
-    expect(mockButtonFx.mock.calls[1][2]).toBe(100);
+    expect(mockFunction.mock.calls.length).toBe(2);
+    expect(mockFunction.mock.calls[1][1]).toBe(0);
+    expect(mockFunction.mock.calls[1][2]).toBe(100);
     // click left
     act(() => {
       left.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockButtonFx.mock.calls.length).toBe(3);
-    expect(mockButtonFx.mock.calls[2][1]).toBe(-100);
-    expect(mockButtonFx.mock.calls[2][2]).toBe(0);
+    expect(mockFunction.mock.calls.length).toBe(3);
+    expect(mockFunction.mock.calls[2][1]).toBe(-100);
+    expect(mockFunction.mock.calls[2][2]).toBe(0);
     // click right
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockButtonFx.mock.calls.length).toBe(4);
-    expect(mockButtonFx.mock.calls[3][1]).toBe(100);
-    expect(mockButtonFx.mock.calls[3][2]).toBe(0);
+    expect(mockFunction.mock.calls.length).toBe(4);
+    expect(mockFunction.mock.calls[3][1]).toBe(100);
+    expect(mockFunction.mock.calls[3][2]).toBe(0);
   });
 });

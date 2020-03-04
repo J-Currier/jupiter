@@ -11,7 +11,9 @@ exports[`app integration integration with sideboard click 1`] = `
     <div class=\\"controlerWrapper\\">
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
-        <div id=\\"translation\\" class=\\"tab\\">Translation<input type=\\"number\\" min=\\"0\\" max=\\"18\\" id=\\"factorBox\\" value=\\"1\\"><img name=\\"up\\" alt=\\"up\\" id=\\"up\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_3.svg\\"><img name=\\"left\\" alt=\\"left\\" id=\\"left\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_1.svg\\"><img name=\\"right\\" alt=\\"right\\" id=\\"right\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_2.svg\\"><img name=\\"down\\" alt=\\"down\\" id=\\"down\\" class=\\"directional button\\" src=\\"kuba_arrow_button_set_4.svg\\"></div>
+        <div id=\\"translation\\" class=\\"tab\\">
+          <div class=\\"controls\\"><input name=\\"setTranslationFactor\\" type=\\"number\\" min=\\"0\\" max=\\"18\\" id=\\"factorBox\\" value=\\"1\\"><button name=\\"up\\" alt=\\"up button\\" id=\\"up\\" class=\\"arrow button\\"><svg>btnTransArrow_crop.svg</svg></button><button name=\\"left\\" alt=\\"left button\\" id=\\"left\\" class=\\"arrow button\\"><svg>btnTransArrow_crop.svg</svg></button><button name=\\"right\\" alt=\\"right button\\" id=\\"right\\" class=\\"arrow button\\"><svg>btnTransArrow_crop.svg</svg></button><button name=\\"down\\" alt=\\"down button\\" id=\\"down\\" class=\\"arrow button\\"><svg>btnTransArrow_crop.svg</svg></button></div>
+        </div>
       </div>
       <div class=\\"call-stack\\">
         <div class=\\"calling-card\\" id=\\"1\\"><img src=\\"rotate-arrow.svg\\">description<button>X</button></div>
@@ -37,7 +39,7 @@ exports[`app integration integration with sideboard click 2`] = `
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
         <div id=\\"rotation\\" class=\\"tab\\">
-          <h1>Rotation</h1><img id=\\"rotate-left\\" alt=\\"left rotation button\\" src=\\"rotate-arrow.svg\\"><input><input><img id=\\"rotate-right\\" alt=\\"right rotation button\\" src=\\"rotate-arrow.svg\\"><select id=\\"rotateDrop\\">
+          <h1>Rotation</h1><img id=\\"rotate-left\\" alt=\\"left rotation button\\" src=\\"rotate-arrow.svg\\"><input type=\\"number\\" name=\\"setPivotPointx\\" value=\\"0\\"><input type=\\"number\\" name=\\"setPivotPointy\\" value=\\"0\\"><img id=\\"rotate-right\\" alt=\\"right rotation button\\" src=\\"rotate-arrow.svg\\"><select id=\\"rotateDrop\\" name=\\"setRotationMag\\">
             <option>90°</option>
             <option>180°</option>
             <option>270°</option>
@@ -68,7 +70,7 @@ exports[`app integration integration with sideboard click 3`] = `
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
         <div class=\\"tab\\">
-          <h1>Reflection</h1><select id=\\"reflectDrop\\">
+          <h1>Reflection</h1><img name=\\"ReflectX\\" src=\\"rotate-arrow.svg\\"><select id=\\"reflectDrop\\" name=\\"setLineOfReflection\\">
             <option>-9</option>
             <option>-8</option>
             <option>-7</option>
@@ -88,7 +90,7 @@ exports[`app integration integration with sideboard click 3`] = `
             <option>7</option>
             <option>8</option>
             <option>9</option>
-          </select>
+          </select><img name=\\"ReflectY\\" src=\\"rotate-arrow.svg\\">
         </div>
       </div>
       <div class=\\"call-stack\\">

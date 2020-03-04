@@ -51,40 +51,6 @@ describe("sideboard load", () => {
       translationBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
     expect(pretty(container.innerHTML)).toMatchSnapshot();
-    // translation buttons
-    const up = document.getElementById("up");
-    const down = document.getElementById("down");
-    const left = document.getElementById("left");
-    const right = document.getElementById("right");
-    // click up
-    act(() => {
-      up.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-    expect(mockButtonFx.mock.calls.length).toBe(1);
-    expect(mockButtonFx.mock.calls[0][1]).toBe(0);
-    expect(mockButtonFx.mock.calls[0][2]).toBe(-100);
-    // click down
-    act(() => {
-      down.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-    expect(mockButtonFx.mock.calls.length).toBe(2);
-    expect(mockButtonFx.mock.calls[1][1]).toBe(0);
-    expect(mockButtonFx.mock.calls[1][2]).toBe(100);
-    // click left
-    act(() => {
-      left.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-    expect(mockButtonFx.mock.calls.length).toBe(3);
-    expect(mockButtonFx.mock.calls[2][1]).toBe(-100);
-    expect(mockButtonFx.mock.calls[2][2]).toBe(0);
-    // click right
-    act(() => {
-      right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
-    expect(mockButtonFx.mock.calls.length).toBe(4);
-    expect(mockButtonFx.mock.calls[3][1]).toBe(100);
-    expect(mockButtonFx.mock.calls[3][2]).toBe(0);
-
     // click rotation
     act(() => {
       rotationBtn.dispatchEvent(new MouseEvent("click", { bubbles: true }));
