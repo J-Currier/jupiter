@@ -64,33 +64,26 @@ nav {
 #down {
     grid-column-start: 2;
 }
-
 #left,
 #right {
     grid-row-start: 3;
 }
-
 #right {
     grid-column-start: 3;
 }
-
 #down {
     grid-row-start: 4;
 }
-
 #undo,
 #redo {
     grid-row-start: 5;
 }
-
 #redo {
     grid-column-start: 3;
 }
-
 #undo {
     transform: scaleX(-1)
 }
-
 .tab-button {
     width: 90%;
     margin: 4px;
