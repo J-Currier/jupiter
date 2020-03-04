@@ -1,6 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sideboard load click button 1`] = `
+exports[`sideboard tab clicks click reflection 1`] = `
+"<div id=\\"sideboard\\">
+  <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+  <div class=\\"tab\\">
+    <h1>Reflection</h1><img name=\\"ReflectX\\" src=\\"rotate-arrow.svg\\"><select id=\\"reflectDrop\\" name=\\"setLineOfReflection\\">
+      <option>-9</option>
+      <option>-8</option>
+      <option>-7</option>
+      <option>-6</option>
+      <option>-5</option>
+      <option>-4</option>
+      <option>-3</option>
+      <option>-2</option>
+      <option>-1</option>
+      <option>0</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+    </select><img name=\\"ReflectY\\" src=\\"rotate-arrow.svg\\">
+  </div>
+</div>"
+`;
+
+exports[`sideboard tab clicks click rotation 1`] = `
+"<div id=\\"sideboard\\">
+  <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
+  <div id=\\"rotation\\" class=\\"tab\\">
+    <h1>Rotation</h1><img id=\\"rotate-left\\" alt=\\"left rotation button\\" src=\\"rotate-arrow.svg\\"><input type=\\"number\\" name=\\"setPivotPointx\\" value=\\"\\"><input type=\\"number\\" name=\\"setPivotPointy\\" value=\\"\\"><img id=\\"rotate-right\\" alt=\\"right rotation button\\" src=\\"rotate-arrow.svg\\"><select id=\\"rotateDrop\\" name=\\"setRotationMag\\">
+      <option>90°</option>
+      <option>180°</option>
+      <option>270°</option>
+    </select>
+  </div>
+</div>"
+`;
+
+exports[`sideboard tab clicks click translation 1`] = `
 "<div id=\\"sideboard\\">
   <nav><button id=\\"translation-button\\" class=\\"tab-button\\">Translation</button><button id=\\"rotation-button\\" class=\\"tab-button\\">Rotation</button><button id=\\"reflection-button\\" class=\\"tab-button\\">Reflection</button></nav>
   <div id=\\"translation\\" class=\\"tab\\">
