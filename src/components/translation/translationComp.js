@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as ArrowSvg } from "../../images/btnTransArrow_crop.svg";
+import { ReactComponent as ArrowSvg } from "../../images/btnTransArrow.svg";
 import "./translation.css";
 
 function Translation(props) {
