@@ -30,7 +30,11 @@ function Rotation(props) {
         value={props.pivotPointy}
         onChange={props.handleChange}
       ></input>
-      <img id="rotate-right" alt="right rotation button" src={rotate}></img>
+      <img id="rotate-right" 
+      alt="right rotation button" 
+      src={rotate}
+      onClick={(e) => props.rotate(e, props.rotationMag, true)}
+      ></img>
 
       <select id="rotateDrop" name="setRotationMag" value={props.rotationMag} onChange={props.handleChange}>{options}</select>
     </div>

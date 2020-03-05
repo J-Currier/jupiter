@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54.086 52.828" width="54.086" height="52.828">
-    <ellipse ry="24.414" rx="25.043" cy="41.353" cx="-39.005" fill="#e2ab0b" stroke="#1d219d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(66.049 -14.938)"/>
-    <path d="M14.96 31.767l12.084-12.589 12.083 13.366" fill="none" stroke="#1d219d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="204.421" height="199.666" viewBox="0 0 54.086 52.828">
+	<ellipse id="ellipseBtnTransArrow_crop" cx="27.043" cy="26.414" rx="25.043" ry="24.414" fill="#e2ab0b" stroke="#1d219d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+	<path d="M14.859 31.767l12.083-12.589 12.084 13.366" fill="none" stroke="#1d219d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
