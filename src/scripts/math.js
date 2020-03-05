@@ -48,6 +48,8 @@ const mathFunctions = {
 
     rotate: (magnitude, direction, pointOfRotation, playerPosition) => { //direction true = ccw
         let flipFactor = 1;
+        playerPosition[0] = (playerPosition[0] - 1000) /100;
+        playerPosition[1] = (1000 - playerPosition[1]) /100;
         let deltaX = playerPosition[0] - pointOfRotation[0];
         let deltaY = playerPosition[1] - pointOfRotation[1];
         let newDirection =direction;
@@ -83,9 +85,10 @@ const mathFunctions = {
         if (newOrientation === 0){
             newOrientation = 4*flipFactor;
         }
-        let newAnchorX = pointOfRotation[0] + deltaX;
-        let newAnchorY = pointOfRotation[1] + deltaY;
+        let newAnchorX = (pointOfRotation[0] + deltaX) * 100 + 1000;
+        let newAnchorY = 1000 - ((pointOfRotation[1] + deltaY) * 100);
         console.log([newAnchorX, newAnchorY, newOrientation])
+
         return ([newAnchorX, newAnchorY, newOrientation]);
     },
 

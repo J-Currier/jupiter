@@ -20,14 +20,14 @@ test('math reflect', () => {
 });
 
 test('math rotate', () => {
-    expect(mathFunctions.rotate(90, true, [0,0], [3,2,2,1])).toEqual([-2, 3, 2]);
-    expect(mathFunctions.rotate(270, true, [0,0], [3,2,2,-1])).toEqual([2, -3, -2]);
-    expect(mathFunctions.rotate(270, true, [0,0], [3,2,2,4])).toEqual([2, -3, 3]);
-    expect(mathFunctions.rotate(270, true, [0,0], [3,2,2,-4])).toEqual([2, -3, -1]);
-    expect(mathFunctions.rotate(90, false, [0,0], [3,2,2,1])).toEqual([2, -3, 4]);
-    expect(mathFunctions.rotate(270, false, [0,0], [3,2,2,-1])).toEqual([-2, 3, -4]);
-    expect(mathFunctions.rotate(270, false, [0,0], [3,2,2,4])).toEqual([-2, 3, 1]);
-    expect(mathFunctions.rotate(270, false, [0,0], [3,2,2,-4])).toEqual([-2, 3, -3]);
+    expect(mathFunctions.rotate(90, true, [0,0], [1300,800,2,1])).toEqual([800, 700, 2]);
+    expect(mathFunctions.rotate(270, true, [0,0], [1300,800,2,-1])).toEqual([1200, 1300, -2]);
+    expect(mathFunctions.rotate(270, true, [0,0], [1300,800,2,4])).toEqual([1200, 1300, 3]);
+    expect(mathFunctions.rotate(270, true, [0,0], [1300,800,2,-4])).toEqual([1200, 1300, -1]);
+    expect(mathFunctions.rotate(90, false, [0,0], [1300,800,2,1])).toEqual([1200, 1300, 4]);
+    expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,-1])).toEqual([800, 700, -4]);
+    expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,4])).toEqual([800, 700, 1]);
+    expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,-4])).toEqual([800, 700, -3]);
 
 });
 
