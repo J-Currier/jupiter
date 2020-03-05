@@ -16,6 +16,7 @@ import mathFunctions from "./scripts/math.js";
 function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+
   const [shape, setShape] = useState(randomShape);
 
   let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
@@ -159,10 +160,10 @@ function Game(props) {
     }, 100);
   };
 
-  const rotate = async (e, magnitude, direction, ) => {  //direction true= ccw
+  const rotate = async (e, magnitude, direction) => {  //direction true= ccw
     magnitude = magnitude.slice(0, -1)
-    magnitude = Number(magnitude)
-    let pointOfRotation = [pivotPointx, pivotPointy]
+    magnitude = Number(magnitude);
+    let pointOfRotation = [pivotPointx, pivotPointy];
     console.log(e.target, magnitude, direction)
     let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.rotate(
       magnitude, 
@@ -170,13 +171,13 @@ function Game(props) {
       pointOfRotation,
       playerPosition
     );
-    playerPositionsArray.push([
+      playerPositionsArray.push([
       newAnchorX,
       newAnchorY,
       playerPosition[2],
       newOrientation
     ]);
-    playerAcceptablePositionsArray.push([
+     playerAcceptablePositionsArray.push([
       newAnchorX,
       newAnchorY,
       playerPosition[2],
@@ -190,7 +191,7 @@ function Game(props) {
     await setTimeout(() => {
       setPlayerPosition([
         newAnchorX,
-        newAnchorY,,
+        newAnchorY,
         playerPosition[2],
         newOrientation
         ]);

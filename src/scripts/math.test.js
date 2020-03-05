@@ -28,6 +28,9 @@ test('math rotate', () => {
     expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,-1])).toEqual([800, 700, -4]);
     expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,4])).toEqual([800, 700, 1]);
     expect(mathFunctions.rotate(270, false, [0,0], [1300,800,2,-4])).toEqual([800, 700, -3]);
+    expect(mathFunctions.rotate(270, true, [5, -5], [1900, 900, 2, 1])).toEqual([2100, 1900, 4])
+    expect(mathFunctions.rotate(90, false, [0, 0], [300, 1700, 2, 4])).toEqual([1700, 1700, 1])
+    expect(mathFunctions.rotate(90, false, [0, 0], [1700, 1700, 2, 1])).toEqual([1700, 300, 2])
 
 });
 

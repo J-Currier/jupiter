@@ -52,7 +52,7 @@ const mathFunctions = {
         playerPosition[1] = (1000 - playerPosition[1]) /100;
         let deltaX = playerPosition[0] - pointOfRotation[0];
         let deltaY = playerPosition[1] - pointOfRotation[1];
-        let newDirection =direction;
+        let newDirection = direction;
         let tempX;
 
         if (playerPosition[3] < 0) {
