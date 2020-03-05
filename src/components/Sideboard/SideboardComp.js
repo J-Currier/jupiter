@@ -41,27 +41,27 @@ function Sideboard(props) {
             </nav>
             {tab === 'translation' &&  
                 <Translation 
-                    translate = {props.translate}
-                    translationFactor = {props.translationFactor}
-                    handleChange = {props.handleChange}
-                />
-            }
+                translate = {props.translate}
+                translationFactor = {props.translationFactor}
+                handleChange = {props.handleChange}
+                addToStack={props.addToStack}
+                />}
             {tab === 'rotation' &&  
                 <Rotation 
-                    rotate={props.rotate}
-                    pivotPointx={props.pivotPointx}
-                    pivotPointy={props.pivotPointy}
-                    rotationMag ={props.rotationMag}
-                    handleChange = {props.handleChange}
-                />
-            }
+                rotate={props.rotate}
+                pivotPointx={props.pivotPointx}
+                pivotPointy={props.pivotPointy}
+                rotationMag ={props.rotationMag}
+                handleChange = {props.handleChange}
+                addToStack={props.addToStack}
+                />}
             {tab === 'reflection' &&  
                 <Reflection 
-                    reflect={props.reflect}
-                    lineOfReflection={props.lineOfReflection}
-                    handleChange = {props.handleChange}
-                />
-            }
+                reflect={props.reflect}
+                lineOfReflection={props.lineOfReflection}
+                handleChange = {props.handleChange}
+                addToStack={props.addToStack}
+                />}
         </div>
     )
 }

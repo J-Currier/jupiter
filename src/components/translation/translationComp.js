@@ -5,6 +5,9 @@ import "./translation.css";
 function Translation(props) {
   function handleClick(e) {
     props.translate(e, ...buttonInfo[e.currentTarget.name].values);
+    const desc = `Move shape ${props.translationFactor} units ${e.currentTarget.name}`
+    let para = buttonInfo[e.currentTarget.name]
+    props.addToStack(ArrowSvg, desc, props.translate, para)
   }
 
   const buttonInfo = {

@@ -35,9 +35,10 @@ describe('render', () => {
 describe('component', () => {
 
   let container = null;
-  let mockFunction;
+  let mockTranslate;
   let translationFactor = 1;
   let mockHandle;
+  let mockAddToStack;
   let up;
   let down;
   let left;
@@ -47,16 +48,18 @@ describe('component', () => {
     container = document.createElement("div");
     document.body.appendChild(container);
 
-    mockFunction = jest.fn();
+    mockTranslate = jest.fn();
     mockHandle = jest.fn(
       // e => {translationFactor = e.currentTarget.value}
     );
+    mockAddToStack = jest.fn()
     act(() => {
       render(
         <Translation
-          translate = {mockFunction}
+          translate = {mockTranslate}
           translationFactor = {translationFactor}
           handleChange = {mockHandle}
+          addToStack = {mockAddToStack}
         />, container
       );
     });
@@ -77,33 +80,33 @@ describe('component', () => {
     act(() => {
       up.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(1);
-    expect(mockFunction.mock.calls[0][1]).toBe(0);
-    expect(mockFunction.mock.calls[0][2]).toBe(-100);
+    expect(mockTranslate.mock.calls.length).toBe(1);
+    expect(mockTranslate.mock.calls[0][1]).toBe(0);
+    expect(mockTranslate.mock.calls[0][2]).toBe(-100);
   });
   test('click down', () => {
     act(() => {
       down.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(1);
-    expect(mockFunction.mock.calls[0][1]).toBe(0);
-    expect(mockFunction.mock.calls[0][2]).toBe(100);
+    expect(mockTranslate.mock.calls.length).toBe(1);
+    expect(mockTranslate.mock.calls[0][1]).toBe(0);
+    expect(mockTranslate.mock.calls[0][2]).toBe(100);
   });
   test('click left', () => {
     act(() => {
       left.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(1);
-    expect(mockFunction.mock.calls[0][1]).toBe(-100);
-    expect(mockFunction.mock.calls[0][2]).toBe(0);
+    expect(mockTranslate.mock.calls.length).toBe(1);
+    expect(mockTranslate.mock.calls[0][1]).toBe(-100);
+    expect(mockTranslate.mock.calls[0][2]).toBe(0);
   });
   test('click right', () => {
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(1);
-    expect(mockFunction.mock.calls[0][1]).toBe(100);
-    expect(mockFunction.mock.calls[0][2]).toBe(0);
+    expect(mockTranslate.mock.calls.length).toBe(1);
+    expect(mockTranslate.mock.calls[0][1]).toBe(100);
+    expect(mockTranslate.mock.calls[0][2]).toBe(0);
   });
   test('change factorBox', () => {
     for (let i = 0; i <= 18; i++) {
