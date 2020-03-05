@@ -9,7 +9,7 @@
 }
 
 #rotation input,
-select {
+#rotation select {
     max-width: 30px;
     max-height: 30px;
 }
@@ -21,7 +21,7 @@ select {
     max-width: 30px;
 }
 
-select {
+#rotation select {
     grid-row-start: 3;
     grid-column-start: 1;
     grid-column-end: 5;
