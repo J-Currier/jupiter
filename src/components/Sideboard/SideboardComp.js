@@ -29,6 +29,7 @@ function Sideboard(props) {
                 translate = {props.translate}
                 translationFactor = {props.translationFactor}
                 handleChange = {props.handleChange}
+                addToStack={props.addToStack}
                 />}
             {tab === 'rotation' &&  
                 <Rotation 
@@ -37,12 +38,14 @@ function Sideboard(props) {
                 pivotPointy={props.pivotPointy}
                 rotationMag ={props.rotationMag}
                 handleChange = {props.handleChange}
+                addToStack={props.addToStack}
                 />}
             {tab === 'reflection' &&  
                 <Reflection 
                 reflect={props.reflect}
                 lineOfReflection={props.lineOfReflection}
                 handleChange = {props.handleChange}
+                addToStack={props.addToStack}
                 />}
         </div>
     )
