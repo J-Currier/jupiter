@@ -124,65 +124,78 @@ function Game(props) {
   };
 
   const reflect = async (e, lineOfReflection) => {
-    console.log(e.target, Number(lineOfReflection)) 
-    // let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
-    //   playerPosition,
-    //   lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
-    // );
-    // playerPositionsArray.push([
-    //   newAnchorX,
-    //   newAnchorY,
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // playerAcceptablePositionsArray.push([
-    //   newAnchorX,
-    //   newAnchorY,
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // await changeClass("fade-out");
-    // await setTimeout(() => {
-    //   setPlayerPosition([
-    //     newAnchorX,
-    //     newAnchorY,
-    //     playerPosition[2],
-    //     newOrientation
-    //   ]);
-    //   changeClass("fade-in");
-    // }, 100);
+    let myArray= [];
+    if (e.target.name === 'ReflectX') {
+      myArray = [true, false, lineOfReflection];
+    }
+    if (e.target.name === 'ReflectY') {
+      myArray = [false, true, lineOfReflection];
+    }
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
+      playerPosition,
+      myArray //[xRefl(t/f),yReflec(t/f), value]
+    );
+    playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,
+        playerPosition[2],
+        newOrientation
+      ]);
+      changeClass("fade-in");
+    }, 100);
   };
 
-  const rotate = async (e, magnitude, direction) => {  //direction true= ccw
+  const rotate = async (e, magnitude, direction, ) => {  //direction true= ccw
     magnitude = magnitude.slice(0, -1)
     magnitude = Number(magnitude)
+    let pointOfRotation = [pivotPointx, pivotPointy]
     console.log(e.target, magnitude, direction)
-    // let [newOrientation] = mathFunctions.rotate(
-    //   playerPosition[3],
-    //   magnitude, direction
-    // );
-    // playerPositionsArray.push([
-    //   playerPosition[0],
-    //   playerPosition[1],
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // playerAcceptablePositionsArray.push([
-    //   playerPosition[0],
-    //   playerPosition[1],
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // await changeClass("fade-out");
-    // await setTimeout(() => {
-    //   setPlayerPosition([
-    //     playerPosition[0],
-    //     playerPosition[1],
-    //     playerPosition[2],
-    //     newOrientation
-    //     ]);
-    //   changeClass("fade-in");
-    // }, 100);
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.rotate(
+      magnitude, 
+      direction,
+      pointOfRotation,
+      playerPosition
+    );
+    playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    console.log(newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation)
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,,
+        playerPosition[2],
+        newOrientation
+        ]);
+      changeClass("fade-in");
+    }, 100);
   };
 
   
