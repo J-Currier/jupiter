@@ -4,14 +4,14 @@ import "./translation.css";
 
 function Translation(props) {
   function handleClick(e) {
-    props.translate(e, ...buttonInfo[e.currentTarget.name]);
+    props.translate(e, ...buttonInfo[e.currentTarget.name].values);
   }
 
   const buttonInfo = {
-    up: [0, -100],
-    left: [-100, 0],
-    right: [100, 0],
-    down: [0, 100]
+    up: {values:[0, -100], class: "upBtn"},
+    left: {values:[-100, 0], class: "leftBtn"},
+    right: {values: [100, 0], class: "rightBtn"},
+    down: {values: [0, 100], class: "downBtn"}
   };
 
   const buttons = [];
@@ -23,9 +23,11 @@ function Translation(props) {
         name={key}
         alt={`${key} button`}
         id={key}
-        className="arrow button"
+        className="controlBtn"
       >
-        <ArrowSvg />
+        <ArrowSvg 
+          className={buttonInfo[key].class}
+        />
       </button>
     );
   }

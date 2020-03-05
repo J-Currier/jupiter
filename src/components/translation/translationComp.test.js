@@ -1,10 +1,11 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
+import { fireEvent } from '@testing-library/react'
 import { act } from "react-dom/test-utils";
 
 import Translation from './translationComp';
 
-describe('component', () => {
+describe('render', () => {
 
   let container = null;
 
@@ -29,52 +30,89 @@ describe('component', () => {
       );
     });
   });
+});
 
-  test('click button', () => {
-    // setup mock button function
-    const mockFunction = jest.fn(); // mock function
-    const mockHandle = jest.fn(); // mock function
+describe('component', () => {
+
+  let container = null;
+  let mockFunction;
+  let translationFactor = 1;
+  let mockHandle;
+  let up;
+  let down;
+  let left;
+  let right;
+  let factorBox;
+  beforeEach(() => {
+    container = document.createElement("div");
+    document.body.appendChild(container);
+
+    mockFunction = jest.fn();
+    mockHandle = jest.fn(
+      // e => {translationFactor = e.currentTarget.value}
+    );
     act(() => {
       render(
         <Translation
           translate = {mockFunction}
-          translationFactor = {1}
+          translationFactor = {translationFactor}
           handleChange = {mockHandle}
         />, container
       );
     });
-    // identify the buttons
-    const up = document.getElementById("up");
-    const down = document.getElementById("down");
-    const left = document.getElementById("left");
-    const right = document.getElementById("right");
-    // click up
+    up = document.getElementById("up");
+    down = document.getElementById("down");
+    left = document.getElementById("left");
+    right = document.getElementById("right");
+    factorBox = document.getElementById("factorBox");
+  });
+
+  afterEach(() => {
+    unmountComponentAtNode(container);
+    container.remove();
+    container = null;
+  });
+
+  test('click up', () => {
     act(() => {
       up.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
     expect(mockFunction.mock.calls.length).toBe(1);
     expect(mockFunction.mock.calls[0][1]).toBe(0);
     expect(mockFunction.mock.calls[0][2]).toBe(-100);
-    // click down
+  });
+  test('click down', () => {
     act(() => {
       down.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(2);
-    expect(mockFunction.mock.calls[1][1]).toBe(0);
-    expect(mockFunction.mock.calls[1][2]).toBe(100);
-    // click left
+    expect(mockFunction.mock.calls.length).toBe(1);
+    expect(mockFunction.mock.calls[0][1]).toBe(0);
+    expect(mockFunction.mock.calls[0][2]).toBe(100);
+  });
+  test('click left', () => {
     act(() => {
       left.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(3);
-    expect(mockFunction.mock.calls[2][1]).toBe(-100);
-    expect(mockFunction.mock.calls[2][2]).toBe(0);
-    // click right
+    expect(mockFunction.mock.calls.length).toBe(1);
+    expect(mockFunction.mock.calls[0][1]).toBe(-100);
+    expect(mockFunction.mock.calls[0][2]).toBe(0);
+  });
+  test('click right', () => {
     act(() => {
       right.dispatchEvent(new MouseEvent("click", { bubbles: true }));
     });
-    expect(mockFunction.mock.calls.length).toBe(4);
-    expect(mockFunction.mock.calls[3][1]).toBe(100);
-    expect(mockFunction.mock.calls[3][2]).toBe(0);
+    expect(mockFunction.mock.calls.length).toBe(1);
+    expect(mockFunction.mock.calls[0][1]).toBe(100);
+    expect(mockFunction.mock.calls[0][2]).toBe(0);
+  });
+  test('change factorBox', () => {
+    for (let i = 0; i <= 18; i++) {
+      act(() => {
+        fireEvent.change(factorBox, { target: { value: i } });
+        factorBox.value = i; // manually change value instead of using mockHandle
+      });
+      expect(factorBox.value).toBe(i.toString());
+      expect(mockHandle.mock.calls.length).toBe(i+1);
+    }
   });
 });
