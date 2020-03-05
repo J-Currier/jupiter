@@ -33,10 +33,12 @@ const mathFunctions = {
         let [anchorX, anchorY, , orientation] = position; // size skipped
         let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
         if (xRef ) {
+            value = value * 100 + 1000;
             orientation = orientation * -1;
             anchorX = value - ( anchorX - value);
         }
         if (yRef) {
+            value = value * -100 + 1000;
             orientation = ((orientation + 2) % 4) * -1;
             anchorY = value - ( anchorY - value);
         }
