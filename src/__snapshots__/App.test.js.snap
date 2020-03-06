@@ -16,19 +16,19 @@ exports[`app integration integration with sideboard click 1`] = `
         </div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\" id=\\"0\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units up</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"0\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units up</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"1\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units down</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units down</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"2\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units left</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"2\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units left</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"3\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units right</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"3\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units right</p>
         </div>
-        <div class=\\"button-div\\"><button id=\\"clear-button\\">CLEAR</button><button id=\\"run-button\\">RUN</button></div>
+        <div class=\\"button-div\\"><button id=\\"clear-button\\"><svg class=\\"iconBtn\\" alt=\\"Clear Button\\">btnClear.svg</svg></button><button id=\\"run-button\\"><svg class=\\"iconBtn\\" alt=\\"Run Button\\">btnRun.svg</svg></button></div>
       </div>
     </div>
     <div></div>
@@ -60,19 +60,19 @@ exports[`app integration integration with sideboard click 2`] = `
         </div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\" id=\\"0\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units up</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"0\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units up</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"1\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units down</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units down</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"2\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units left</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"2\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units left</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"3\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units right</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"3\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units right</p>
         </div>
-        <div class=\\"button-div\\"><button id=\\"clear-button\\">CLEAR</button><button id=\\"run-button\\">RUN</button></div>
+        <div class=\\"button-div\\"><button id=\\"clear-button\\"><svg class=\\"iconBtn\\" alt=\\"Clear Button\\">btnClear.svg</svg></button><button id=\\"run-button\\"><svg class=\\"iconBtn\\" alt=\\"Run Button\\">btnRun.svg</svg></button></div>
       </div>
     </div>
     <div></div>
@@ -116,19 +116,19 @@ exports[`app integration integration with sideboard click 3`] = `
         </div>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"calling-card\\" id=\\"0\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units up</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"0\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units up</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"1\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units down</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"1\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units down</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"2\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units left</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"2\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units left</p>
         </div>
-        <div class=\\"calling-card\\" id=\\"3\\"><svg>btnTransArrow.svg</svg>
-          <p>Move shape 1 units right</p><button>X</button>
+        <div class=\\"calling-card\\" id=\\"3\\"><svg class=\\"cardIcon\\">btnTrans.svg</svg>
+          <p>Move shape 1 units right</p>
         </div>
-        <div class=\\"button-div\\"><button id=\\"clear-button\\">CLEAR</button><button id=\\"run-button\\">RUN</button></div>
+        <div class=\\"button-div\\"><button id=\\"clear-button\\"><svg class=\\"iconBtn\\" alt=\\"Clear Button\\">btnClear.svg</svg></button><button id=\\"run-button\\"><svg class=\\"iconBtn\\" alt=\\"Run Button\\">btnRun.svg</svg></button></div>
       </div>
     </div>
     <div></div>
@@ -149,7 +149,7 @@ exports[`app integration render app 1`] = `
         <nav><button id=\\"translation-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Translation\\" tabindex=\\"0\\" class=\\"\\">btnTrans.svg</svg></button><button id=\\"rotation-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Rotation\\" tabindex=\\"0\\" class=\\"\\">btnRot.svg</svg></button><button id=\\"reflection-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Reflection\\" tabindex=\\"0\\" class=\\"\\">btnReflect.svg</svg></button></nav>
       </div>
       <div class=\\"call-stack\\">
-        <div class=\\"button-div\\"><button id=\\"clear-button\\">CLEAR</button><button id=\\"run-button\\">RUN</button></div>
+        <div class=\\"button-div\\"><button id=\\"clear-button\\"><svg class=\\"iconBtn\\" alt=\\"Clear Button\\">btnClear.svg</svg></button><button id=\\"run-button\\"><svg class=\\"iconBtn\\" alt=\\"Run Button\\">btnRun.svg</svg></button></div>
       </div>
     </div>
     <div></div>
