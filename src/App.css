@@ -4,6 +4,7 @@
   --text-emphasis-color: rgba(137, 235, 52, 1);
   --icon-fill-color: #e2ab0b;
   --icon-stroke-color: #1d219d;
+  --game-background-color: rgba(226, 171, 11, 0.35);
 }
 
 html, body {
@@ -134,7 +135,7 @@ button {
 .canvasWrapper {
   position: relative;
   margin: 40px 5px 0px 5px;
-  background-color: rgba(226, 171, 11, 0.35);
+  background-color: var(--game-background-color);
 }
 
 .controlerWrapper {
