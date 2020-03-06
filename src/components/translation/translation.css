@@ -8,28 +8,6 @@
     /* height: 100%; */
   }
 
-#factorBox {
-    border:solid 4px var(--icon-stroke-color);
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background: var(--icon-fill-color);
-    color: var(--text-secondary-color);
-    font-size:2em;
-    text-align: center;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    width:4rem;
-}
-#factorBox {
-    -moz-appearance:textfield;
-}
-#factorBox::-webkit-inner-spin-button, 
-#factorBox::-webkit-outer-spin-button { 
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 #translation #up {
     grid-column-start: 2;
     grid-row-start: 1;

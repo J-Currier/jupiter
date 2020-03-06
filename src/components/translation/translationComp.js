@@ -46,6 +46,7 @@ function Translation(props) {
           onChange={props.handleChange}
           value={props.translationFactor}
           id="factorBox"
+          className="controlInputNum"
         />
         {buttons}
       </div>
