@@ -206,18 +206,20 @@ function Game(props) {
   const font = 'M PLUS Rounded 1c';
 
 
-  function addToStack(image, desc, fx, para) {
+  function addToStack(image, desc, fx, para, newClass) {
     setCounter(prevCounter => prevCounter + 1)
-    let newComp = 
+    console.log(newClass)
+      let newComp = 
       <CallCard
-        image={image}
-        // fx={fx}
-        // para = {para}
-        desc = {desc}
-        id={counter} />;
-    console.log(newComp)
-    setCallStackComps((prev) => [...prev, newComp])
-
+      image={image}
+      // fx={fx}
+      // para = {para}
+      desc = {desc}
+      id={counter}
+      key={counter} />;
+      // console.log(newComp)
+      setCallStackComps((prev) => [...prev, newComp])
+      // console.log(callStackComps)
   }
   return (
     <main>

@@ -6,7 +6,6 @@ import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 export function CallCard(props) {
-    console.log(props)
 
     const Svg = props.image
     return(

@@ -14,11 +14,12 @@ function Rotation(props) {
     rotationMag,
     pivotPointX,
     pivotPointY,
-    counterClockwise
+    direction
   ) => {
-    props.rotate(e, rotationMag, pivotPointX, pivotPointY, counterClockwise);
-    const desc = `Rotate the shape around point (${(pivotPointX,
-    pivotPointY)})`;
+        
+    props.rotate(e, rotationMag, pivotPointX, pivotPointY, direction);
+
+    const desc = `Rotate the shape ${rotationMag} ${direction ? 'counter clockwise' : 'clockwise'} around point (${pivotPointX}, ${pivotPointY})`;
     props.addToStack(RotateCounterSvg, desc, props.rotate, e);
   };
 

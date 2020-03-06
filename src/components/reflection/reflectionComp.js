@@ -11,7 +11,7 @@ function Reflection(props) {
 
   const handleClick = (e, lineOfReflection, axis, xAxis) => {
     props.reflect(e, lineOfReflection, axis);
-    const desc = `Reflect the shape over the ${props.lineOfReflection} axis`;
+    const desc = `Reflect the shape over the axis on ${lineOfReflection}${xAxis ? 'X': 'Y'}`;
     props.addToStack(
       xAxis ? ReflectXSvg : ReflectYSvg, 
       desc, 
@@ -47,7 +47,7 @@ function Reflection(props) {
           key="reflectYBtn"
           name="reflectY"
           className="controlBtn"
-          onClick={e => props.reflect(e, props.lineOfReflection, false)}
+          onClick={e => handleClick(e, props.lineOfReflection, false)}
         >
           <ReflectYSvg 
             alt="Y-reflection icon"
