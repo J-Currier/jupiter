@@ -12,7 +12,7 @@ export function CallCard(props) {
         <div className="calling-card" id={props.id} key = {props.id}>
             <Svg />
             <p>{props.desc}</p>
-            <button>X</button>
+            {/* <button>X</button> */}
         </div>
     )
 }
