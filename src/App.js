@@ -208,7 +208,6 @@ function Game(props) {
 
   function addToStack(image, desc, fx, para) {
     setCounter(prevCounter => prevCounter + 1)
-    console.log(counter)
     let newComp = 
       <CallCard
         image={image}
@@ -216,7 +215,7 @@ function Game(props) {
         // para = {para}
         desc = {desc}
         id={counter} />;
-
+    console.log(newComp)
     setCallStackComps((prev) => [...prev, newComp])
 
   }

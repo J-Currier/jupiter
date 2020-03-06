@@ -6,7 +6,7 @@ import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 export function CallCard(props) {
-
+    console.log(props)
 
     const Svg = props.image
     return(
@@ -20,18 +20,6 @@ export function CallCard(props) {
 
 
 export function CallStack(props) {
-
-    // function addToStack(image, fx, counter) {
-    //     props.callStackComps.push(
-    //         <CallCard
-    //         image = {image}
-    //         fx = {fx}
-    //         cardId = {counter}/>
-    //     )
-    // }
-
-
-
     return(
         <div  className='call-stack'>
             {props.callStackComps}
