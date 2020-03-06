@@ -33,10 +33,12 @@ const mathFunctions = {
         let [anchorX, anchorY, , orientation] = position; // size skipped
         let [xRef, yRef, value] = lineOfReflection; //xRef and yRef= bool
         if (xRef ) {
+            value = value * 100 + 1000;
             orientation = orientation * -1;
             anchorX = value - ( anchorX - value);
         }
-        if (yRef !== 0) {
+        if (yRef) {
+            value = value * -100 + 1000;
             orientation = ((orientation + 2) % 4) * -1;
             anchorY = value - ( anchorY - value);
         }
@@ -44,24 +46,50 @@ const mathFunctions = {
         return [anchorX, anchorY, orientation];
     },
 
-    rotate: (orientation, magnitude, direction) => { //direction true = ccw
-        let flipFactor = 1
-        if (orientation < 0) {
-            orientation = orientation * -1;
-            direction = !direction;
+    rotate: (magnitude, direction, pointOfRotation, playerPosition) => { //direction true = ccw
+        let flipFactor = 1;
+        playerPosition[0] = (playerPosition[0] - 1000) /100;
+        playerPosition[1] = (1000 - playerPosition[1]) /100;
+        let deltaX = playerPosition[0] - pointOfRotation[0];
+        let deltaY = playerPosition[1] - pointOfRotation[1];
+        let newDirection = direction;
+        let tempX;
+
+        if (playerPosition[3] < 0) {
+            playerPosition[3] = playerPosition[3] * -1;
+            newDirection = !direction;
             flipFactor = -1;
         }
         let newOrientation;
-        if (direction ) {
-            newOrientation = ((orientation + magnitude/90) % 4) *flipFactor;
+        if (newDirection) {
+            newOrientation = ((playerPosition[3] + magnitude/90) % 4) *flipFactor;
+            
         }
-        if (!direction ) {
-            newOrientation = ((orientation + (4 - (magnitude/90))) %4) * flipFactor;
+        if (!newDirection ) {
+            newOrientation = ((playerPosition[3] + (4 - (magnitude/90))) %4) * flipFactor;
+        }
+        if (direction) {
+            for (let i = 0; i < (magnitude/90); i++) {
+                tempX = deltaY * -1;
+                deltaY = deltaX;
+                deltaX = tempX;
+            }
+        }
+        if (!direction) {
+            for (let i = 0; i < (magnitude/90); i++) {
+                tempX = deltaY;
+                deltaY = deltaX * -1;
+                deltaX = tempX;
+            }
         }
         if (newOrientation === 0){
             newOrientation = 4*flipFactor;
         }
-        return (newOrientation);
+        let newAnchorX = (pointOfRotation[0] + deltaX) * 100 + 1000;
+        let newAnchorY = 1000 - ((pointOfRotation[1] + deltaY) * 100);
+        console.log([newAnchorX, newAnchorY, newOrientation])
+
+        return ([newAnchorX, newAnchorY, newOrientation]);
     },
 
     // transformGrid: (grid, x, y, callback, parameters) => {

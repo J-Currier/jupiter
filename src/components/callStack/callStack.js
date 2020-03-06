@@ -6,69 +6,47 @@ import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 export function CallCard(props) {
-    let image
-    let desc
-    if (props.img === 'rotation') {
-        image = rotation
-    } else if (props.img === 'translation' && props.direction === 'left') {
-        image = translateLeft
-    }  
-    else {
-        image = "not an image"
-    }
+
+    // if (props.img === 'rotation') {
+    //     image = rotation
+    // } else if (props.img === 'translation' && props.direction === 'left') {
+    //     image = translateLeft
+    // }
+    // else {
+    //     image = "not an image"
+    // }
+    const Svg = props.image
     return(
-        <div className="calling-card" id={props.cardId}>
-            <img src={image}></img>
-            description
+        <div className="calling-card" id={props.key}>
+            {/* <img src={props.image}></img> */}
+            <Svg />
+            <p>{props.desc}</p>
             <button>X</button>
-        </div>        
+        </div>
     )
 }
 
 
-function CallStack(fx) {
-    const [stack, setStack] = useState([]);
-    const [counter, setCounter] = useState(0);
+export function CallStack(props) {
 
-    function addToStack(image, fx, counter) {
-        stack.push(
-            <CallCard 
-            image = {image} 
-            fx = {fx} 
-            cardId = {counter}/>
-        )
-
-
-    }
+    // function addToStack(image, fx, counter) {
+    //     props.callStackComps.push(
+    //         <CallCard
+    //         image = {image}
+    //         fx = {fx}
+    //         cardId = {counter}/>
+    //     )
+    // }
 
 
 
     return(
         <div  className='call-stack'>
-            <CallCard 
-            img = {'rotation'} 
-            direction = {'left'}
-            fx = {() => {}} 
-            cardId = {1}/>
-            <CallCard 
-            img = {'translation'} 
-            direction = {'left'}
-            fx = {() => {}} 
-            cardId = {2}/>
-            <CallCard 
-            img = {'translation'} 
-            direction = {'left'}
-            fx = {() => {}} 
-            cardId = {3}/>
-            <CallCard 
-            img = {'translation'} 
-            direction = {'left'}
-            fx = {() => {}} 
-            cardId = {4}/>
+            {props.callStackComps}
             <button>CLEAR</button>
             <button>RUN</button>
         </div>
     )
 }
 
-export default CallStack
+// export default {CallStack, CallCard}

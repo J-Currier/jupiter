@@ -1,20 +1,21 @@
 import React from "react";
-import { ReactComponent as ArrowSvg } from "../../images/btnTransArrow.svg";
+import { ReactComponent as ArrowSvg } from "../../images/btnTransArrow_crop.svg";
 import "./translation.css";
 
 function Translation(props) {
   function handleClick(e) {
-    props.translate(e, ...buttonInfo[e.currentTarget.name].values);
+    props.translate(e, ...buttonInfo[e.currentTarget.name]);
     const desc = `Move shape ${props.translationFactor} units ${e.currentTarget.name}`
     let para = buttonInfo[e.currentTarget.name]
     props.addToStack(ArrowSvg, desc, props.translate, para)
+    console.log(desc)
   }
 
   const buttonInfo = {
-    up: {values:[0, -100], class: "upBtn"},
-    left: {values:[-100, 0], class: "leftBtn"},
-    right: {values: [100, 0], class: "rightBtn"},
-    down: {values: [0, 100], class: "downBtn"}
+    up: [0, -100],
+    left: [-100, 0],
+    right: [100, 0],
+    down: [0, 100]
   };
 
   const buttons = [];
@@ -26,11 +27,9 @@ function Translation(props) {
         name={key}
         alt={`${key} button`}
         id={key}
-        className="controlBtn"
+        className="arrow button"
       >
-        <ArrowSvg 
-          className={buttonInfo[key].class}
-        />
+        <ArrowSvg />
       </button>
     );
   }

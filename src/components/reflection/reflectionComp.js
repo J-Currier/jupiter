@@ -1,50 +1,36 @@
 import React from "react";
 import "./reflection.css";
-import { ReactComponent as ReflectYSvg } from '../../images/btnReflectY.svg'
-import { ReactComponent as ReflectXSvg } from '../../images/btnReflectX.svg'
+import rotate from "../../images/rotate-arrow.svg";
+// import reflectY from '../../images/btnReflectY.svg'
 
 function Reflection(props) {
-  const selector = [];
-  for (let i = -9; i < 10; i++) {
-    selector.push(<option key={i}>{i}</option>);
+  const selector = () => {
+    const array = [];
+    for (let i = -9; i < 10; i++) {
+      array.push(<option key={i}>{i}</option>);
+    }
+    return array;
   };
 
-  function handleClick(e) {
-    const axes = {
-      reflectX: [true, false, props.lineOfReflection],
-      reflectY: [false, true, props.lineOfReflection],
-    }
-    props.reflect(e, axes[e.currentTarget.name]);
-  }
-
   return (
-    <div id="reflection" className="tab">
-      <div className="controls">
-        <button
-          id="reflectXBtn"
-          name="reflectX" 
-          className="controlBtn"
-          onClick={handleClick}
-        >
-          <ReflectXSvg />
-        </button>
-        <select
-          id="reflectDrop"
-          name="setLineOfReflection"
-          value={props.lineOfReflection}
-          onChange={props.handleChange}
-        >
-          {selector}
-        </select>
-        <button
-          id="reflectYBtn"
-          name="reflectY"
-          className="controlBtn"
-          onClick={handleClick}
-        >
-          <ReflectYSvg />
-        </button>
-      </div>
+    <div className="tab">
+      <h1>Reflection</h1>
+      <img
+        name="ReflectX"
+        src={rotate}
+        onClick={(e) => props.reflect(e, props.lineOfReflection)}
+      ></img>
+      <select
+      id="reflectDrop"
+      name="setLineOfReflection"
+      value={props.lineOfReflection}
+      onChange={props.handleChange}
+      >{selector()}</select>
+      <img
+        name="ReflectY"
+        src={rotate}
+        onClick={(e) => props.reflect(e, props.lineOfReflection)}
+      ></img>
     </div>
   );
 }

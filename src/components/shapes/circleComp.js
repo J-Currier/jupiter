@@ -15,15 +15,15 @@ function Circle(props) {
     let anchorDotSize = props.anchorDotSize;
     let radius = size/2;
 
-    let orientation1 = [[anchorX+radius, anchorY]];
+    let orientation1 = [[anchorX+radius, anchorY], [anchorX, anchorY+radius]];
     
-    let corner = shapesFunctions.determineCorners(
+    let cornerArray = shapesFunctions.determineCorners(
     anchorX,
     anchorY,
     radius,
     orientation,
     orientation1
-    )[0];
+    );
     
     if (anchorY < radius || anchorY > 2000-radius) {
         props.moveBack_shakeVertical();
@@ -50,7 +50,10 @@ function Circle(props) {
         }
 
         drawCircle(anchorX, anchorY, radius, fillColour, borderColour, borderWidth);
-        if (anchorDotSize) shapesFunctions.drawAnchorDot(context, corner[0], corner[1], anchorDotSize, 'white', 'white', borderWidth);
+        if (anchorDotSize) {
+            shapesFunctions.drawAnchorDot(context, cornerArray[0][0], cornerArray[0][1], anchorDotSize, 'white', 'white', borderWidth);
+            shapesFunctions.drawAnchorDot(context, cornerArray[1][0], cornerArray[1][1], anchorDotSize, 'black', 'black', borderWidth);
+        } 
     }, [position]);
 
     return (

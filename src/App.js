@@ -9,13 +9,15 @@ import { Triangle } from "./components/shapes/triangleComp.js";
 // import { Heart } from "./components/shapes/heartComp.js";
 import { Star } from "./components/shapes/starComp.js";
 import { Rectangle } from "./components/shapes/rectangleComp.js";
-import CallStack from './components/callStack/callStack'
+import { CallStack, CallCard } from './components/callStack/callStack'
+
 
 import mathFunctions from "./scripts/math.js";
 
 function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
   let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
+
   const [shape, setShape] = useState(randomShape);
 
   let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
@@ -40,7 +42,7 @@ function Game(props) {
   let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
   while (
     Math.pow(endAnchorX - startAnchorX, 2) +
-      Math.pow(endAnchorY - startAnchorY, 2) <
+    Math.pow(endAnchorY - startAnchorY, 2) <
     Math.pow(2 * size, 2)
   ) {
     [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
@@ -60,15 +62,18 @@ function Game(props) {
   const [translationFactor, setTranslationFactor] = useState(1);
   const [pivotPointx, setPivotPointx] = useState(0);
   const [pivotPointy, setPivotPointy] = useState(0);
-  const [rotationMag, setRotationMag] = useState("180°") ;
+  const [rotationMag, setRotationMag] = useState("180°");
   const [lineOfReflection, setLineOfReflection] = useState(0);
   const transformFunctions = {
     "setTranslationFactor": setTranslationFactor,
     "setPivotPointx": setPivotPointx,
     "setPivotPointy": setPivotPointy,
     "setRotationMag": setRotationMag,
-    "setLineOfReflection": setLineOfReflection    
+    "setLineOfReflection": setLineOfReflection
   }
+
+  const [callStackComps, setCallStackComps] = useState([]);
+  const [counter, setCounter] = useState(0)
 
   let player = {
     id: "myStartPt",
@@ -124,68 +129,81 @@ function Game(props) {
   };
 
   const reflect = async (e, lineOfReflection) => {
-    console.log(e.target, Number(lineOfReflection)) 
-    // let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
-    //   playerPosition,
-    //   lineOfReflection //[xRefl(t/f),yReflec(t/f), value]
-    // );
-    // playerPositionsArray.push([
-    //   newAnchorX,
-    //   newAnchorY,
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // playerAcceptablePositionsArray.push([
-    //   newAnchorX,
-    //   newAnchorY,
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // await changeClass("fade-out");
-    // await setTimeout(() => {
-    //   setPlayerPosition([
-    //     newAnchorX,
-    //     newAnchorY,
-    //     playerPosition[2],
-    //     newOrientation
-    //   ]);
-    //   changeClass("fade-in");
-    // }, 100);
+    let myArray= [];
+    if (e.target.name === 'ReflectX') {
+      myArray = [true, false, lineOfReflection];
+    }
+    if (e.target.name === 'ReflectY') {
+      myArray = [false, true, lineOfReflection];
+    }
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
+      playerPosition,
+      myArray //[xRefl(t/f),yReflec(t/f), value]
+    );
+    playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,
+        playerPosition[2],
+        newOrientation
+      ]);
+      changeClass("fade-in");
+    }, 100);
   };
 
   const rotate = async (e, magnitude, direction) => {  //direction true= ccw
     magnitude = magnitude.slice(0, -1)
-    magnitude = Number(magnitude)
+    magnitude = Number(magnitude);
+    let pointOfRotation = [pivotPointx, pivotPointy];
     console.log(e.target, magnitude, direction)
-    // let [newOrientation] = mathFunctions.rotate(
-    //   playerPosition[3],
-    //   magnitude, direction
-    // );
-    // playerPositionsArray.push([
-    //   playerPosition[0],
-    //   playerPosition[1],
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // playerAcceptablePositionsArray.push([
-    //   playerPosition[0],
-    //   playerPosition[1],
-    //   playerPosition[2],
-    //   newOrientation
-    // ]);
-    // await changeClass("fade-out");
-    // await setTimeout(() => {
-    //   setPlayerPosition([
-    //     playerPosition[0],
-    //     playerPosition[1],
-    //     playerPosition[2],
-    //     newOrientation
-    //     ]);
-    //   changeClass("fade-in");
-    // }, 100);
+    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.rotate(
+      magnitude, 
+      direction,
+      pointOfRotation,
+      playerPosition
+    );
+      playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+     playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation
+    ]);
+    console.log(newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      newOrientation)
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,
+        playerPosition[2],
+        newOrientation
+        ]);
+      changeClass("fade-in");
+    }, 100);
   };
 
-  
+
 
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
@@ -205,7 +223,7 @@ function Game(props) {
 
   const handleChange = e => {
     let name = e.target.name
-    transformFunctions[name](e.target.value)    
+    transformFunctions[name](e.target.value)
   };
 
   const LevelCheck = () => {
@@ -235,7 +253,7 @@ function Game(props) {
       moveBack_shakeVertical={moveBack_shakeVertical}
       moveBack_shakeHorizontal={moveBack_shakeHorizontal}
       shapeInfo={player}
-      anchorDotSize = {9}
+      anchorDotSize={9}
     />
   );
   const targetComp = (
@@ -247,11 +265,34 @@ function Game(props) {
     />
   );
 
-  const font='M PLUS Rounded 1c';
+  const font = 'M PLUS Rounded 1c';
+
+
+  function addToStack(image, desc, fx, para) {
+    setCounter(prevCounter => prevCounter + 1)
+    console.log(counter)
+    let newComp = 
+      <CallCard
+        image={image}
+        // fx={fx}
+        desc = {desc}
+        key={counter} />;
+
+    setCallStackComps((prev) => [...prev, newComp])
+    // callStackComps.push(
+    //   <CallCard
+    //     // image={image}
+    //     // fx={fx}
+    //     desc = {desc}
+    //     key={counter} />
+    // )
+    // setCallStackComps(callStackComps)
+
+  }
   return (
     <main>
       <div className="canvasWrapper">
-        <Grid/>
+        <Grid />
         {targetComp}
         {playerComp}
       </div>
@@ -264,11 +305,14 @@ function Game(props) {
           translationFactor={translationFactor}
           pivotPointx={pivotPointx}
           pivotPointy={pivotPointy}
-          rotationMag ={rotationMag}
+          rotationMag={rotationMag}
           lineOfReflection={lineOfReflection}
+          addToStack={addToStack}
           key="sideboard"
         />
-        <CallStack />
+        <CallStack
+          callStackComps={callStackComps}
+        />
       </div>
       <LevelCheck key="levelCheck" />
     </main>
