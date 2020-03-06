@@ -131,7 +131,9 @@ function Game(props) {
     magnitude = Number(magnitude.slice(0, -1))
     pivotPointx = Number(pivotPointx)
     pivotPointy = Number(pivotPointy)
+    console.log(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
     let newPlayerPosition = mathFunctions.rotate(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
+    console.log(newPlayerPosition)
     playerPositionsArray.push(newPlayerPosition)
     playerAcceptablePositionsArray.push(newPlayerPosition)
     await changeClass("fade-out");
