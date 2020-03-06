@@ -34,11 +34,7 @@ function Rectangle(props) {
         if (corner[1] < 0 || corner[1] > 2000) {
             props.moveBack_shakeVertical();
             break;
-        }
-      }
-    
-    for (let corner of cornerArray) {
-        if (corner[0] < 0 || corner[0] > 2000) {
+        } else if (corner[0] < 0 || corner[0] > 2000) {
             props.moveBack_shakeHorizontal();
             break;
         }

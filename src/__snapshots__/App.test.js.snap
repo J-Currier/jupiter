@@ -48,14 +48,13 @@ exports[`app integration integration with sideboard click 2`] = `
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Translation\\" tabindex=\\"0\\" class=\\"\\">btnTrans.svg</svg></button><button id=\\"rotation-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Rotation\\" tabindex=\\"0\\" class=\\"activeTab\\">btnRot.svg</svg></button><button id=\\"reflection-button\\" class=\\"tabBtn iconBtn\\"><svg alt=\\"Reflection\\" tabindex=\\"0\\" class=\\"\\">btnReflect.svg</svg></button></nav>
         <div id=\\"rotation\\" class=\\"tab\\">
-          <div class=\\"controls\\"><button id=\\"rotate-left\\" name=\\"rotate-left\\" class=\\"controlBtn iconBtn\\"><svg alt=\\"Counterclockwise Rotate Icon\\">btnRotCounter.svg</svg></button>
-            <div>
-              <div><input id=\\"setPivotPointx\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointx\\" value=\\"0\\"><input id=\\"setPivotPointy\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointy\\" value=\\"0\\"></div><select id=\\"rotateDrop\\" name=\\"setRotationMag\\" class=\\"controlSelect\\">
+          <div class=\\"controls\\">
+            <div id=\\"pivotCoords\\"><input id=\\"setPivotPointx\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointx\\" value=\\"0\\"><input id=\\"setPivotPointy\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointy\\" value=\\"0\\"></div>
+            <div id=\\"rotateDirection\\"><button id=\\"rotate-left\\" name=\\"rotate-left\\" class=\\"controlBtn iconBtn\\"><svg alt=\\"Counterclockwise Rotate Icon\\">btnRotCounter.svg</svg></button><select id=\\"rotateDrop\\" name=\\"setRotationMag\\" class=\\"controlSelect\\">
                 <option>90°</option>
                 <option>180°</option>
                 <option>270°</option>
-              </select>
-            </div><button id=\\"rotate-right\\" name=\\"rotate-right\\" class=\\"controlBtn iconBtn\\"><svg alt=\\"Clockwise Rotate Icon\\" class=\\"reflectXBtn\\">btnRotCounter.svg</svg></button>
+              </select><button id=\\"rotate-right\\" name=\\"rotate-right\\" class=\\"controlBtn iconBtn\\"><svg alt=\\"Clockwise Rotate Icon\\" class=\\"reflectXBtn\\">btnRotCounter.svg</svg></button></div>
           </div>
         </div>
       </div>
