@@ -16,7 +16,7 @@ function Reflection(props) {
   };
 
   return (
-    <div className="tab">
+    <div id="reflection" className="tab">
       <div className="controls">
         <button
           id="reflectXBtn"

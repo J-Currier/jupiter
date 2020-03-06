@@ -91,7 +91,7 @@ exports[`app integration integration with sideboard click 3`] = `
     <div class=\\"controlerWrapper\\">
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\"><svg alt=\\"Translation\\">btnTrans.svg</svg></button><button id=\\"rotation-button\\" class=\\"tab-button\\"><svg alt=\\"Rotation\\">btnRot.svg</svg></button><button id=\\"reflection-button\\" class=\\"tab-button\\"><svg alt=\\"Reflection\\">btnReflect.svg</svg></button></nav>
-        <div class=\\"tab\\">
+        <div id=\\"reflection\\" class=\\"tab\\">
           <div class=\\"controls\\"><button id=\\"reflectXBtn\\" name=\\"reflectX\\" class=\\"controlBtn\\"><svg alt=\\"X-reflection icon\\">btnReflectX.svg</svg></button><select id=\\"reflectDrop\\" name=\\"setLineOfReflection\\" class=\\"controlSelect\\">
               <option>9</option>
               <option>8</option>
