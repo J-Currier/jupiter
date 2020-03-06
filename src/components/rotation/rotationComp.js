@@ -41,26 +41,41 @@ function Rotation(props) {
             )
           }
         >
-          <RotateCounterSvg alt="Counterclockwise Rotate Icon" />
+          <RotateCounterSvg 
+            alt="Counterclockwise Rotate Icon" 
+          />
         </button>
-        <input
-          id="setPivotPointx"
-          key="setPivotPointx"
-          className="controlInputNum"
-          type="number"
-          name="setPivotPointx"
-          value={props.pivotPointx}
-          onChange={props.handleChange}
-        ></input>
-        <input
-          id="setPivotPointy"
-          key="setPivotPointy"
-          className="controlInputNum"
-          type="number"
-          name="setPivotPointy"
-          value={props.pivotPointy}
-          onChange={props.handleChange}
-        ></input>
+        <div>
+          <div>
+            <input
+              id="setPivotPointx"
+              key="setPivotPointx"
+              className="controlInputNum"
+              type="number"
+              name="setPivotPointx"
+              value={props.pivotPointx}
+              onChange={props.handleChange}
+            ></input>
+            <input
+              id="setPivotPointy"
+              key="setPivotPointy"
+              className="controlInputNum"
+              type="number"
+              name="setPivotPointy"
+              value={props.pivotPointy}
+              onChange={props.handleChange}
+            ></input>
+          </div>
+          <select
+            id="rotateDrop"
+            name="setRotationMag"
+            className="controlSelect"
+            value={props.rotationMag}
+            onChange={props.handleChange}
+          >
+            {options}
+          </select>
+        </div>
         <button
           id="rotate-right"
           key="rotate-right"
@@ -76,17 +91,11 @@ function Rotation(props) {
             )
           }
         >
-          <RotateCounterSvg alt="Counterclockwise Rotate Icon" />
+          <RotateCounterSvg 
+            alt="Clockwise Rotate Icon" 
+            className="reflectXBtn"
+          />
         </button>
-
-        <select
-          id="rotateDrop"
-          name="setRotationMag"
-          value={props.rotationMag}
-          onChange={props.handleChange}
-        >
-          {options}
-        </select>
       </div>
     </div>
   );
