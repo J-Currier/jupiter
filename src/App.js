@@ -1,129 +1,266 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-import {Grid} from './components/gridComp'
-import Sideboard from './components/SideboardComp'
-import {Circle} from './components/circleComp.js'
-import {Square} from './components/squareComp.js'
+import { Grid } from "./components/grid/gridComp";
+import Sideboard from "./components/Sideboard/SideboardComp";
+import { Circle } from "./components/shapes/circleComp.js";
+import { Square } from "./components/shapes/squareComp.js";
+import { Triangle } from "./components/shapes/triangleComp.js";
+// import { Heart } from "./components/shapes/heartComp.js";
+import { Star } from "./components/shapes/starComp.js";
+import { Rectangle } from "./components/shapes/rectangleComp.js";
+import { CallStack, CallCard } from './components/callStack/callStack'
 
-import mathFunctions from './scripts/math.js'
 
+import mathFunctions from "./scripts/math.js";
 
-function Game (props) {
-  let size = (Math.floor(Math.random()*2)+1)*100
-  let startPoint = mathFunctions.shapeMaker('circle', size)
-  const [PlayerPosition, setPlayerPosition] = useState(startPoint)
-  const [fillColour, setFillColour] = useState('rgba(137, 235, 52, 1)')
-  const [borderColour, setBorderColour] = useState('rgba(0, 0, 0, 1)')
-  const [borderWidth, setBorderWidth] = useState(10)
-  const [shapeClassName, setShapeClassName] = useState('Circle')
+function Game(props) {
+  let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
+  let randomShape = shapesArray[Math.floor(Math.random() * shapesArray.length)];
 
-  let endPoint = mathFunctions.shapeMaker('circle', size)
-  while ((Math.pow((endPoint[0]-PlayerPosition[0]), 2) + Math.pow((endPoint[1]-PlayerPosition[1]), 2)) < Math.pow((2*size), 2)) {
-    console.log(endPoint, PlayerPosition)
-    endPoint = mathFunctions.shapeMaker('circle', size)
+  const [shape, setShape] = useState(randomShape);
+
+  let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
+  let randomOrientation = Math.floor(Math.random() * 8);
+  let startOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
+  randomOrientation = Math.floor(Math.random() * 8);
+  let endOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
+
+  let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
+  const [playerPositionsArray, setPlayerPositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerAcceptablePositionsArray, setplayerAcceptablePositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerPosition, setPlayerPosition] = useState([startAnchorX, startAnchorY, size, startOrientation]);
+
+  let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
+  while (
+    Math.pow(endAnchorX - startAnchorX, 2) +
+    Math.pow(endAnchorY - startAnchorY, 2) <
+    Math.pow(2 * size, 2)
+  ) {
+    [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
   }
-  const [targetPostition, setTargetPosition] = useState(endPoint)
-  const [moveFactor, setMoveFactor] = useState(1)
+  const [targetPostition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, endOrientation]);
 
-  let playerCircle = {
-  "id": "myCircle",
-  "position": PlayerPosition,
-  "fillColour": fillColour,
-  "borderColour": borderColour,
-  "borderWidth": borderWidth,
-  "shapeClassName": shapeClassName
+  const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
+  const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 1)");
+  const [borderWidth, setBorderWidth] = useState(6);
+  const [shapeClassName, setShapeClassName] = useState("Circle");
+
+  const [translationFactor, setTranslationFactor] = useState(1);
+  const [pivotPointx, setPivotPointx] = useState(0);
+  const [pivotPointy, setPivotPointy] = useState(0);
+  const [rotationMag, setRotationMag] = useState("180°");
+  const [lineOfReflection, setLineOfReflection] = useState(0);
+  const transformFunctions = {
+    "setTranslationFactor": setTranslationFactor,
+    "setPivotPointx": setPivotPointx,
+    "setPivotPointy": setPivotPointy,
+    "setRotationMag": setRotationMag,
+    "setLineOfReflection": setLineOfReflection
   }
 
-  let targetCircle = {
-    "id": "myEndPt",
-    "position": targetPostition,
-    "fillColour": 'rgba(255, 77, 0, 1)',
-    "borderColour": borderColour,
-    "borderWidth": borderWidth,
-    "shapeClassName": "endPtCircle"
-  }
+  const [callStackComps, setCallStackComps] = useState([]);
+  const [counter, setCounter] = useState(0)
 
-  let squareInfo = {
-    "id": "mySquare",
-    'position': [1000, 1000, 200],
-    "fillColour": 'rgba(0, 0, 0, 1)',
-    "borderColour": 'rgba(0, 0, 0, 1)',
-    "borderWidth": borderWidth,
-    "shapeClassName": shapeClassName,
-    'orientation': 4,
-  }
+  let player = {
+    id: "myStartPt",
+    position: playerPosition,
+    fillColour: fillColour,
+    borderColour: borderColour,
+    borderWidth: borderWidth,
+    shapeClassName: shapeClassName
+  };
 
-  const changeClass = (newName) => {
-    setShapeClassName(newName)
-  }
+  let target = {
+    id: "myEndPt",
+    position: targetPostition,
+    fillColour: "rgba(255, 77, 0, 0.6)",
+    borderColour: borderColour,
+    borderWidth: borderWidth,
+    shapeClassName: "endPtCircle"
+  };
 
-  const translateCircle = async (e, deltaX, deltaY) => {
-    let [newCenterX, newCenterY] = mathFunctions.translate(PlayerPosition[0], PlayerPosition[1], deltaX*moveFactor, deltaY*moveFactor)
-    if (newCenterX < 100 || newCenterX > 1900) {
-      changeClass('shake-vertical');
-      newCenterX = PlayerPosition[0];
-      setTimeout(() => {
-        changeClass("Circle")
-        }, 500);
-    } else if (newCenterY < 100 || newCenterY > 1900) {
-      changeClass('shake-horizontal');
-      newCenterY = PlayerPosition[1];
-      setTimeout(() => {
-        changeClass("Circle")
-        }, 500);
-    } else {
-    await changeClass("fade-out")
+  const changeClass = newName => {
+    setShapeClassName(newName);
+  };
+
+  const translate = async (e, deltaX, deltaY) => {
+    let [newAnchorX, newAnchorY] = mathFunctions.translate(
+      playerPosition[0],
+      playerPosition[1],
+      deltaX * translationFactor,
+      deltaY * translationFactor
+    );
+    playerPositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      playerPosition[3]
+    ]);
+    playerAcceptablePositionsArray.push([
+      newAnchorX,
+      newAnchorY,
+      playerPosition[2],
+      playerPosition[3]
+    ]);
+    await changeClass("fade-out");
     await setTimeout(() => {
-      setPlayerPosition([newCenterX, newCenterY, PlayerPosition[2]])
-      changeClass("fade-in")
+      setPlayerPosition([
+        newAnchorX,
+        newAnchorY,
+        playerPosition[2],
+        playerPosition[3]
+      ]);
+      changeClass("fade-in");
     }, 100);
-    }
-  }
+  };
 
-  const factorHandle = (e) => {
-    setMoveFactor(e.target.value)
-  }
+  const reflect = async (e, lineOfReflection, axis) => { // axis: x = true, y = false
+    lineOfReflection = Number(lineOfReflection);
+    let newPlayerPosition = mathFunctions.reflect(playerPosition, lineOfReflection, axis);
+    playerPositionsArray.push(newPlayerPosition);
+    playerAcceptablePositionsArray.push(newPlayerPosition);
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition(newPlayerPosition);
+      changeClass("fade-in");
+    }, 100);
+  };
+
+  const rotate = async (e, magnitude, pivotPointx, pivotPointy, direction) => { //direction: true = ccw, false = cw
+    magnitude = Number(magnitude.slice(0, -1))
+    pivotPointx = Number(pivotPointx)
+    pivotPointy = Number(pivotPointy)
+    let newPlayerPosition = mathFunctions.rotate(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
+    playerPositionsArray.push(newPlayerPosition)
+    playerAcceptablePositionsArray.push(newPlayerPosition)
+    await changeClass("fade-out");
+    await setTimeout(() => {
+      setPlayerPosition(newPlayerPosition);
+      changeClass("fade-in");
+    }, 100);
+  };
+
+
+
+  const moveBack_shakeVertical = async () => {
+    playerAcceptablePositionsArray.pop();
+    await setPlayerPosition(
+      playerAcceptablePositionsArray[playerAcceptablePositionsArray.length - 1]
+    );
+    changeClass("shake-vertical");
+  };
+
+  const moveBack_shakeHorizontal = async () => {
+    playerAcceptablePositionsArray.pop();
+    await setPlayerPosition(
+      playerAcceptablePositionsArray[playerAcceptablePositionsArray.length - 1]
+    );
+    changeClass("shake-horizontal");
+  };
+
+  const handleChange = e => {
+    let name = e.target.name
+    transformFunctions[name](e.target.value)
+  };
 
   const LevelCheck = () => {
-    if (JSON.stringify(PlayerPosition) === JSON.stringify(targetPostition)) {
+    if (JSON.stringify(playerPosition) === JSON.stringify(targetPostition)) {
       return (
-        <div className='winner'>
+        <div className="winner">
           Portal Locked! <br />
           You Win
         </div>
-      )
+      );
     } else {
-      return (
-        <div></div>
-      )
+      return <div></div>;
     }
+  };
+
+  const shapeCompsObj = {
+    circle: Circle,
+    square: Square,
+    triangle: Triangle,
+    rectangle: Rectangle,
+    star: Star
+    // heart: Heart
+  };
+  const ShapeComp = shapeCompsObj[shape];
+  const playerComp = (
+    <ShapeComp
+      moveBack_shakeVertical={moveBack_shakeVertical}
+      moveBack_shakeHorizontal={moveBack_shakeHorizontal}
+      shapeInfo={player}
+      anchorDotSize={9}
+    />
+  );
+  const targetComp = (
+    <ShapeComp
+      moveBack_shakeVertical={moveBack_shakeVertical}
+      moveBack_shakeHorizontal={moveBack_shakeHorizontal}
+      shapeInfo={target}
+      anchorDotSize={9}
+    />
+  );
+
+  const font = 'M PLUS Rounded 1c';
+
+
+  function addToStack(image, desc, fx, para, newClass) {
+    setCounter(prevCounter => prevCounter + 1)
+    console.log(newClass)
+      let newComp = 
+      <CallCard
+      image={image}
+      // fx={fx}
+      // para = {para}
+      desc = {desc}
+      id={counter}
+      key={counter} />;
+      // console.log(newComp)
+      setCallStackComps((prev) => [...prev, newComp])
+      // console.log(callStackComps)
+  }
+
+  function clearStack() {
+    setCallStackComps([])
   }
 
   return (
     <main>
-      <div className='wrapper'>
+      <div className="canvasWrapper">
         <Grid />
-        <Circle circleInfo={targetCircle}/>
-        <Circle circleInfo={playerCircle}/>
-        <Square shapeInfo={squareInfo}/>
-
-
+        {targetComp}
+        {playerComp}
       </div>
-      <Sideboard
-        buttonFunction={translateCircle}
-        factorHandle={factorHandle}
-        moveFactor={moveFactor}
-        key='sideboard' />
-      <LevelCheck key='levelCHeck'/>
+      <div className="controlerWrapper">
+        <Sideboard
+          translate={translate}
+          rotate={rotate}
+          reflect={reflect}
+          handleChange={handleChange}
+          translationFactor={translationFactor}
+          pivotPointx={pivotPointx}
+          pivotPointy={pivotPointy}
+          rotationMag={rotationMag}
+          lineOfReflection={lineOfReflection}
+          addToStack={addToStack}
+          key="sideboard"
+        />
+        <CallStack
+          callStackComps={callStackComps}
+          clearStack={clearStack}
+        />
+      </div>
+      <LevelCheck key="levelCheck" />
     </main>
-  )
+  );
 }
 
 function App() {
   return (
     <div className="App">
-      <Game key='Game' />
+      <Game key="Game" />
     </div>
   );
 }

@@ -1,5 +1,40 @@
+:root {
+  --text-primary-color: #000;
+  --text-secondary-color: #fff;
+  --text-emphasis-color: rgba(137, 235, 52, 1);
+  --icon-fill-color: #e2ab0b;
+  --icon-stroke-color: #1d219d;
+  --icon-fill-color2: rgba(226, 171, 11, 0.7);
+  --icon-stroke-color2: rgb(50, 50, 50, 0.7);
+  --game-background-color: rgba(255, 255, 255, 0.2);
+}
+
+html, body {
+  width: 100%;
+  height: 100%; 
+}
+
+body { 
+  margin: 0;
+  padding: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  overflow-x: hidden;
+  color: var(--text-primary-color)
+}
+
+input, select, textarea, button{
+  font-family:inherit;
+}
+
 .App {
   text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 .App-logo {
@@ -37,46 +72,101 @@
   }
 }
 
-.directional, .time {
-  width: 8vmin;
+button {
+  border:0;
+  padding:0;
+  background-color:transparent;
 }
 
-.wrapper {
+@media screen and (min-width: 1450px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 700px;
+      height: 700px;
+  }
+}
+
+@media screen and (max-width: 1450px) and (min-width: 1350px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 650px;
+      height: 650px;
+  }
+}
+
+@media screen and (max-width: 1350px) and (min-width: 1250px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 600px;
+      height: 600px;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 1150px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 550px;
+      height: 550px;
+  }
+}
+
+@media screen and (max-width: 1150px) and (min-width: 1050px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 500px;
+      height: 500px;
+  }
+}
+
+@media screen and (max-width: 1050px) and (min-width: 950px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 450px;
+      height: 450px;
+  }
+}
+
+@media screen and (max-width: 950px) and (min-width: 850px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 400px;
+      height: 400px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .canvasWrapper, .controlerWrapper {
+      width: 350px;
+      height: 350px;
+  }
+}
+
+.canvasWrapper {
   position: relative;
-  width: 60vmin;
-  height: 60vmin;
-  justify-self: right;
+  margin: 40px 5px 0px 5px;
+  background-color: var(--game-background-color);
+}
+
+.controlerWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 40px 5px 0px 5px;
 }
 
 main {
   display: flex;
   justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
-  background-color: rgba(238, 238, 238, 0.4);
+  min-height: 100%;
+  background-color: rgb(100, 100, 100);
   background-image: url("./images/planetImage.png");
-  background-repeat: no-repeat;
+	background-repeat: no-repeat;
   background-size: cover;
-  background-blend-mode: color;
-  height: 100vh;
-  width: 100vw;
-  align-items: center;
-}
-
-.sideboard {
-  justify-self: left;
-  
+  background-position: center center;
 }
 
 .winner {
   font-size: 500%;
-  color: rgba(137, 235, 52, 1);
-  font-family: 'Bangers', cursive;
+  color: var(--text-emphasis-color);
+  font-family: "Bangers", cursive;
   height: 60vh;
   vertical-align: middle;
   width: 100%;
   position: absolute;
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
-
-
-

@@ -1,29 +1,15 @@
-// generate grid with a loop
-const mathFunctions = {
-    shapeMaker: (shapeType, size) => {
-        if (shapeType === 'circle') {
-            let radius = size
-            let centerX = 0
-            while(centerX < radius || centerX > 2000-radius ) {
-                centerX = (Math.floor(Math.random()*(10)))*200
-            }
-            let centerY = 0
-            while(centerY < radius || centerY > 2000-radius ) {
-                centerY = (Math.floor(Math.random()*(10)))*200
-            }
-            return [centerX, centerY, radius]
-        }
-    },
 
-    createGridObject: () => {
-        const grid ={};
-        for (let x = -10; x <= 10; x++) {
-            grid[x] = {};
-            for (let y = -10; y <= 10; y++) {
-                grid[x][y] = false;
-            }
+const mathFunctions = {
+    shapeMaker: (size) => {
+        let anchorX = 0
+        while(anchorX < size || anchorX > 2000-size ) {
+            anchorX = (Math.floor(Math.random()*19)+1)*100
         }
-    return grid
+        let anchorY = 0
+        while(anchorY < size || anchorY > 2000-size ) {
+            anchorY = (Math.floor(Math.random()*19)+1)*100
+        }
+        return [anchorX, anchorY]
     },
 
     translate: (x, y, deltaX, deltaY) => {
@@ -32,28 +18,77 @@ const mathFunctions = {
         return [endX, endY]
     },
 
-    reflect: (x, y, horizontal, axis) => {
-        let endX = x;
-        let endY = y;
-        if (horizontal) {
-            endX = axis + (axis - x);
-        } else {
-            endY = axis + (axis - y);
-        };
-        return [endX, endY];
+    reflect: (playerPosition, lineOfReflection, axis) => { // axis: x = true, y = false
+        let [anchorX, anchorY, size , orientation] = playerPosition;
+        if (axis) {
+            lineOfReflection = lineOfReflection*100 + 1000;
+            anchorX = anchorX - 2*(anchorX-lineOfReflection)
+            orientation = orientation * -1;
+        }
+        if (!axis) {
+            lineOfReflection = -lineOfReflection*100 + 1000;
+            anchorY = anchorY - 2*(anchorY-lineOfReflection);
+            if (orientation > 0) {
+                orientation = orientation + 2;
+                if (orientation > 4) orientation = orientation - 4
+            } 
+            if (orientation < 0) {
+                orientation = orientation + 2;
+                if (orientation >= 0) orientation = orientation - 4
+            }
+            orientation = orientation * -1;
+        }
+        return ([anchorX, anchorY, size, orientation])
     },
 
-    // rotate: (x,y, clockwise, centre) => {
-    //     let endX;
-    //     let endY;
-    //     return [endX, endY];
-    // },
-
-    transformGrid: (grid, x, y, callback, parameters) => {
-        let [endX, endY] = callback(x, y, ...parameters);
-        grid[endX][endY] = true;
-        grid[x][y] = false;
-    }
+    rotate: (playerPosition, magnitude, pivotPointx, pivotPointy, direction) => { //direction: true = ccw, false = cw
+        let [anchorX, anchorY, size, orientation] = playerPosition;
+        pivotPointx = pivotPointx*100 + 1000;
+        pivotPointy = -pivotPointy*100 + 1000;
+        if ((magnitude === 90 && direction)||(magnitude === 270 && !direction)) {
+            let cornerX = anchorX;
+            let cornerY = anchorY;
+            anchorX = pivotPointx + cornerY - pivotPointy;
+            anchorY = pivotPointy - cornerX + pivotPointx;
+            if (orientation > 0) {
+                orientation = orientation + 1;
+                if (orientation > 4) orientation = orientation - 4
+            } 
+            if (orientation < 0) {
+                orientation = orientation + 1;
+                if (orientation >= 0) orientation = orientation - 4
+            }
+        }
+        if ((magnitude === 180 && direction)||(magnitude === 180 && !direction)) {
+            let cornerX = anchorX;
+            let cornerY = anchorY;
+            anchorX = 2 * pivotPointx - cornerX;
+            anchorY = 2 * pivotPointy - cornerY;
+            if (orientation > 0) {
+                orientation = orientation + 2;
+                if (orientation > 4) orientation = orientation - 4
+            } 
+            if (orientation < 0) {
+                orientation = orientation + 2;
+                if (orientation >= 0) orientation = orientation - 4
+            }
+        }
+        if ((magnitude === 270 && direction)||(magnitude === 90 && !direction)) {
+            let cornerX = anchorX;
+            let cornerY = anchorY;
+            anchorX = pivotPointy - cornerY + pivotPointx;
+            anchorY = cornerX - pivotPointx + pivotPointy;
+            if (orientation > 0) {
+                orientation = orientation + 3;
+                if (orientation > 4) orientation = orientation - 4
+            } 
+            if (orientation < 0) {
+                orientation = orientation + 3;
+                if (orientation >= 0) orientation = orientation - 4
+            }
+        }
+        return ([anchorX, anchorY, size, orientation])
+    },
 }
 
 
