@@ -12,13 +12,20 @@ function Reflection(props) {
     return array;
   };
 
+  const handleClick = (e, axis) => {
+    props.reflect(e, props.lineOfReflection);
+    const desc = `Reflect the shape over the ${props.lineOfReflection} axis`
+
+    props.addToStack(rotate, desc, props.reflect, e)
+  }
+
   return (
     <div className="tab">
       <h1>Reflection</h1>
       <img
         name="ReflectX"
         src={rotate}
-        onClick={(e) => props.reflect(e, props.lineOfReflection)}
+        onClick={handleClick}
       ></img>
       <select
       id="reflectDrop"

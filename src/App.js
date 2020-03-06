@@ -275,18 +275,11 @@ function Game(props) {
       <CallCard
         image={image}
         // fx={fx}
+        // para = {para}
         desc = {desc}
         key={counter} />;
 
     setCallStackComps((prev) => [...prev, newComp])
-    // callStackComps.push(
-    //   <CallCard
-    //     // image={image}
-    //     // fx={fx}
-    //     desc = {desc}
-    //     key={counter} />
-    // )
-    // setCallStackComps(callStackComps)
 
   }
   return (
