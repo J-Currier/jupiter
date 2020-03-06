@@ -25,7 +25,11 @@ function Reflection(props) {
       <img
         name="ReflectX"
         src={rotate}
+<<<<<<< HEAD
         onClick={handleClick}
+=======
+        onClick={(e) => props.reflect(e, props.lineOfReflection, true)}
+>>>>>>> da4ea49d383a1012da331a93271392bb52f0937f
       ></img>
       <select
       id="reflectDrop"
@@ -36,7 +40,7 @@ function Reflection(props) {
       <img
         name="ReflectY"
         src={rotate}
-        onClick={(e) => props.reflect(e, props.lineOfReflection)}
+        onClick={(e) => props.reflect(e, props.lineOfReflection, false)}
       ></img>
     </div>
   );

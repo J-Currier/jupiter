@@ -23,21 +23,13 @@ function Game(props) {
   let size = (Math.floor(Math.random() * 3) + 2) * 100; // returns a random int between 4 and 2 (both inclusive)
   let randomOrientation = Math.floor(Math.random() * 8);
   let startOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
+  randomOrientation = Math.floor(Math.random() * 8);
+  let endOrientation = [4, 3, 2, 1, -1, -2, -3, -4][randomOrientation];
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
-  const [playerPositionsArray, setPlayerPositionsArray] = useState([
-    [startAnchorX, startAnchorY, size, startOrientation]
-  ]);
-  const [
-    playerAcceptablePositionsArray,
-    setplayerAcceptablePositionsArray
-  ] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
-  const [playerPosition, setPlayerPosition] = useState([
-    startAnchorX,
-    startAnchorY,
-    size,
-    startOrientation
-  ]);
+  const [playerPositionsArray, setPlayerPositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerAcceptablePositionsArray, setplayerAcceptablePositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerPosition, setPlayerPosition] = useState([startAnchorX, startAnchorY, size, startOrientation]);
 
   let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
   while (
@@ -47,12 +39,7 @@ function Game(props) {
   ) {
     [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
   }
-  const [targetPostition, setTargetPosition] = useState([
-    endAnchorX,
-    endAnchorY,
-    size,
-    startOrientation
-  ]);
+  const [targetPostition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, endOrientation]);
 
   const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
   const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 1)");
@@ -128,77 +115,28 @@ function Game(props) {
     }, 100);
   };
 
-  const reflect = async (e, lineOfReflection) => {
-    let myArray= [];
-    if (e.target.name === 'ReflectX') {
-      myArray = [true, false, lineOfReflection];
-    }
-    if (e.target.name === 'ReflectY') {
-      myArray = [false, true, lineOfReflection];
-    }
-    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.reflect(
-      playerPosition,
-      myArray //[xRefl(t/f),yReflec(t/f), value]
-    );
-    playerPositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
-    playerAcceptablePositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
+  const reflect = async (e, lineOfReflection, axis) => { // axis: x = true, y = false
+    lineOfReflection = Number(lineOfReflection);
+    let newPlayerPosition = mathFunctions.reflect(playerPosition, lineOfReflection, axis);
+    playerPositionsArray.push(newPlayerPosition);
+    playerAcceptablePositionsArray.push(newPlayerPosition);
     await changeClass("fade-out");
     await setTimeout(() => {
-      setPlayerPosition([
-        newAnchorX,
-        newAnchorY,
-        playerPosition[2],
-        newOrientation
-      ]);
+      setPlayerPosition(newPlayerPosition);
       changeClass("fade-in");
     }, 100);
   };
 
-  const rotate = async (e, magnitude, direction) => {  //direction true= ccw
-    magnitude = magnitude.slice(0, -1)
-    magnitude = Number(magnitude);
-    let pointOfRotation = [pivotPointx, pivotPointy];
-    console.log(e.target, magnitude, direction)
-    let [newAnchorX, newAnchorY, newOrientation] = mathFunctions.rotate(
-      magnitude, 
-      direction,
-      pointOfRotation,
-      playerPosition
-    );
-      playerPositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
-     playerAcceptablePositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation
-    ]);
-    console.log(newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      newOrientation)
+  const rotate = async (e, magnitude, pivotPointx, pivotPointy, direction) => { //direction: true = ccw, false = cw
+    magnitude = Number(magnitude.slice(0, -1))
+    pivotPointx = Number(pivotPointx)
+    pivotPointy = Number(pivotPointy)
+    let newPlayerPosition = mathFunctions.rotate(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
+    playerPositionsArray.push(newPlayerPosition)
+    playerAcceptablePositionsArray.push(newPlayerPosition)
     await changeClass("fade-out");
     await setTimeout(() => {
-      setPlayerPosition([
-        newAnchorX,
-        newAnchorY,
-        playerPosition[2],
-        newOrientation
-        ]);
+      setPlayerPosition(newPlayerPosition);
       changeClass("fade-in");
     }, 100);
   };
