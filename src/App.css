@@ -4,7 +4,9 @@
   --text-emphasis-color: rgba(137, 235, 52, 1);
   --icon-fill-color: #e2ab0b;
   --icon-stroke-color: #1d219d;
-  --game-background-color: rgba(226, 171, 11, 0.35);
+  --icon-fill-color2: rgba(226, 171, 11, 0.5);
+  --icon-stroke-color2: rgb(50, 50, 50, 0.5);
+  --game-background-color: rgba(255, 255, 255, 0.2);
 }
 
 html, body {

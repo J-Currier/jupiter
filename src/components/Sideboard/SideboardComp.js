@@ -25,24 +25,36 @@ function Sideboard(props) {
       <nav>
         <button
           id="translation-button"
-          className="tab-button"
+          className="tabBtn iconBtn"
           onClick={handleClick}
         >
-          <TranslationSvg alt="Translation" />
+          <TranslationSvg 
+            alt="Translation" 
+            tabIndex="0"
+            className={(tab === "translation")? "activeTab": ""}
+          />
         </button>
         <button
           id="rotation-button"
-          className="tab-button"
+          className="tabBtn iconBtn"
           onClick={handleClick}
         >
-          <RotationSvg alt="Rotation" />
+          <RotationSvg 
+            alt="Rotation" 
+            tabIndex="0"
+            className={(tab === "rotation")? "activeTab": ""}
+          />
         </button>
         <button
           id="reflection-button"
-          className="tab-button"
+          className="tabBtn iconBtn"
           onClick={handleClick}
         >
-          <ReflectionSvg alt="Reflection" />
+          <ReflectionSvg 
+            alt="Reflection" 
+            tabIndex="0"
+            className={(tab === "reflection")? "activeTab": ""}
+          />
         </button>
       </nav>
       {tab === "translation" && (

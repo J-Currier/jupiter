@@ -29,7 +29,7 @@ function Rotation(props) {
           id="rotate-left"
           key="rotate-left"
           name="rotate-left"
-          className="controlBtn"
+          className="controlBtn iconBtn"
           onClick={e =>
             handleClick(
               e,
@@ -79,7 +79,7 @@ function Rotation(props) {
           id="rotate-right"
           key="rotate-right"
           name="rotate-right"
-          className="controlBtn"
+          className="controlBtn iconBtn"
           onClick={e =>
             handleClick(
               e,

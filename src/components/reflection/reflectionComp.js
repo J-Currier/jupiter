@@ -22,7 +22,7 @@ function Reflection(props) {
           id="reflectXBtn"
           key="reflectXBtn"
           name="reflectX"
-          className="controlBtn"
+          className="controlBtn iconBtn"
           onClick={e => handleClick(e, props.lineOfReflection, false)}
         >
           <ReflectXSvg alt="X-reflection icon" />
@@ -40,7 +40,7 @@ function Reflection(props) {
           id="reflectYBtn"
           key="reflectYBtn"
           name="reflectY"
-          className="controlBtn"
+          className="controlBtn iconBtn"
           onClick={e => props.reflect(e, props.lineOfReflection, true)}
         >
           <ReflectYSvg alt="Y-reflection icon" />

@@ -26,7 +26,7 @@ function Translation(props) {
         name={key}
         alt={`${key} button`}
         id={key}
-        className="controlBtn"
+        className="controlBtn iconBtn"
       >
         <ArrowSvg 
           className={buttonInfo[key].class}
