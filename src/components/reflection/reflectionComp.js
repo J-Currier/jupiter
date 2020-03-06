@@ -13,10 +13,14 @@ function Reflection(props) {
   };
 
   const handleClick = (e, axis) => {
-    props.reflect(e, props.lineOfReflection);
+    if(e.target.name === "ReflectX") {
+      props.reflect(e, props.lineOfReflection, true)
+    } else if(e.target.name === "ReflectY") {
+      props.reflect(e, props.lineOfReflection, false)
+    } 
     const desc = `Reflect the shape over the ${props.lineOfReflection} axis`
 
-    props.addToStack(rotate, desc, props.reflect, e)
+    props.addToStack(rotate, desc, props.reflect)
   }
 
   return (
@@ -25,11 +29,7 @@ function Reflection(props) {
       <img
         name="ReflectX"
         src={rotate}
-<<<<<<< HEAD
         onClick={handleClick}
-=======
-        onClick={(e) => props.reflect(e, props.lineOfReflection, true)}
->>>>>>> da4ea49d383a1012da331a93271392bb52f0937f
       ></img>
       <select
       id="reflectDrop"

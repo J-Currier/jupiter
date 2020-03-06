@@ -215,7 +215,7 @@ function Game(props) {
         // fx={fx}
         // para = {para}
         desc = {desc}
-        key={counter} />;
+        id={counter} />;
 
     setCallStackComps((prev) => [...prev, newComp])
 
