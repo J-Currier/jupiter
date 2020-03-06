@@ -6,19 +6,11 @@ import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 export function CallCard(props) {
+    console.log(props)
 
-    // if (props.img === 'rotation') {
-    //     image = rotation
-    // } else if (props.img === 'translation' && props.direction === 'left') {
-    //     image = translateLeft
-    // }
-    // else {
-    //     image = "not an image"
-    // }
     const Svg = props.image
     return(
-        <div className="calling-card" id={props.key}>
-            {/* <img src={props.image}></img> */}
+        <div className="calling-card" id={props.id} key = {props.id}>
             <Svg />
             <p>{props.desc}</p>
             <button>X</button>
@@ -28,23 +20,13 @@ export function CallCard(props) {
 
 
 export function CallStack(props) {
-
-    // function addToStack(image, fx, counter) {
-    //     props.callStackComps.push(
-    //         <CallCard
-    //         image = {image}
-    //         fx = {fx}
-    //         cardId = {counter}/>
-    //     )
-    // }
-
-
-
     return(
         <div  className='call-stack'>
             {props.callStackComps}
-            <button>CLEAR</button>
-            <button>RUN</button>
+            <div className='button-div'>
+            <button id='clear-button'>CLEAR</button>
+            <button id='run-button'>RUN</button>
+            </div>
         </div>
     )
 }

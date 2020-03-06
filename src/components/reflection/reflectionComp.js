@@ -1,7 +1,9 @@
 import React from "react";
 import "./reflection.css";
-import rotate from "../../images/rotate-arrow.svg";
+// import rotate from "../../images/rotate-arrow.svg";
 // import reflectY from '../../images/btnReflectY.svg'
+import { ReactComponent as rotate } from "../../images/btnTransArrow_crop.svg";
+
 
 function Reflection(props) {
   const selector = () => {
@@ -12,13 +14,20 @@ function Reflection(props) {
     return array;
   };
 
+  const handleClick = (e, lineOfReflection, axis) => {
+    props.reflect(e, lineOfReflection, axis);
+    const desc = `Reflect the shape over the ${props.lineOfReflection} axis`
+
+    props.addToStack(rotate, desc, props.reflect, e)
+  }
+
   return (
     <div className="tab">
       <h1>Reflection</h1>
       <img
         name="ReflectX"
         src={rotate}
-        onClick={(e) => props.reflect(e, props.lineOfReflection, true)}
+        onClick={(e) => handleClick(e, props.lineOfReflection, true)}
       ></img>
       <select
       id="reflectDrop"
