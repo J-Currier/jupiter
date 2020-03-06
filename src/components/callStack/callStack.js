@@ -6,14 +6,13 @@ import translateLeft from '../../images/kuba_arrow_button_set_1.svg'
 
 
 export function CallCard(props) {
-    console.log(props)
 
     const Svg = props.image
     return(
         <div className="calling-card" id={props.id} key = {props.id}>
             <Svg />
             <p>{props.desc}</p>
-            <button>X</button>
+            {/* <button>X</button> */}
         </div>
     )
 }
@@ -24,7 +23,7 @@ export function CallStack(props) {
         <div  className='call-stack'>
             {props.callStackComps}
             <div className='button-div'>
-            <button id='clear-button'>CLEAR</button>
+            <button id='clear-button' onClick={props.clearStack}>CLEAR</button>
             <button id='run-button'>RUN</button>
             </div>
         </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import { ReactComponent as RotateCounterSvg } from "../../images/btnRotCounter.svg";
+import { ReactComponent as GeneralRotate } from "../../images/btnRot.svg";
+
 import "./rotation.css";
 
 function Rotation(props) {
@@ -14,12 +16,13 @@ function Rotation(props) {
     rotationMag,
     pivotPointX,
     pivotPointY,
-    counterClockwise
+    direction
   ) => {
-    props.rotate(e, rotationMag, pivotPointX, pivotPointY, counterClockwise);
-    const desc = `Rotate the shape around point (${(pivotPointX,
-    pivotPointY)})`;
-    props.addToStack(RotateCounterSvg, desc, props.rotate, e);
+        
+    props.rotate(e, rotationMag, pivotPointX, pivotPointY, direction);
+
+    const desc = `Rotate the shape ${rotationMag} ${direction ? 'counter clockwise' : 'clockwise'} around point (${pivotPointX}, ${pivotPointY})`;
+    props.addToStack(GeneralRotate, desc, props.rotate, e);
   };
 
   return (

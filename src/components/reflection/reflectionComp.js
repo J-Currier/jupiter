@@ -2,6 +2,8 @@ import React from "react";
 import "./reflection.css";
 import { ReactComponent as ReflectXSvg } from "../../images/btnReflectX.svg";
 import { ReactComponent as ReflectYSvg } from "../../images/btnReflectY.svg";
+import { ReactComponent as GeneralReflect } from "../../images/btnReflect.svg";
+
 
 function Reflection(props) {
   const selector = [];
@@ -9,10 +11,10 @@ function Reflection(props) {
     selector.push(<option key={i}>{i}</option>);
   }
 
-  const handleClick = (e, lineOfReflection, axis, yAxis) => {
+  const handleClick = (e, lineOfReflection, axis) => {
     props.reflect(e, lineOfReflection, axis);
-    const desc = `Reflect the shape over the ${props.lineOfReflection} axis`;
-    props.addToStack(yAxis ? ReflectYSvg : ReflectXSvg, desc, props.reflect, e);
+    const desc = `Reflect the shape over ${axis ? 'X': 'Y'} = ${lineOfReflection}`;
+    props.addToStack(GeneralReflect, desc, props.reflect, e);
   };
 
   return (
@@ -41,7 +43,7 @@ function Reflection(props) {
           key="reflectYBtn"
           name="reflectY"
           className="controlBtn iconBtn"
-          onClick={e => props.reflect(e, props.lineOfReflection, true)}
+          onClick={e => handleClick(e, props.lineOfReflection, true)}
         >
           <ReflectYSvg alt="Y-reflection icon" />
         </button>
