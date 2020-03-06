@@ -27,8 +27,7 @@ function Circle(props) {
     
     if (anchorY < radius || anchorY > 2000-radius) {
         props.moveBack_shakeVertical();
-    }
-    if (anchorX < radius || anchorX > 2000-radius) {
+    } else if (anchorX < radius || anchorX > 2000-radius) {
         props.moveBack_shakeHorizontal();
     }
 
