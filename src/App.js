@@ -221,6 +221,11 @@ function Game(props) {
       setCallStackComps((prev) => [...prev, newComp])
       // console.log(callStackComps)
   }
+
+  function clearStack() {
+    setCallStackComps([])
+  }
+
   return (
     <main>
       <div className="canvasWrapper">
@@ -244,6 +249,7 @@ function Game(props) {
         />
         <CallStack
           callStackComps={callStackComps}
+          clearStack={clearStack}
         />
       </div>
       <LevelCheck key="levelCheck" />

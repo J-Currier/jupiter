@@ -2,6 +2,8 @@ import React from "react";
 import "./reflection.css";
 import { ReactComponent as ReflectXSvg } from "../../images/btnReflectX.svg";
 import { ReactComponent as ReflectYSvg } from "../../images/btnReflectY.svg";
+import { ReactComponent as GeneralReflect } from "../../images/btnReflect.svg";
+
 
 function Reflection(props) {
   const selector = [];
@@ -12,7 +14,7 @@ function Reflection(props) {
   const handleClick = (e, lineOfReflection, axis) => {
     props.reflect(e, lineOfReflection, axis);
     const desc = `Reflect the shape over the axis on ${lineOfReflection}${axis ? 'X': 'Y'}`;
-    props.addToStack(axis ? ReflectYSvg : ReflectXSvg, desc, props.reflect, e);
+    props.addToStack(GeneralReflect, desc, props.reflect, e);
   };
 
   return (

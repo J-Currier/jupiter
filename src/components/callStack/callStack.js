@@ -23,7 +23,7 @@ export function CallStack(props) {
         <div  className='call-stack'>
             {props.callStackComps}
             <div className='button-div'>
-            <button id='clear-button'>CLEAR</button>
+            <button id='clear-button' onClick={props.clearStack}>CLEAR</button>
             <button id='run-button'>RUN</button>
             </div>
         </div>

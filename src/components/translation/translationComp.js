@@ -1,5 +1,7 @@
 import React from "react";
 import { ReactComponent as ArrowSvg } from "../../images/btnTransArrow.svg";
+import { ReactComponent as GeneralTranslation } from "../../images/btnTrans.svg";
+
 import "./translation.css";
 
 function Translation(props) {
@@ -7,7 +9,7 @@ function Translation(props) {
     props.translate(e, ...buttonInfo[e.currentTarget.name].values);
     const desc = `Move shape ${props.translationFactor} units ${e.currentTarget.name}`
     let para = buttonInfo[e.currentTarget.name]
-    props.addToStack(ArrowSvg, desc, props.translate, para)
+    props.addToStack(GeneralTranslation, desc, props.translate, para)
   }
 
   const buttonInfo = {
