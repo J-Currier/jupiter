@@ -7,7 +7,10 @@
     width: 100%;
     /* height: 100%; */
   }
-
+#translation #factorBox {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
 #translation #up {
     grid-column-start: 2;
     grid-row-start: 1;

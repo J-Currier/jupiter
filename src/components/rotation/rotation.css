@@ -1,4 +1,4 @@
-#reflection .controls{
+#rotation .controls{
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     justify-items: center; 

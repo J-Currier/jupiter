@@ -48,11 +48,15 @@ exports[`app integration integration with sideboard click 2`] = `
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\"><svg alt=\\"Translation\\">btnTrans.svg</svg></button><button id=\\"rotation-button\\" class=\\"tab-button\\"><svg alt=\\"Rotation\\">btnRot.svg</svg></button><button id=\\"reflection-button\\" class=\\"tab-button\\"><svg alt=\\"Reflection\\">btnReflect.svg</svg></button></nav>
         <div id=\\"rotation\\" class=\\"tab\\">
-          <div class=\\"controls\\"><button id=\\"rotate-left\\" name=\\"rotate-left\\" class=\\"controlBtn\\"><svg alt=\\"Counterclockwise Rotate Icon\\">btnRotCounter.svg</svg></button><input id=\\"setPivotPointx\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointx\\" value=\\"0\\"><input id=\\"setPivotPointy\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointy\\" value=\\"0\\"><button id=\\"rotate-right\\" name=\\"rotate-right\\" class=\\"controlBtn\\"><svg alt=\\"Counterclockwise Rotate Icon\\">btnRotCounter.svg</svg></button><select id=\\"rotateDrop\\" name=\\"setRotationMag\\">
-              <option>90°</option>
-              <option>180°</option>
-              <option>270°</option>
-            </select></div>
+          <div class=\\"controls\\"><button id=\\"rotate-left\\" name=\\"rotate-left\\" class=\\"controlBtn\\"><svg alt=\\"Counterclockwise Rotate Icon\\">btnRotCounter.svg</svg></button>
+            <div>
+              <div><input id=\\"setPivotPointx\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointx\\" value=\\"0\\"><input id=\\"setPivotPointy\\" class=\\"controlInputNum\\" type=\\"number\\" name=\\"setPivotPointy\\" value=\\"0\\"></div><select id=\\"rotateDrop\\" name=\\"setRotationMag\\" class=\\"controlSelect\\">
+                <option>90°</option>
+                <option>180°</option>
+                <option>270°</option>
+              </select>
+            </div><button id=\\"rotate-right\\" name=\\"rotate-right\\" class=\\"controlBtn\\"><svg alt=\\"Clockwise Rotate Icon\\" class=\\"reflectXBtn\\">btnRotCounter.svg</svg></button>
+          </div>
         </div>
       </div>
       <div class=\\"call-stack\\">
@@ -88,26 +92,26 @@ exports[`app integration integration with sideboard click 3`] = `
       <div id=\\"sideboard\\">
         <nav><button id=\\"translation-button\\" class=\\"tab-button\\"><svg alt=\\"Translation\\">btnTrans.svg</svg></button><button id=\\"rotation-button\\" class=\\"tab-button\\"><svg alt=\\"Rotation\\">btnRot.svg</svg></button><button id=\\"reflection-button\\" class=\\"tab-button\\"><svg alt=\\"Reflection\\">btnReflect.svg</svg></button></nav>
         <div class=\\"tab\\">
-          <div class=\\"controls\\"><button id=\\"reflectXBtn\\" name=\\"reflectX\\" class=\\"controlBtn\\"><svg alt=\\"X-reflection icon\\">btnReflectX.svg</svg></button><select id=\\"reflectDrop\\" name=\\"setLineOfReflection\\">
-              <option>-9</option>
-              <option>-8</option>
-              <option>-7</option>
-              <option>-6</option>
-              <option>-5</option>
-              <option>-4</option>
-              <option>-3</option>
-              <option>-2</option>
-              <option>-1</option>
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
+          <div class=\\"controls\\"><button id=\\"reflectXBtn\\" name=\\"reflectX\\" class=\\"controlBtn\\"><svg alt=\\"X-reflection icon\\">btnReflectX.svg</svg></button><select id=\\"reflectDrop\\" name=\\"setLineOfReflection\\" class=\\"controlSelect\\">
               <option>9</option>
+              <option>8</option>
+              <option>7</option>
+              <option>6</option>
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
+              <option>0</option>
+              <option>-1</option>
+              <option>-2</option>
+              <option>-3</option>
+              <option>-4</option>
+              <option>-5</option>
+              <option>-6</option>
+              <option>-7</option>
+              <option>-8</option>
+              <option>-9</option>
             </select><button id=\\"reflectYBtn\\" name=\\"reflectY\\" class=\\"controlBtn\\"><svg alt=\\"Y-reflection icon\\">btnReflectY.svg</svg></button></div>
         </div>
       </div>

@@ -5,19 +5,14 @@ import { ReactComponent as ReflectYSvg } from "../../images/btnReflectY.svg";
 
 function Reflection(props) {
   const selector = [];
-  for (let i = -9; i < 10; i++) {
+  for (let i = 9; i >= -9; i--) {
     selector.push(<option key={i}>{i}</option>);
   }
 
-  const handleClick = (e, lineOfReflection, axis, xAxis) => {
+  const handleClick = (e, lineOfReflection, axis, yAxis) => {
     props.reflect(e, lineOfReflection, axis);
     const desc = `Reflect the shape over the ${props.lineOfReflection} axis`;
-    props.addToStack(
-      xAxis ? ReflectXSvg : ReflectYSvg, 
-      desc, 
-      props.reflect, 
-      e
-    );
+    props.addToStack(yAxis ? ReflectYSvg : ReflectXSvg, desc, props.reflect, e);
   };
 
   return (
@@ -28,16 +23,15 @@ function Reflection(props) {
           key="reflectXBtn"
           name="reflectX"
           className="controlBtn"
-          onClick={e => handleClick(e, props.lineOfReflection, true)}
+          onClick={e => handleClick(e, props.lineOfReflection, false)}
         >
-          <ReflectXSvg 
-            alt="X-reflection icon"
-          />
+          <ReflectXSvg alt="X-reflection icon" />
         </button>
         <select
           id="reflectDrop"
           name="setLineOfReflection"
           value={props.lineOfReflection}
+          className="controlSelect"
           onChange={props.handleChange}
         >
           {selector}
@@ -47,11 +41,9 @@ function Reflection(props) {
           key="reflectYBtn"
           name="reflectY"
           className="controlBtn"
-          onClick={e => props.reflect(e, props.lineOfReflection, false)}
+          onClick={e => props.reflect(e, props.lineOfReflection, true)}
         >
-          <ReflectYSvg 
-            alt="Y-reflection icon"
-          />
+          <ReflectYSvg alt="Y-reflection icon" />
         </button>
       </div>
     </div>
