@@ -216,7 +216,6 @@ function Game(props) {
         let newArr = [...array]
         newArr.shift(0)
         setCallStackComps(newArr)
-        console.log(array)
         setTimeout(() => {
           recursiveFunc(newArr)
         }, 1000)
