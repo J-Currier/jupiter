@@ -85,33 +85,17 @@ function Game(props) {
   };
 
   const translate = async (e, deltaX, deltaY) => {
-    let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]
-    let [newAnchorX, newAnchorY] = mathFunctions.translate(
-      currentPlayerPosition[0],
-      currentPlayerPosition[1],
+    let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1];
+    let newPlayerPosition = mathFunctions.translate(
+      currentPlayerPosition,
       deltaX * translationFactor,
       deltaY * translationFactor
     );
-    playerPositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      playerPosition[3]
-    ]);
-    playerAcceptablePositionsArray.push([
-      newAnchorX,
-      newAnchorY,
-      playerPosition[2],
-      playerPosition[3]
-    ]);
+    playerPositionsArray.push(newPlayerPosition);
+    playerAcceptablePositionsArray.push(newPlayerPosition);
     await changeClass("fade-out");
     await setTimeout(() => {
-      setPlayerPosition([
-        newAnchorX,
-        newAnchorY,
-        playerPosition[2],
-        playerPosition[3]
-      ]);
+      setPlayerPosition(newPlayerPosition);
       changeClass("fade-in");
     }, 100);
   };
@@ -219,35 +203,26 @@ function Game(props) {
       desc = {desc}
       id={counter}
       key={counter} />;
-      // console.log(newComp)
       setCallStackComps((prev) => [...prev, newComp])
-      // console.log(callStackComps)
   }
 
   const runStack = async () => {
-    // callStackComps[0].props.fx(...callStackComps[0].props.para)
-    // console.log(callStackComps.length)
-    // console.log(callStackComps[0].props.fx)
-    // console.log(...callStackComps[0].props.para)
-    // callStackComps.forEach(i => i.fx(...i.para))
+    
 
     // maybe try recursive function?
-    console.log(playerPositionsArray[playerPositionsArray.length-1])
-    let n = 0
-    while (n < callStackComps.length) {
-      // setTimeout(() => {
-        await callStackComps[n].props.fx(...callStackComps[n].props.para)
-        console.log('-------------------')
-        console.log("callStackComps # " + n)
-        console.log(callStackComps[n].props.fx)
-        console.log(callStackComps[n].props.para)
-        console.log(playerPositionsArray[playerPositionsArray.length-1])
-        n = n + 1
-      // }, 2000
-      // )
+    const recursiveFunc = async (array) => {
+      if (array.length > 0) {
+        await array[0].props.fx(...array[0].props.para)
+        let newArr = [...array]
+        newArr.shift(0)
+        setCallStackComps(newArr)
+        console.log(array)
+        setTimeout(() => {
+          recursiveFunc(newArr)
+        }, 1000)
+      }
     }
-    clearStack()
-
+    recursiveFunc(callStackComps)
   }
 
   function clearStack() {
