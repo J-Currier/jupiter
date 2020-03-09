@@ -85,9 +85,10 @@ function Game(props) {
   };
 
   const translate = async (e, deltaX, deltaY) => {
+    let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]
     let [newAnchorX, newAnchorY] = mathFunctions.translate(
-      playerPosition[0],
-      playerPosition[1],
+      currentPlayerPosition[0],
+      currentPlayerPosition[1],
       deltaX * translationFactor,
       deltaY * translationFactor
     );
@@ -117,7 +118,8 @@ function Game(props) {
 
   const reflect = async (e, lineOfReflection, axis) => { // axis: x = true, y = false
     lineOfReflection = Number(lineOfReflection);
-    let newPlayerPosition = mathFunctions.reflect(playerPosition, lineOfReflection, axis);
+    let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]
+    let newPlayerPosition = mathFunctions.reflect(currentPlayerPosition, lineOfReflection, axis);
     playerPositionsArray.push(newPlayerPosition);
     playerAcceptablePositionsArray.push(newPlayerPosition);
     await changeClass("fade-out");
@@ -131,9 +133,8 @@ function Game(props) {
     magnitude = Number(magnitude.slice(0, -1))
     pivotPointx = Number(pivotPointx)
     pivotPointy = Number(pivotPointy)
-    console.log(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
-    let newPlayerPosition = mathFunctions.rotate(playerPosition, magnitude, pivotPointx, pivotPointy, direction)
-    console.log(newPlayerPosition)
+    let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1]
+    let newPlayerPosition = mathFunctions.rotate(currentPlayerPosition, magnitude, pivotPointx, pivotPointy, direction)
     playerPositionsArray.push(newPlayerPosition)
     playerAcceptablePositionsArray.push(newPlayerPosition)
     await changeClass("fade-out");
@@ -223,6 +224,32 @@ function Game(props) {
       // console.log(callStackComps)
   }
 
+  const runStack = async () => {
+    // callStackComps[0].props.fx(...callStackComps[0].props.para)
+    // console.log(callStackComps.length)
+    // console.log(callStackComps[0].props.fx)
+    // console.log(...callStackComps[0].props.para)
+    // callStackComps.forEach(i => i.fx(...i.para))
+
+    // maybe try recursive function?
+    console.log(playerPositionsArray[playerPositionsArray.length-1])
+    let n = 0
+    while (n < callStackComps.length) {
+      // setTimeout(() => {
+        await callStackComps[n].props.fx(...callStackComps[n].props.para)
+        console.log('-------------------')
+        console.log("callStackComps # " + n)
+        console.log(callStackComps[n].props.fx)
+        console.log(callStackComps[n].props.para)
+        console.log(playerPositionsArray[playerPositionsArray.length-1])
+        n = n + 1
+      // }, 2000
+      // )
+    }
+    clearStack()
+
+  }
+
   function clearStack() {
     setCallStackComps([])
   }
@@ -251,6 +278,7 @@ function Game(props) {
         <CallStack
           callStackComps={callStackComps}
           clearStack={clearStack}
+          runStack = {runStack}
         />
       </div>
       <LevelCheck key="levelCheck" />

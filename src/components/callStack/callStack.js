@@ -22,18 +22,18 @@ export function CallCard(props) {
 
 export function CallStack(props) {
 
-    const runStack = () => {
-        console.log(props.callStackComps.length)
-        props.callStackComps.forEach(props.fx(...props.para))
-        // let i
-        // for(i = 0; i=props.callStackComps.length; i++){
-        //     console.log(props.callStackComps[i])
-        // }
-        // let item
-        // for(item in props.callStackComps) {
-        //     console.log(item)
-        // }
-    }
+    // const runStack = () => {
+    //     console.log(props.callStackComps.length)
+    //     props.callStackComps.forEach(i => i.props.fx(i.props.para))
+    //     // let i
+    //     // for(i = 0; i=props.callStackComps.length; i++){
+    //     //     console.log(props.callStackComps[i])
+    //     // }
+    //     // let item
+    //     // for(item in props.callStackComps) {
+    //     //     console.log(item)
+    //     // }
+    // }
     return(
         <div  className='call-stack'>
             {props.callStackComps}
@@ -44,7 +44,7 @@ export function CallStack(props) {
                     alt="Clear Button"
                 />
             </button>
-            <button id='run-button' onClick = {runStack}>
+            <button id='run-button' onClick = {props.runStack}>
                 <RunSvg 
                     className="iconBtn"
                     alt="Run Button"
