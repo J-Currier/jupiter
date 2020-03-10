@@ -2,9 +2,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
+import postData from "./fetch";
+
 
 export default function Login(props) {
-  const { setIsSignedIn, setUser } = props;
+  const { setIsSignedIn, setUser, setCurrentLevel, url } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -56,6 +58,10 @@ export default function Login(props) {
   }
   function handleLogin() {
     setIsSignedIn(true);
+    const endpoint = "user/"+username;
+    const json = await postData(url, endpoint, "GET");
+    setCurrentLevel(json.userInfo.currentLevel);
+
   }
   function handleGuest() {
     setIsSignedIn(true);

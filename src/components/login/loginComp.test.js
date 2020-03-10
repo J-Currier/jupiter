@@ -34,4 +34,12 @@ describe("render", () => {
     });
     // expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
+  test("fetch", () => {
+    act(() => {
+      render(<Login 
+        url= {process.env.REACT_APP_ACK_URL}
+      />, container);
+    });
+    // expect(pretty(container.innerHTML)).toMatchSnapshot();
+  });
 });

@@ -1,19 +1,21 @@
 // import postData from "./fetch";
-const postData = jest.fn();
 
-const url = "http://localhost:5000/";
+const url = process.env.REACT_APP_ACK_URL;
 
-describe("fetch routes", () => {
+
+
+describe('example', () => {
 
   let json;
   let result;
   let endpoint;
   let body;
-  const testUsers = [
+  let testUsers = [
     {
       userName: "hopper",
       userInfo: {
         id: 1,
+        currentLevel: 2,
         logs: [
           {
             levelId: 1, 
@@ -32,74 +34,123 @@ describe("fetch routes", () => {
     }
   ];
 
+  async function ack(
+    param1, endpoint, myMethod, data = {}
+  ) {
+    let url = process.env.REACT_APP_ACK_URL
+    testUsers = data;
+    const options = {
+      // Default options are marked with *
+      method: myMethod, // *GET, POST, PUT, DELETE, etc.
+      // mode: "cors", // no-cors, *cors, same-origin
+      // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json"
+      },
+      // redirect: "follow", // manual, *follow, error
+      // referrer: "no-referrer", // no-referrer, *client
+    };
+    if (myMethod==='POST') {
+      options.body = JSON.stringify(data);
+
+    };
+
+    const response = await fetch(url + "/" + endpoint, options)
+    const json =  response.json();
+    json.status = response.status;
+    json.statusText = response.statusText;
+    return json;
+  }
+  
+  
+  beforeEach(function() {
+
+    global.fetch = jest.fn().mockImplementation(() => {
+        var p = new Promise((resolve, reject) => {
+          resolve({
+            ok: true, 
+            Id: '123', 
+            json: function() { 
+              return {testUsers}
+            }
+          });
+        });
+
+        return p;
+    });
+
+  });
+
+
+  it("ack", async function() {
+    const response = await ack('foo', 'bar', "GET", [{'test user': 'me'}]);
+    console.log(response);
+    // expect(response.Id).toBe("123"); 
+  });
+
   test("get users", async () => {
     endpoint = "users";
-    json = await postData(url, endpoint, "GET");
+    const response = await ack('foo', endpoint, "GET",   [{'test user': 'me'}]);
+    expect(response.testUsers[0]["test user"]).toBe("me"); 
     // expect(json.status).toEqual(200);
     // expect(json.length).toBe(0);
     // expect(json).toEqual(testUsers);
   });
 
-  test("add user", async () => {
-    endpoint = "user/" + testUsers[0].userName;
-    body = testUsers[0].userInfo;
-
-    json = await postData(url, endpoint, "POST", body);
+  test("post users", async () => {
+    endpoint = "users";
+    const response = await ack('foo', endpoint, "POST", [{'test user': 'me'}]);
+    console.log(response, 'response')
+    expect(response.testUsers[0]["test user"]).toBe("me"); 
     // expect(json.status).toEqual(200);
-    // expect(json).toEqual("User added.");
+    // expect(json.length).toBe(0);
+    // expect(json).toEqual(testUsers);
   });
 
-  test("get user info", async () => {
-    endpoint = "user/" + testUsers[0].userName;
-    body = testUsers[0].userInfo;
-    json = await postData(url, endpoint, "POST", body);
-    // expect(json.status).toEqual(200);
-    // expect(json).toEqual("User added.");
+  async function postData(
+    url, endpoint, myMethod="POST", data = {}
+  ) {
+    const options = {
+      // Default options are marked with *
+      method: myMethod, // *GET, POST, PUT, DELETE, etc.
+      // mode: "cors", // no-cors, *cors, same-origin
+      // cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: "same-origin", // include, *same-origin, omit
+      headers: {
+        "Content-Type": "application/json"
+      },
+      // redirect: "follow", // manual, *follow, error
+      // referrer: "no-referrer", // no-referrer, *client
+    };
+    if (myMethod==='POST') {
+      options.body = JSON.stringify(data);
+    };
+    const response = await fetch(url + "/" + endpoint, options)
+    const json = await response.json();
+    json.status = response.status;
+    json.statusText = response.statusText;
+    return json;
+  }
 
-    json = await postData(url, endpoint, "GET");
+  test("get users postData", async () => {
+    endpoint = "users";
+    const response = await postData(process.env.REACT_APP_ACK_URL, endpoint, "GET",   [{'test user': 'me'}]);
+    expect(response.testUsers[0]["test user"]).toBe("me"); 
     // expect(json.status).toEqual(200);
-    // result = testUsers[0].userInfo;
-    // expect(json).toEqual(result);
+    // expect(json.length).toBe(0);
+    // expect(json).toEqual(testUsers);
   });
 
-  test("add user log, get user logs", async () => {
-    endpoint = "user/" + testUsers[0].userName;
-    body = testUsers[0].userInfo;
-    json = await postData(url, endpoint, "POST", body);
+  test("post users postData", async () => {
+    endpoint = "users";
+    const response = await postData(process.env.REACT_APP_ACK_URL, endpoint, "POST", [{'test user': 'me'}]);
+    console.log(response, 'response')
+    expect(response.testUsers[0]["test user"]).toBe("me"); 
     // expect(json.status).toEqual(200);
-    // expect(json).toEqual("User added.");
-
-    endpoint = `user/${testUsers[0].userName}/log`;
-    body = testUsers[0].userInfo.logs[0];
-    json = await postData(url, endpoint, "POST", body);
-    // expect(json.status).toEqual(200);
-    // expect(json).toEqual("Log added.")
-
-    endpoint = `user/${testUsers[0].userName}/logs`;
-    json = await postData(url, endpoint, "GET");
-    // expect(json.status).toEqual(200);
-    // expect(json.length).toBe(1);
-    // result = testUsers[0].userInfo.logs;
-    // expect(json).toEqual(result);
-
-    // total logs of all users
-    endpoint = "logs" 
-    json = await postData(url, endpoint, "GET");
-    // expect(json.status).toEqual(200);
-    // expect(json.length).toBe(1);
-    // result = testUsers[0].userInfo.logs;
-    // expect(json).toEqual(result)
+    // expect(json.length).toBe(0);
+    // expect(json).toEqual(testUsers);
   });
 
-  test("delete user", async () => {
-    endpoint = "user/" + testUsers[0].userName;
-    body = testUsers[0].userInfo;
-    json = await postData(url, endpoint, "POST", body);
-    // expect(json.status).toEqual(200);
-    // expect(json).toEqual("User added.");
 
-    json = await postData(url, endpoint, "DELETE");
-    // expect(json.status).toEqual(200);
-    // expect(json).toEqual("User deleted.");
-  });
-});
+})
