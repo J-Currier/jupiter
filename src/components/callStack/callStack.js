@@ -38,15 +38,25 @@ export function CallStack(props) {
         <div  className='call-stack'>
             {props.callStackComps}
             <div className='button-div'>
-            <button id='clear-button' onClick={props.clearStack}>
+            <button 
+                id='clear-button' 
+                name="clear-button"
+                key="clear-button" 
+                className="iconBtn" 
+                onClick={props.clearStack}
+            >
                 <ClearSvg 
-                    className="iconBtn"
                     alt="Clear Button"
                 />
             </button>
-            <button id='run-button' onClick = {props.runStack}>
+            <button 
+                id='run-button' 
+                name="run-button"
+                key="run-button" 
+                className="iconBtn" 
+                onClick={props.runStack}
+            >
                 <RunSvg 
-                    className="iconBtn"
                     alt="Run Button"
                 />
             </button>
