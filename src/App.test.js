@@ -12,6 +12,14 @@ describe("app integration", () => {
     // setup a DOM element as a render target
     container = document.createElement("div");
     document.body.appendChild(container);
+
+    // mock google api
+    global.gapi = {
+      load: jest.fn(),
+      auth2: {
+        init: jest.fn()
+      }
+    }
   });
 
   afterEach(() => {
