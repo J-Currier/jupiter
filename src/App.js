@@ -9,9 +9,9 @@ import { Triangle } from "./components/shapes/triangleComp.js";
 // import { Heart } from "./components/shapes/heartComp.js";
 import { Star } from "./components/shapes/starComp.js";
 import { Rectangle } from "./components/shapes/rectangleComp.js";
-import { CallStack, CallCard } from './components/callStack/callStack'
-
-
+import { CallStack, CallCard } from './components/callStack/callStack';
+import Login from './components/login/loginComp';
+import Menu from './components/login/menuComp';
 import mathFunctions from "./scripts/math.js";
 
 function Game(props) {
@@ -28,7 +28,7 @@ function Game(props) {
 
   let [startAnchorX, startAnchorY] = mathFunctions.shapeMaker(size);
   const [playerPositionsArray, setPlayerPositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
-  const [playerAcceptablePositionsArray, setplayerAcceptablePositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
+  const [playerAcceptablePositionsArray, setPlayerAcceptablePositionsArray] = useState([[startAnchorX, startAnchorY, size, startOrientation]]);
   const [playerPosition, setPlayerPosition] = useState([startAnchorX, startAnchorY, size, startOrientation]);
 
   let [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
@@ -61,6 +61,10 @@ function Game(props) {
 
   const [callStackComps, setCallStackComps] = useState([]);
   const [counter, setCounter] = useState(0)
+
+  // Login props
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   let player = {
     id: "myStartPt",
@@ -151,17 +155,22 @@ function Game(props) {
     transformFunctions[name](e.target.value)
   };
 
-  const LevelCheck = () => {
-    if (JSON.stringify(playerPosition) === JSON.stringify(targetPostition)) {
-      return (
-        <div className="winner">
-          Portal Locked! <br />
-          You Win
-        </div>
-      );
-    } else {
-      return <div></div>;
-    }
+  const LevelCheck = (props) => {
+    return (
+      <div id="winner">
+        <span>Portal Locked! <br />
+        You Win</span>
+        <button 
+          id="restartBtn" 
+          key="restart" 
+          name="restart" 
+          className="levelCheckBtn" 
+          onClick={props.handleReset}
+        >
+          Restart
+        </button>
+      </div>
+    );
   };
 
   const shapeCompsObj = {
@@ -189,8 +198,6 @@ function Game(props) {
       anchorDotSize={9}
     />
   );
-
-  const font = 'M PLUS Rounded 1c';
 
 
   function addToStack(image, desc, fx, para) {
@@ -228,8 +235,32 @@ function Game(props) {
     setCallStackComps([])
   }
 
+  function resetPlayer() {
+    setPlayerPosition(playerPositionsArray[0]);
+    setPlayerPositionsArray(prev => [prev[0]])
+    setPlayerAcceptablePositionsArray(prev => [prev[0]])
+    clearStack();
+  }
+
+  function showScores() {
+    // todo
+  }
+
   return (
     <main>
+      {isSignedIn || 
+        <Login
+          setIsSignedIn = {setIsSignedIn}
+          setUser = {setUser}
+        />
+      }
+      {isSignedIn && 
+        <Menu
+          setIsSignedIn = {setIsSignedIn}
+          handleRestart = {resetPlayer}
+          handleHighScores = {showScores}
+        />
+      }
       <div className="canvasWrapper">
         <Grid />
         {targetComp}
@@ -255,7 +286,11 @@ function Game(props) {
           runStack = {runStack}
         />
       </div>
-      <LevelCheck key="levelCheck" />
+      {(JSON.stringify(playerPosition) === JSON.stringify(targetPostition)) &&
+        <LevelCheck 
+          handleReset={resetPlayer}
+        />
+      }
     </main>
   );
 }
