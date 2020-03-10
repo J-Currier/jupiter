@@ -58,10 +58,3 @@ img {
     max-width: 60px;
     max-height: 60px;
 }
-#run-button path,
-#run-button ellipse {
-  stroke: var(--icon-stroke-color2);
-}
-#run-button ellipse {
-  fill: var(--icon-fill-color2);
-}
