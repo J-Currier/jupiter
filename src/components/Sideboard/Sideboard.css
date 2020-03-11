@@ -81,14 +81,16 @@
 }
 .controlInputNum,
 .controlSelect {
+  /* color: var(--text-secondary-color); */
+  color: var(--blue-4);
   font-size: 1.5em;
   font-weight: Bold;
   border: solid 4px var(--icon-stroke-color);
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
-  background: var(--icon-fill-color);
-  color: var(--text-secondary-color);
+  background: var(--gold-1);
+  /* background: var(--icon-fill-color); */
   text-align: center;
 }
 .controlInputNum {
