@@ -13,11 +13,11 @@
   --blue-4: #13157E /* rgb(19, 21, 126) */;
   --blue-5: #0B0D62 /* rgb(11, 13, 98) */;
 
-  --icon-fill-color: #e2ab0b;
   --icon-fill-color2: rgba(226, 171, 11, 0.7);
   --gold-1: #FFD763 /* rgb(255, 215, 99) */;
   --gold-2: #F6C638 /* rgb(246, 198, 56) */;
   --gold-3: #E2AB0B /* rgb(226, 171, 11) */;
+  /* --icon-fill-color: #e2ab0b; */
   /* --gold-4: #B58700 rgb(181, 135, 0); */
   /* --gold-5: #8C6800 rgb(140, 104, 0); */
 

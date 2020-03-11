@@ -47,7 +47,8 @@
   fill: var(--icon-fill-color2);
 }
 .tabBtn .activeTab ellipse {
-  fill: var(--icon-fill-color);
+  fill: var(--gold-2);
+  /* fill: var(--icon-fill-color); */
 }
 .tabBtn .activeTab path,
 .tabBtn .activeTab ellipse {
@@ -67,7 +68,7 @@
   stroke: var(--icon-stroke-color);
 }
 .controlBtn ellipse {
-  fill: var(--icon-fill-color);
+  fill: var(--gold-2);
 }
 .iconBtn:hover {
   transition: 0.1s;
