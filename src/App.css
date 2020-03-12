@@ -24,6 +24,9 @@
   --gold4: #B58700 /* rgb(181, 135, 0) */;
   --gold5: #8C6800 /* rgb(140, 104, 0) */;
 
+  --black5: #000000 /* rgb(255, 255, 255) */;
+  --white1: #FFFFFF /* rgb(0, 0, 0) */;
+
   --text-primary-color: #0f0f0f;
   --text-secondary-color: #f0f8ff;
   --text-emphasis-color: rgba(137, 235, 52, 1);
