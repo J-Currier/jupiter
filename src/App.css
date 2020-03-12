@@ -71,56 +71,56 @@ button {
 }
 
 @media screen and (min-width: 1450px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 700px;
       height: 700px;
   }
 }
 
 @media screen and (max-width: 1450px) and (min-width: 1350px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 650px;
       height: 650px;
   }
 }
 
 @media screen and (max-width: 1350px) and (min-width: 1250px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 600px;
       height: 600px;
   }
 }
 
 @media screen and (max-width: 1250px) and (min-width: 1150px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 550px;
       height: 550px;
   }
 }
 
 @media screen and (max-width: 1150px) and (min-width: 1050px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 500px;
       height: 500px;
   }
 }
 
 @media screen and (max-width: 1050px) and (min-width: 950px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 450px;
       height: 450px;
   }
 }
 
 @media screen and (max-width: 950px) and (min-width: 850px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 400px;
       height: 400px;
   }
 }
 
 @media screen and (max-width: 850px) {
-  .canvasWrapper, .controlerWrapper {
+  .canvasWrapper, .controllerWrapper {
       width: 350px;
       height: 350px;
   }
@@ -132,7 +132,7 @@ button {
   background-color: var(--game-background-color);
 }
 
-.controlerWrapper {
+.controllerWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 40px 5px 0px 5px;
