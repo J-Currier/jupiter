@@ -88,6 +88,7 @@
   background-color: var(--gold02);
   color: var(--blue4);
   text-align: center;
+  font-weight: 700;
 }
 .controlInputNum {
   font-size: 1.5em;
