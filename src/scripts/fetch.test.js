@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-jest.mock("node-fetch");
+jest.mock("node-fetch"); //replaces node-fetch with mock fetch function
 
 import {postData} from "./fetch";
 import { keys } from "../config";
