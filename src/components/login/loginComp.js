@@ -1,67 +1,123 @@
 /* global gapi */
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
-import postData from "../../scripts/fetch";
+import { postData, tokenInfo } from "../../scripts/fetch";
 
 
 export default function Login(props) {
-  const { setIsSignedIn, setUser, setCurrentLevel, url } = props;
+  const { setIsSignedIn, setUser, setCurrentLevel } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameMsg, setUsernameMsg] = useState("");
+  const [passwordMsg, setPasswordMsg] = useState("");
+  const [accessToken, setAccessToken] = useState("");
 
-  const auth2 = useRef();
   useEffect(() => {
-    window.gapi.load("auth2", async () => {
-      auth2.current = gapi.auth2.init({
-        client_id: keys.clientId + ".apps.googleusercontent.com"
+    // timeout for known issue with firing too early
+    const timer = setTimeout(() => {
+      window.gapi.load("auth2", async () => {
+        const auth2 = gapi.auth2.init({
+          client_id: keys.clientId + ".apps.googleusercontent.com"
+        });
+        const gSignedIn = await auth2.isSignedIn.get()
+        // setIsSignedIn(gSignedIn);
       });
-      auth2.current.attachClickHandler(
-        "gLoginBtn",
-        {},
-        handleSuccess,
-        handleFailure
-      );
-      setIsSignedIn(await auth2.current.isSignedIn.get());
-    });
 
-    window.gapi.load("signin2", () => {
-      const options = {
-        width: 300,
-        height: 50,
-        longtitle: true,
-        onsuccess: handleSuccess,
-        onfailure: handleFailure
-      };
-      gapi.signin2.render("gLoginBtn", options);
-    });
+      window.gapi.load("signin2", () => {
+        const options = {
+          client_id: keys.clientId + ".apps.googleusercontent.com",
+          width: 300,
+          height: 50,
+          longtitle: true,
+          onsuccess: handleSuccess,
+          onfailure: handleFailure
+        };
+        gapi.signin2.render("gLoginBtn", options);
+      });
+    }, 10);
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
+  async function gAuthenticate(idToken) {
+    // let response = await postData("tokensignin", "POST", {idToken: idToken});
+    let response = await tokenInfo(idToken);
+    const checkIssuer = (iss) => (
+      iss === 'accounts.google.com' ||
+      iss === 'https://accounts.google.com'
+    )
+    const checkAud = (aud) => (
+      aud === (keys.clientId + ".apps.googleusercontent.com")
+    )
+    if (!checkIssuer(response.iss) || !checkAud(response.aud)) {
+      console.log("Authentication failed.")
+    } else {
+      return response.sub; // Google ID
+    }
+  }
+  async function startSession(idToken) {
+    const gId = await gAuthenticate(idToken);
+    // await postData("register", "POST", { gId: gId });
+    // setAccessToken(await postData("auth", "POST", { gId: gId }));
+    setUser({ gId: gId });
+  }
+  async function handleSuccess(googleUser) {
+    const idToken = googleUser.getAuthResponse().id_token;
+    await startSession(idToken);
 
-  function handleSuccess(googleUser) {
-    setIsSignedIn(true);
-    const profile = googleUser.getBasicProfile();
-    const id = profile.getId(); // Do not send to your backend! Use an ID token instead.
-    const name = profile.getGivenName();
-    const image = profile.getImageUrl();
-    const email = profile.getEmail(); // This is null if the 'email' scope is not present.
-    const id_token = googleUser.getAuthResponse().id_token;
-    setUser({
-      id_token: id_token,
-      id: id,
-      name: name,
-      image: image,
-      email: email
-    });
+    // const profile = googleUser.getBasicProfile();
+    // const gId = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    // const name = profile.getGivenName();
+    // const image = profile.getImageUrl();
+    // const email = profile.getEmail(); // This is null if the 'email' scope is not present.
+    setIsSignedIn(true); // must be last, component will unmount
   }
   function handleFailure() {
     setIsSignedIn(false);
   }
+  function validateInputs(username, password) {
+    let userValid =
+      username.length >= 6 && username.length <= 16 && !username.includes(" ");
+    let passValid =
+      password.length >= 8 && password.length <= 128 && !password.includes(" ");
+    if (!userValid) {
+      setUsernameMsg("Must be 6-16 characters, with no spaces.");
+    }
+    if (!passValid) {
+      setPasswordMsg("Must be 8 or more characters, with no spaces.");
+    }
+    return userValid && passValid;
+  }
   async function handleLogin() {
+    if (!validateInputs(username, password)) {
+      return;
+    }
+    // const jsonUser = await postData("user/" + username, "GET");
+    // if (jsonUser.message) {
+    //   // not found
+    //   await postData("register", "POST", {
+    //     username: username,
+    //     password: password
+    //   });
+    // } else {
+    //   // found
+    //   const jsonAuth = await postData("auth", "POST", {
+    //     username: username,
+    //     password: password
+    //   });
+    //   if (!jsonAuth.accessToken) {
+    //     // wrong password
+    //     setPasswordMsg("Wrong password.");
+    //     setPassword("");
+    //     return;
+    //   }
+    //   setAccessToken(jsonAuth.accessToken);
+    // }
+    // setUser({ username: username });
+    // const currentLevel = jsonUser.username.currentLevel
+    // setCurrentLevel(currentLevel? currentLevel: 1);
     setIsSignedIn(true);
-    const route = "user/"+username;
-    const json = await postData(url, route, "GET");
-    setCurrentLevel(json.username.currentLevel);
-
   }
   function handleGuest() {
     setIsSignedIn(true);
@@ -76,7 +132,7 @@ export default function Login(props) {
     <div id="login" className="overlay">
       <div className="loginItem">
         <label htmlFor="username" className="loginLabel">
-          Username:
+          {`Username: ${usernameMsg}`}
         </label>
         <br />
         <input
@@ -92,11 +148,11 @@ export default function Login(props) {
       </div>
       <div className="loginItem">
         <label htmlFor="password" className="loginLabel">
-          ID number:
+          {`Password: ${passwordMsg}`}
         </label>
         <br />
         <input
-          type="text"
+          type="password"
           autoComplete="current-password"
           id="password"
           name="password"
