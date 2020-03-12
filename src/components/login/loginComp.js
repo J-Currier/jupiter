@@ -114,12 +114,13 @@ export default function Login(props) {
     //   }
     //   setAccessToken(jsonAuth.accessToken);
     // }
-    // setUser({ username: username });
     // const currentLevel = jsonUser.username.currentLevel
     // setCurrentLevel(currentLevel? currentLevel: 1);
+    setUser({ username: username });
     setIsSignedIn(true);
   }
   function handleGuest() {
+    setUser({guest: "guest"+Date.now()})
     setIsSignedIn(true);
   }
   function handleUsername(e) {

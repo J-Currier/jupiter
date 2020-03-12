@@ -13,6 +13,7 @@ import { CallStack, CallCard } from './components/callStack/callStack';
 import Login from './components/login/loginComp';
 import Menu from './components/login/menuComp';
 import mathFunctions from "./scripts/math.js";
+import { postData } from "./scripts/fetch";
 
 
 function Game(props) {
@@ -237,11 +238,19 @@ function Game(props) {
     setCallStackComps([])
   }
 
-  function resetPlayer() {
+  async function resetPlayer() {
     setPlayerPosition(playerPositionsArray[0]);
     setPlayerPositionsArray(prev => [prev[0]])
     setPlayerAcceptablePositionsArray(prev => [prev[0]])
     clearStack();
+    
+    const body = {
+      username: (user.username || user.gId || user.guest),
+      levelId: currentLevel,
+      logTime: new Date(),
+      attemptSuccess: false,
+    }
+    // await postData("logs", "POST", body);
   }
 
   function showScores() {

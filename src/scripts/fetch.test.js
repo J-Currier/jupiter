@@ -18,6 +18,7 @@ const testData = {
     currentLevel: 1,
     logs: [
       {
+        username: "graph_hopper",
         levelId: 1, 
         attempt: 1, 
         logTime: '2020-03-01 12:00:00',
@@ -30,6 +31,7 @@ const testData = {
         finalCodeBlocks: []
       },
       {
+        username: "graph_hopper",
         levelId: 1, 
         attempt: 2, 
         logTime: '2020-03-02 12:00:00',
@@ -49,6 +51,7 @@ const testData = {
     currentLevel: 2,
     logs: [
       {
+        username: "ester_lavista",
         levelId: 1, 
         attempt: 1, 
         logTime: '2020-03-01 12:00:00',
@@ -78,31 +81,41 @@ describe.only("mock fetch", () => {
       let result = {};
       switch (init.method) {
         case "GET":
-          if (!db[item]) {
+          if (item === "logs") {
+            result.logs = testData[segments[1]].logs;
+          } else if (!db[item]) {
             result = { message: "not found" };
           } else {
             result[item] = db[item];
           }
           break;
         case "POST":
-          switch (route) {
+          if (item === "logs") {
+            db[body.username].logs.push(body);
+            result.logs = body;
+          } else { switch (route) {
             case "tokensignin":
               result = {iss: "https://accounts.google.com"};
               break;
             case "register":
+              db[body.username] = body;
               result = {message: "User created successfully."};
               break;
             case "auth":
-              result = {access_token: "123456"};
+              if (db[body.username].password !== body.password) {
+                result = {message: "Authentication failed."}
+              } else {
+                result = {access_token: "123456"};
+              } 
               break;
             default:
               db[item] = body;
-              result[item] = db[item];
-          }
+              result[item] = body;
+          }}
           break;
         case "PUT":
           db[item] = body;
-          result[item] = db[item];
+          result[item] = body;
           break;
         case "DELETE":
           if (!db[item]) {
@@ -150,32 +163,33 @@ describe.only("mock fetch", () => {
     expect(response).toEqual({ graph_hopper: testData.graph_hopper });
   });
 
-  // test("post user", async () => {
-  //   let route = "user/ester_lavista";
-  //   let method = "POST";
-  //   let body = testData.ester_lavista;
-  //   let response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
+  test("post log", async () => {
+    let route = "/logs";
+    let method = "POST";
+    let body = testData.graph_hopper.logs[0];
+    let response = await postData(route, method, body);
+    expect(response).toEqual({ logs: body });
 
-  //   method = "GET";
-  //   response = await postData(route, method);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
-  // });
+    route = "user/graph_hopper/logs";
+    method = "GET";
+    response = await postData(route, method);
+    expect(response).toEqual({ logs: testData.graph_hopper.logs });
+  });
 
   // test("put user", async () => {
   //   let route = "user/ester_lavista";
   //   let method = "PUT";
   //   let body = testData.ester_lavista;
   //   let response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
+  //   expect(response).toEqual({ ester_lavista: body });
 
   //   body = testData.graph_hopper;
   //   response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.graph_hopper });
+  //   expect(response).toEqual({ ester_lavista: body });
 
   //   method = "GET";
   //   response = await postData(route, method);
-  //   expect(response).toEqual({ ester_lavista: testData.graph_hopper });
+  //   expect(response).toEqual({ ester_lavista: body });
   // });
 
   test("delete user", async () => {
@@ -240,34 +254,6 @@ describe("real fetch", () => {
     let response = await postData(route, method);
     expect(response).toEqual({ graph_hopper: testData.graph_hopper });
   });
-
-  // test("post user", async () => {
-  //   let route = "user/ester_lavista";
-  //   let method = "POST";
-  //   let body = testData.ester_lavista;
-  //   let response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
-
-  //   method = "GET";
-  //   response = await postData(route, method);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
-  // });
-
-  // test("put user", async () => {
-  //   let route = "user/ester_lavista";
-  //   let method = "PUT";
-  //   let body = testData.ester_lavista;
-  //   let response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.ester_lavista });
-
-  //   body = testData.graph_hopper;
-  //   response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: testData.graph_hopper });
-
-  //   method = "GET";
-  //   response = await postData(route, method);
-  //   expect(response).toEqual({ ester_lavista: testData.graph_hopper });
-  // });
 
   test("delete user", async () => {
     let route = "user/ester_lavista";
