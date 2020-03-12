@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
-import postData from "./fetch";
+import postData from "../../scripts/fetch";
 
 
 export default function Login(props) {
@@ -56,11 +56,11 @@ export default function Login(props) {
   function handleFailure() {
     setIsSignedIn(false);
   }
-  function handleLogin() {
+  async function handleLogin() {
     setIsSignedIn(true);
-    const endpoint = "user/"+username;
-    const json = await postData(url, endpoint, "GET");
-    setCurrentLevel(json.userInfo.currentLevel);
+    const route = "user/"+username;
+    const json = await postData(url, route, "GET");
+    setCurrentLevel(json.username.currentLevel);
 
   }
   function handleGuest() {

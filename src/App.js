@@ -14,7 +14,6 @@ import Login from './components/login/loginComp';
 import Menu from './components/login/menuComp';
 import mathFunctions from "./scripts/math.js";
 
-// const url = process.env.REACT_APP_ACK_URL;
 
 function Game(props) {
   let shapesArray = ["circle", "square", "star", "rectangle", "triangle"];
@@ -67,7 +66,6 @@ function Game(props) {
   // Login props
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState(null);
-
   const [currentLevel, setCurrentLevel] = useState(1);
 
   let player = {
@@ -257,7 +255,6 @@ function Game(props) {
           setIsSignedIn = {setIsSignedIn}
           setUser = {setUser}
           setCurrentLevel = {setCurrentLevel}
-          url={url}
         />
       }
       {isSignedIn && 
