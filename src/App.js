@@ -278,7 +278,7 @@ function Game(props) {
         {targetComp}
         {playerComp}
       </div>
-      <div className="controlerWrapper">
+      <div className="controllerWrapper">
         <Sideboard
           translate={translate}
           rotate={rotate}
