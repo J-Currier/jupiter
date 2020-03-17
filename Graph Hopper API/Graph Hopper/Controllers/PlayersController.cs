@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Graph_Hopper.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Graph_Hopper.Controllers
 {
@@ -14,16 +15,19 @@ namespace Graph_Hopper.Controllers
     public class PlayersController : ControllerBase
     {
         private readonly PlayersContext _context;
+        private readonly ILogger _logger;
 
-        public PlayersController(PlayersContext context)
+        public PlayersController(PlayersContext context, ILogger<PlayersController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Players
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
         {
+            _logger.LogInformation("Hi from api/Players");
             return await _context.Players.ToListAsync();
         }
 

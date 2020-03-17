@@ -21,7 +21,7 @@ namespace Graph_Hopper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string sqlServerUrl = Environment.GetEnvironmentVariable("sqlServerUrl");
+            string sqlServerUrl = Configuration.GetConnectionString("GraphHopperdbConnection");
             services.AddDbContext<PlayersContext>(opt =>
                 opt.UseSqlServer(sqlServerUrl));
             services.AddControllers();
