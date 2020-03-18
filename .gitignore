@@ -22,6 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /Graph Hopper API/Graph Hopper/appsettings.json
-/Graph Hopper API/Graph Hopper/bin/Debug/netcoreapp3.1/appsettings.json
-/Graph Hopper API/Graph Hopper/bin/Release
-/Graph Hopper API/Graph Hopper/obj/Release
+/Graph Hopper API/Graph Hopper/bin
+/Graph Hopper API/Graph Hopper/obj
