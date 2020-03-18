@@ -204,7 +204,9 @@ function Game(props) {
 
 
   function addToStack(image, desc, fx, para) {
-    setCounter(prevCounter => prevCounter + 1)
+
+    if (callStackComps <= 10) {
+      setCounter(prevCounter => prevCounter + 1)
       let newComp = 
       <CallCard
       image={image}
@@ -214,6 +216,9 @@ function Game(props) {
       id={counter}
       key={counter} />;
       setCallStackComps((prev) => [...prev, newComp])
+    } else {
+      alert("Too many actions in callstack. Consider removing some.")
+    }
   }
 
   const runStack = async () => {

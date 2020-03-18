@@ -100,4 +100,10 @@ describe("app integration", () => {
     }
     // expect(pretty(container.innerHTML)).toMatchSnapshot();
   });
+
+  // test('integration with callStack', () => {
+  //   act(()=> {
+
+  //   })
+  // })
 });
