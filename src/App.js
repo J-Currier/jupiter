@@ -205,7 +205,7 @@ function Game(props) {
 
   function addToStack(image, desc, fx, para) {
 
-    if (callStackComps <= 10) {
+    if (callStackComps.length < 10) {
       setCounter(prevCounter => prevCounter + 1)
       let newComp = 
       <CallCard
