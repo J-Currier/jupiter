@@ -12,10 +12,10 @@ namespace Graph_Hopper.Controllers
     [ApiController]
     public class PlayersController : ControllerBase
     {
-        private readonly PlayersContext _context;
+        private readonly GraphHopperContext _context;
         private readonly ILogger _logger;
 
-        public PlayersController(PlayersContext context, ILogger<PlayersController> logger)
+        public PlayersController(GraphHopperContext context, ILogger<PlayersController> logger)
         {
             _context = context;
             _logger = logger;

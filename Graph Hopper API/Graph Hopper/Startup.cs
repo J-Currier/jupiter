@@ -22,9 +22,7 @@ namespace Graph_Hopper
         public void ConfigureServices(IServiceCollection services)
         {
             string sqlServerUrl = Configuration.GetConnectionString("GraphHopperdbConnection");
-            services.AddDbContext<PlayersContext>(opt =>
-                opt.UseSqlServer(sqlServerUrl));
-            services.AddDbContext<AttemptsContext>(opt =>
+            services.AddDbContext<GraphHopperContext>(opt =>
                 opt.UseSqlServer(sqlServerUrl));
             services.AddControllers();
         }

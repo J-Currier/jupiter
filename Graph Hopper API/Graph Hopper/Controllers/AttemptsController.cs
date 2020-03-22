@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Graph_Hopper.Models;
-using Microsoft.Extensions.Logging;
 
 namespace Graph_Hopper.Controllers
 {
@@ -12,20 +11,17 @@ namespace Graph_Hopper.Controllers
     [ApiController]
     public class AttemptsController : ControllerBase
     {
-        private readonly AttemptsContext _context;
-        private readonly ILogger _logger;
+        private readonly GraphHopperContext _context;
 
-        public AttemptsController(AttemptsContext context, ILogger<PlayersController> logger)
+        public AttemptsController(GraphHopperContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         // GET: api/Attempts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Attempt>>> GetAttempts()
         {
-            _logger.LogInformation("Hi from api/Attempts");
             return await _context.Attempts.ToListAsync();
         }
 
@@ -41,6 +37,53 @@ namespace Graph_Hopper.Controllers
             }
 
             return attempt;
+        }
+
+        // GET: api/Attempts/PlayerId=4
+        [HttpGet("PlayerId={playerId}")]
+        public async Task<ActionResult<IEnumerable<Attempt>>> GetAttemptsByPlayerId(long playerId)
+        {
+            var attempts = await _context.Attempts.Where(p => p.PlayerId == playerId).ToListAsync();
+
+            if (attempts.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return attempts;
+        }
+
+        // GET: api/Attempts/LastLevelPlayerId=4
+        [HttpGet("LastLevel/PlayerId={playerId}")]
+        public async Task<ActionResult<object>> GetLastLevelAttemptsByPlayerId(long playerId)
+        {
+            DbSet<Attempt> attempts = _context.Attempts;
+            DbSet<Level> levels = _context.Levels;
+
+            var joined = attempts
+                .Where(attempt => attempt.PlayerId == playerId)
+                .Join(levels,
+                    attempt => attempt.LevelId,
+                    level => level.Id,
+                    ((attempt, level) => new
+                    {
+                        attempt.PlayerId,
+                        AttemptId = attempt.Id,
+                        LevelId = level.Id,
+                        level.LevelName,
+                        level.Difficulty,
+
+                    }));
+            var result = await joined
+                .Where(p => p.Difficulty == joined.Max(p => p.Difficulty))
+                .ToListAsync();
+
+            if (result.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return result;
         }
 
         // PUT: api/Attempts/5
