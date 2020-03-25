@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import { Grid } from "./components/grid/gridComp";
@@ -13,7 +13,7 @@ import { CallStack, CallCard } from './components/callStack/callStack';
 import Login from './components/login/loginComp';
 import Menu from './components/login/menuComp';
 import mathFunctions from "./scripts/math.js";
-import { postData } from "./scripts/fetch";
+import { fetchJson } from "./scripts/fetch";
 
 
 function Game(props) {
@@ -41,9 +41,10 @@ function Game(props) {
   ) {
     [endAnchorX, endAnchorY] = mathFunctions.shapeMaker(size);
   }
-  const [targetPostition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, endOrientation]);
+  const [targetPosition, setTargetPosition] = useState([endAnchorX, endAnchorY, size, endOrientation]);
 
   const [fillColour, setFillColour] = useState("rgba(137, 235, 52, 0.6)");
+  const [targetFillColour, setTargetFillColour] = useState("rgba(255, 77, 0, 0.6)");
   const [borderColour, setBorderColour] = useState("rgba(255, 255, 255, 1)");
   const [borderWidth, setBorderWidth] = useState(6);
   const [shapeClassName, setShapeClassName] = useState("Circle");
@@ -68,6 +69,14 @@ function Game(props) {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [currentLevel, setCurrentLevel] = useState(1);
+  const [online, setOnline] = useState(true);
+  const [attempt, setAttempt] = useState(null);
+  const [score, setScore] = useState(0);
+  useEffect(() => {
+    if (online && isSignedIn) {
+      postAttempt();
+    }
+  }, [isSignedIn]);
 
   let player = {
     id: "myStartPt",
@@ -80,8 +89,8 @@ function Game(props) {
 
   let target = {
     id: "myEndPt",
-    position: targetPostition,
-    fillColour: "rgba(255, 77, 0, 0.6)",
+    position: targetPosition,
+    fillColour: targetFillColour,
     borderColour: borderColour,
     borderWidth: borderWidth,
     shapeClassName: "endPtCircle"
@@ -159,6 +168,9 @@ function Game(props) {
   };
 
   const LevelCheck = (props) => {
+    if (online) {
+      props.postRun(true)
+    }
     return (
       <div id="winner">
         <span>Portal Locked! <br />
@@ -203,6 +215,40 @@ function Game(props) {
   );
 
 
+  async function postAttempt() {
+    const attemptBody = {
+      playerId: user.id,
+      levelId: currentLevel,
+      StartPosition: JSON.stringify(playerPositionsArray[0]),
+      TargetPosition: JSON.stringify(targetPosition)
+    }
+    const attemptJson = await fetchJson("Attempts", "POST", attemptBody);
+    setAttempt(attemptJson.id);
+  }
+
+  async function postRun(success=false) {
+    const callStackFunctions = callStackComps.map(v => {
+      return ({
+        description: v.props.desc, 
+        function: v.props.fx,
+        parameters: v.props.para.slice(1)
+      });
+    });
+    const runBody = {
+      AttemptId: attempt,
+      Functions: JSON.stringify(callStackFunctions),
+      PlayerPositions: JSON.stringify(playerPositionsArray),
+      PlayerAcceptablePositions: JSON.stringify(playerAcceptablePositionsArray),
+      score: score,
+      success: success
+    }
+    try {
+      await fetchJson("FunctionsRuns", "POST", runBody);
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
   function addToStack(image, desc, fx, para) {
 
     if (callStackComps.length < 10) {
@@ -223,6 +269,9 @@ function Game(props) {
 
   const runStack = async () => {
     
+    if (online && callStackComps.length > 0) {
+      await postRun(false);
+    }
 
     // maybe try recursive function?
     const recursiveFunc = async (array) => {
@@ -249,17 +298,9 @@ function Game(props) {
     setPlayerAcceptablePositionsArray(prev => [prev[0]])
     clearStack();
     
-    const body = {
-      username: (user.username || user.gId || user.guest),
-      levelId: currentLevel,
-      logTime: new Date(),
-      attemptSuccess: false,
+    if (online) {
+      await postAttempt();
     }
-    // await postData("logs", "POST", body);
-  }
-
-  function showScores() {
-    // todo
   }
 
   return (
@@ -269,13 +310,17 @@ function Game(props) {
           setIsSignedIn = {setIsSignedIn}
           setUser = {setUser}
           setCurrentLevel = {setCurrentLevel}
+          online = {online}
+          setOnline = {setOnline}
         />
       }
       {isSignedIn && 
         <Menu
           setIsSignedIn = {setIsSignedIn}
           handleRestart = {resetPlayer}
-          handleHighScores = {showScores}
+          setUser = {setUser}
+          user = {user}
+          online = {online}
         />
       }
       <div className="canvasWrapper">
@@ -303,9 +348,10 @@ function Game(props) {
           runStack = {runStack}
         />
       </div>
-      {(JSON.stringify(playerPosition) === JSON.stringify(targetPostition)) &&
+      {(JSON.stringify(playerPosition) === JSON.stringify(targetPosition)) &&
         <LevelCheck 
           handleReset={resetPlayer}
+          postRun={postRun}
         />
       }
     </main>
