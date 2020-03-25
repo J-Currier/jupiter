@@ -80,11 +80,16 @@ export default function Login(props) {
       id: jsonPlayer.id,
       type: userObject.type
     });
-    const jsonLevel = await fetchJson("Attempts/LastLevel/PlayerId="+jsonPlayer.id, "GET");
-    if (jsonLevel && jsonLevel[0] && jsonLevel[0].levelId) {
-      setCurrentLevel(jsonLevel[0].levelId);
-    } else {
+    if (!online || userObject.type==="guest") {
       setCurrentLevel(1);
+    } else {
+      try {
+        const jsonLevel = await fetchJson("Attempts/LastLevel/PlayerId="+jsonPlayer.id, "GET");
+        setCurrentLevel(jsonLevel[0].levelId);
+      } catch(error) {
+        // console.log("fetching player's last level failed", error);
+        setCurrentLevel(1);
+      }
     }
     setIsSignedIn(true); // component will unmount
   }

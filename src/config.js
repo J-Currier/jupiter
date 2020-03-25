@@ -3,7 +3,7 @@ export const keys = {
     clientId: '381072268579-0jo9s6uk126vi0hsc6rk52okmdvmkucm',
 }
 export const apiUrls = {
-    test: "https://localhost:44319/api", // testing mock api
-    development: "https://localhost:44319/api", // dev e.g. npm start with visual studio iis express
-    production: "https://graphhopperapi.azurewebsites.net/api" // production api
+    test: "https://localhost:44319/api",
+    development: "https://graphhopperapi.azurewebsites.net/api", // npm start
+    production: "https://graphhopperapi.azurewebsites.net/api"
 }
