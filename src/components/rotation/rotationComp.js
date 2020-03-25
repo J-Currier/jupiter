@@ -23,7 +23,6 @@ function Rotation(props) {
     const para = [e, rotationMag, pivotPointX, pivotPointY, direction]
     const desc = `Rotate the shape ${rotationMag} ${direction ? 'counter clockwise' : 'clockwise'} around point (${pivotPointX}, ${pivotPointY})`;
     props.addToStack(GeneralRotate, desc, props.rotate, para);
-    console.log(para)
   };
 
   return (
