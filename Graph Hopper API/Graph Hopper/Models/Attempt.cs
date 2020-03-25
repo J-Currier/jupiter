@@ -7,7 +7,7 @@ namespace Graph_Hopper.Models
         public long Id { get; set; }
         public long PlayerId { get; set; }
         public long LevelId { get; set; }
-        public DateTime StartedAt { get; set; }
+        public DateTime StartedAt { get; set; } = DateTime.Now; // Default
         public DateTime EndedAt { get; set; }
         public string StartPosition { get; set; }
         public string TargetPosition { get; set; }

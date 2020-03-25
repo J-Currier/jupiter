@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -47,14 +48,20 @@ namespace Graph_Hopper.Controllers
         [HttpGet("={username}")]
         public async Task<ActionResult<Player>> GetPlayer(string username)
         {
-            var player = await _context.Players.Where(p => p.UserName == username).ToListAsync();
+            var players = await _context.Players.Where(p => p.UserName == username).ToListAsync();
 
-            if (player.Count == 0)
+            if (players.Count == 0)
             {
                 return NotFound();
             }
 
-            return player[0];
+            var player = players[0];
+            
+            player.LoginLast = DateTime.Now;
+            _context.Entry(player).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return player;
         }
 
         // PUT: api/Players/5

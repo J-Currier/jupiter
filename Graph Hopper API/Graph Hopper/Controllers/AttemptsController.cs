@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ namespace Graph_Hopper.Controllers
             return attempts;
         }
 
-        // GET: api/Attempts/LastLevelPlayerId=4
+        // GET: api/Attempts/LastLevel/PlayerId=4
         [HttpGet("LastLevel/PlayerId={playerId}")]
         public async Task<ActionResult<object>> GetLastLevelAttemptsByPlayerId(long playerId)
         {
@@ -86,6 +87,8 @@ namespace Graph_Hopper.Controllers
             return result;
         }
 
+
+
         // PUT: api/Attempts/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -114,6 +117,24 @@ namespace Graph_Hopper.Controllers
                     throw;
                 }
             }
+
+            return NoContent();
+        }
+
+        // PATCH: api/Attempts/EndAttempt/4
+        [HttpPatch("EndAttempt/{id}")]
+        public async Task<IActionResult> EndAttempt(long id)
+        {
+            var attempt = await _context.Attempts.FindAsync(id);
+
+            if (attempt == null)
+            {
+                return NotFound();
+            }
+
+            attempt.EndedAt = DateTime.Now;
+            _context.Entry(attempt).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

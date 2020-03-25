@@ -8,7 +8,7 @@ namespace Graph_Hopper.Models
         public string UserName { get; set; }
         public byte Grade { get; set; }
         public DateTime Created { get; set; } = DateTime.Now; // Default
-        public DateTime LoginFirst { get; set; }
+        public DateTime LoginFirst { get; set; } = DateTime.Now; // Default
         public DateTime LoginLast { get; set; }
     }
 }
