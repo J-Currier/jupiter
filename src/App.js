@@ -228,11 +228,7 @@ function Game(props) {
 
   async function postRun(success=false) {
     const callStackFunctions = callStackComps.map(v => {
-      return ({
-        description: v.props.desc, 
-        function: v.props.fx,
-        parameters: v.props.para.slice(1)
-      });
+      return v.props.desc;
     });
     const runBody = {
       AttemptId: attempt,
@@ -242,11 +238,7 @@ function Game(props) {
       score: score,
       success: success
     }
-    try {
-      await fetchJson("FunctionsRuns", "POST", runBody);
-    } catch(e) {
-      console.log(e);
-    }
+    await fetchJson("FunctionsRuns", "POST", runBody);
   }
 
   function addToStack(image, desc, fx, para) {
