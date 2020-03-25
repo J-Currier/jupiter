@@ -38,6 +38,7 @@
   min-height: 40px;
   max-width: 60px;
   max-height: 60px;
+  outline: none;
 }
 .tabBtn path,
 .tabBtn ellipse {
@@ -72,7 +73,7 @@
 .iconBtn:hover {
   transition: 0.1s;
   outline: none;
-  filter: drop-shadow(0px 0px 2px #000);
+  filter: drop-shadow(0px 0px 2px #fff);
 }
 .iconBtn:active {
   transition: .1s;
