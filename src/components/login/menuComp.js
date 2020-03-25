@@ -16,17 +16,22 @@ function countMatchingObjects(array, compareKey, matchValue) {
 }
 
 async function getScore() {
-  const attemptsJson = await fetchJson("Attempts", "GET");
+  let attemptsJson = [];
+  attemptsJson = await fetchJson("Attempts", "GET");
   let runsJson = [];
-  try {
-    runsJson = await fetchJson("FunctionsRuns", "GET");
-  } catch(e) {
-    console.log(e);
-  }
-  const scores = attemptsJson.map(v => {
-    const score = 100 - 10 * countMatchingObjects(runsJson, "AttemptId", v.id);
-    return {playerId: v.playerId, levelId: v.levelId, score: score}
-  });
+  runsJson = await fetchJson("FunctionsRuns", "GET");
+
+  const scores = attemptsJson.reduce((cumulator, v) => {
+    const countRuns = countMatchingObjects(runsJson, "AttemptId", v.id);
+    if (countRuns > 0) {
+      const score = 100 - 10 * countRuns;
+      cumulator.push(
+        {playerId: v.playerId, levelId: v.levelId, score: score}
+      );
+    }
+    return cumulator;
+  }, []);
+
   scores.sort((a, b) => Number(b.score) - Number(a.score));
   // scores.sort((a, b) => Number(b.levelId) - Number(a.levelId));
   return scores;
