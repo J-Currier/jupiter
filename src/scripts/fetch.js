@@ -1,13 +1,16 @@
 import fetch from "node-fetch";
-import { keys } from "../config";
-let baseUrl;
-if (process.env.NODE_ENV === "production") {
-  baseUrl = keys.apiUrlProd;
-} else if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
-  baseUrl = keys.apiUrlDev;
-}
+import { apiUrls } from "../config";
 
-async function postData(route, method = "POST", body = {}) {
+// for local testing without ssl
+import https from "https";
+const agent = new https.Agent({
+  rejectUnauthorized: (process.env.NODE_ENV==="test")? false: true
+});
+//
+
+let baseUrl = apiUrls[process.env.NODE_ENV];
+
+async function fetchJson(route, method = "POST", body = {}) {
   const init = {
     // Default options are marked with *
     method: method, // *GET, POST, PUT, DELETE, etc.
@@ -16,28 +19,26 @@ async function postData(route, method = "POST", body = {}) {
     // credentials: "same-origin", // include, *same-origin, omit
     headers: {
       "Content-Type": "application/json"
-    }
+    },
     // redirect: "follow", // manual, *follow, error
     // referrer: "no-referrer", // no-referrer, *client
+    agent: agent
   };
   if (method === "POST" || method === "PUT") {
     init.body = JSON.stringify(body);
   }
-  // try {
+  try {
     const response = await fetch(baseUrl + "/" + route, init);
-    if (response.status !== 200) {
-      console.log(`${route} ${method} status: ${response.status}`);
-    } else {
-      const json = await response.json();
-      return json;
-    }
-  // } catch (error) {
-    // throw new Error(`${route} ${method} fetch error: ${error}`);
-  // }
+    return await response.json();
+  } catch (error) {
+    const message = `/${route}: ${method} error: ${error}`
+    // console.log(message);
+    throw new Error(message);
+  }
 }
 
 async function tokenInfo(idToken) {
-  // try {
+  try {
     const response = await fetch(
       "https://oauth2.googleapis.com/tokeninfo?id_token=" + idToken, 
       {
@@ -46,14 +47,16 @@ async function tokenInfo(idToken) {
       }
     );
     if (response.status !== 200) {
-      console.log("tokeninfo status: " + response.status);
+      return {status: response.status};
     } else {
       const json = await response.json();
       return json;
     }
-  // } catch (error) {
-  //   throw new Error("tokeninfo fetch error: " + error);
-  // }
+  } catch (error) {
+    const message = ("tokeninfo fetch error: " + error);
+    // console.log(message);
+    throw new Error(message);
+  }
 }
 
-export { postData, tokenInfo };
+export { fetchJson, tokenInfo };

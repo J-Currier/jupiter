@@ -1,7 +1,9 @@
 export const keys = {
     // google api client id
     clientId: '381072268579-0jo9s6uk126vi0hsc6rk52okmdvmkucm',
-    // api url
-    apiUrlDev: "http://localhost:3000", // dev
-    apiUrlProd: "http://localhost:5000" // replace with api host
+}
+export const apiUrls = {
+    test: "https://localhost:44319/api", // testing mock api
+    development: "https://localhost:44319/api", // dev e.g. npm start with visual studio iis express
+    production: "https://graphhopperapi.azurewebsites.net/api" // production api
 }

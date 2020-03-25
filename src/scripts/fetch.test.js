@@ -1,303 +1,97 @@
-import fetch from "node-fetch";
-jest.mock("node-fetch"); //replaces node-fetch with mock fetch function
-
-import {postData} from "./fetch";
-import { keys } from "../config";
-let baseUrl;
-if (process.env.NODE_ENV === "production") {
-  baseUrl = keys.apiUrlProd;
-} else if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
-  baseUrl = keys.apiUrlDev;
-}
-
-const testData = {
-  graph_hopper: {
-    id: 1,
-    gId: 1,
-    password: "pass123",
-    currentLevel: 1,
-    logs: [
-      {
-        username: "graph_hopper",
-        levelId: 1, 
-        attempt: 1, 
-        logTime: '2020-03-01 12:00:00',
-        startTime: '2020-03-01 12:00:00',
-        endTime: '2020-03-01 12:00:00',
-        attemptSuccess: false,
-        attemptScore: 50,
-        changesToCode: 1,
-        initialCodeBlocks: [],
-        finalCodeBlocks: []
-      },
-      {
-        username: "graph_hopper",
-        levelId: 1, 
-        attempt: 2, 
-        logTime: '2020-03-02 12:00:00',
-        startTime: '2020-03-02 12:00:00',
-        endTime: '2020-03-02 12:00:00',
-        attemptSuccess: true,
-        attemptScore: 100,
-        changesToCode: 2,
-        initialCodeBlocks: [],
-        finalCodeBlocks: []
-      }
-    ] 
-  },
-  ester_lavista: {
-    id: 1,
-    password: "pass456",
-    currentLevel: 2,
-    logs: [
-      {
-        username: "ester_lavista",
-        levelId: 1, 
-        attempt: 1, 
-        logTime: '2020-03-01 12:00:00',
-        startTime: '2020-03-01 12:00:00',
-        endTime: '2020-03-01 12:00:00',
-        attemptSuccess: false,
-        attemptScore: 50,
-        changesToCode: 1,
-        initialCodeBlocks: [],
-        finalCodeBlocks: []
-      }
-    ]
-  }
-};
-
-describe.only("mock fetch", () => {
-  let db = {};
-  beforeEach(() => {
-    db = testData;
-
-    function api(url, init) {
-      const route = url.split(baseUrl + "/")[1];
-      const segments = route.split("/");
-      const category = segments[0];
-      const item = segments[segments.length - 1];
-      const body = init.body ? JSON.parse(init.body) : {};
-      let result = {};
-      switch (init.method) {
-        case "GET":
-          if (item === "logs") {
-            result.logs = testData[segments[1]].logs;
-          } else if (!db[item]) {
-            result = { message: "not found" };
-          } else {
-            result[item] = db[item];
-          }
-          break;
-        case "POST":
-          if (item === "logs") {
-            db[body.username].logs.push(body);
-            result.logs = body;
-          } else { switch (route) {
-            case "tokensignin":
-              result = {iss: "https://accounts.google.com"};
-              break;
-            case "register":
-              db[body.username] = body;
-              result = {message: "User created successfully."};
-              break;
-            case "auth":
-              if (db[body.username].password !== body.password) {
-                result = {message: "Authentication failed."}
-              } else {
-                result = {access_token: "123456"};
-              } 
-              break;
-            default:
-              db[item] = body;
-              result[item] = body;
-          }}
-          break;
-        case "PUT":
-          db[item] = body;
-          result[item] = body;
-          break;
-        case "DELETE":
-          if (!db[item]) {
-            result = { message: "not found" };
-          } else {
-            delete db[item];
-            result = { message: "deleted" };
-          }
-          break;
-        default:
-          result = { message: "fetch resolved" };
-      }
-      return result;
-    }
-
-    fetch.mockImplementation((url, init) => {
-      return new Promise((resolve, reject) => {
-        const result = api(url, init);
-        resolve({
-          status: 200,
-          statusText: "ok",
-          json: function() {
-            return new Promise((resolve, reject) => {
-              resolve(result);
-            });
-          }
-        });
-      });
-    });
-  });
-
+// only test local mock fetch, other blocks use real fetch
+describe.only("mock fetch and api", () => {
+  jest.resetModules();
+  jest.mock("node-fetch"); // mock node-fetch from __mocks__
+  const fetchJson = require("./fetch").fetchJson;
+  
   afterEach(() => {
-    db = {};
+    jest.resetModules();
   });
 
-  test("postData", async function() {
-    let response = await postData("myroute", "myMethod", "myBody");
-    expect(response.message).toEqual("fetch resolved");
+  test("fetchJson", async function() {
+    expect.assertions(1);
+    let json = await fetchJson("myRoute", "myMethod", "myBody");
+    expect(json.title).toBe("myRoute unknown");
   });
 
-  test("get user", async () => {
-    let route = "user/graph_hopper";
+  test("post/get user", async () => {
+    let route = "Players/a";
     let method = "GET";
-    let response = await postData(route, method);
-    expect(response).toEqual({ graph_hopper: testData.graph_hopper });
-  });
+    let json = await fetchJson(route, method);
+    expect(json.title).toBe("Not Found");
 
-  test("post log", async () => {
-    let route = "/logs";
-    let method = "POST";
-    let body = testData.graph_hopper.logs[0];
-    let response = await postData(route, method, body);
-    expect(response).toEqual({ logs: body });
+    route = "Players";
+    method = "POST";
+    let body = {userName: "a"};
+    json = await fetchJson(route, method, body);
+    expect(json.userName).toBe("a");
 
-    route = "user/graph_hopper/logs";
+    route = "Players/a";
     method = "GET";
-    response = await postData(route, method);
-    expect(response).toEqual({ logs: testData.graph_hopper.logs });
+    json = await fetchJson(route, method);
+    expect(json.userName).toBe("a");
+
+    method = "DELETE";
+    json = await fetchJson(route, method);
+    expect(json.userName).toBe("a");
+
+    method = "GET";
+    json = await fetchJson(route, method);
+    expect(json.title).toBe("Not Found");
   });
 
-  // test("put user", async () => {
-  //   let route = "user/ester_lavista";
-  //   let method = "PUT";
-  //   let body = testData.ester_lavista;
-  //   let response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: body });
-
-  //   body = testData.graph_hopper;
-  //   response = await postData(route, method, body);
-  //   expect(response).toEqual({ ester_lavista: body });
-
-  //   method = "GET";
-  //   response = await postData(route, method);
-  //   expect(response).toEqual({ ester_lavista: body });
+  // test("google id token", async () => {
+  //   let route = "tokensignin";
+  //   let method = "POST";
+  //   let body = {idToken: "sometoken"};
+  //   let json = await fetchJson(route, method, body);
+  //   expect(json.iss).toBe("https://accounts.google.com");
   // });
-
-  test("delete user", async () => {
-    let route = "user/ester_lavista";
-    let method = "DELETE";
-    let response = await postData(route, method);
-    expect(response.message).toBe("deleted");
-
-    method = "GET";
-    response = await postData(route, method);
-    expect(response.message).toBe("not found");
-  });
-
-  test("google id token", async () => {
-    let route = "tokensignin";
-    let method = "POST";
-    let body = {idToken: "sometoken"};
-    let response = await postData(route, method, body);
-    expect(response.iss).toBe("https://accounts.google.com");
-  })
-
-  test("register", async () => {
-    let route = "register";
-    let method = "POST";
-    let body = {
-      username: "graph_hopper",
-      password: "pass123"
-    };
-    let response = await postData(route, method, body);
-    expect([
-      "User created successfully.",
-      "User already exists."
-    ]).toContain(response.message);
-  })
-
-  test("auth", async () => {
-    let route = "auth";
-    let method = "POST";
-    let body = {
-      username: "graph_hopper",
-      password: "pass123"
-    };
-    let response = await postData(route, method, body);
-    expect(response.access_token).toBeTruthy();
-  })
 });
 
-describe("real fetch", () => {
-  let db = {};
-  beforeEach(() => {
-    jest.unmock('node-fetch')
-    db = testData;
-  });
 
-  afterEach(() => {
-    db = {};
-  });
+describe("real fetch with local api", () => {
+  jest.resetModules();
+  jest.unmock("node-fetch");
+  const fetchJson = require("./fetch").fetchJson; 
 
-  test("get user", async () => {
-    let route = "user/graph_hopper";
-    let method = "GET";
-    let response = await postData(route, method);
-    expect(response).toEqual({ graph_hopper: testData.graph_hopper });
-  });
-
-  test("delete user", async () => {
-    let route = "user/ester_lavista";
-    let method = "DELETE";
-    let response = await postData(route, method);
-    expect(response.message).toBe("deleted");
+  test("get users/ post/ delete", async () => {
+    let route = "Players";
+    let method = "POST";
+    let username = "test" + Date.now();
+    let body = {userName: username};
+    let json = await fetchJson(route, method, body);
+    expect(json.userName).toBe(username);
 
     method = "GET";
-    response = await postData(route, method);
-    expect(response.message).toBe("not found");
+    json = await fetchJson(route, method);
+    expect(json).toBeTruthy();
+    let lastId = Number(json[json.length -1].id);
+
+    route = "Players/" + lastId;
+    method = "GET";
+    json = await fetchJson(route, method);
+    expect(json.userName).toBe(username);
+
+    method = "DELETE";
+    json = await fetchJson(route, method);
+    expect(json.userName).toBe(username);
+
+    method = "GET";
+    json = await fetchJson(route, method);
+    expect(json.title).toBe("Not Found");
   });
 
-  test("google id token", async () => {
-    let route = "tokensignin";
-    let method = "POST";
-    let body = {idToken: "sometoken"};
-    let response = await postData(route, method, body);
-    expect(response.iss).toBe("https://accounts.google.com");
-  })
-
-  test("register", async () => {
-    let route = "register";
-    let method = "POST";
-    let body = {
-      username: "graph_hopper",
-      id: 1,
-      gId: 1,
-      password: "pass123"
-    };
-    let response = await postData(route, method, body);
-    expect([
-      "User created successfully.",
-      "User already exists."
-    ]).toContain(response.message);
-  })
-
-  test("auth", async () => {
-    let route = "auth";
-    let method = "POST";
-    let body = {
-      username: "graph_hopper",
-      password: "pass123"
-    };
-    let response = await postData(route, method, body);
-    expect(response.access_token).toBeTruthy();
-  })
 });
+
+
+describe('Google tokenInfo', () => {
+  jest.resetModules();
+  jest.unmock("node-fetch");
+  const tokenInfo = require("./fetch").tokenInfo;
+  
+  test("tokenInfo", async () => {
+    let json = await tokenInfo("XYZ123");
+    expect(json.status).toBe(400);
+  })
+})
