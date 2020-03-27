@@ -14,19 +14,16 @@ namespace Graph_Hopper.Controllers
     public class PlayersController : ControllerBase
     {
         private readonly GraphHopperContext _context;
-        private readonly ILogger _logger;
 
-        public PlayersController(GraphHopperContext context, ILogger<PlayersController> logger)
+        public PlayersController(GraphHopperContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
         // GET: api/Players
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Player>>> GetPlayers()
         {
-            _logger.LogInformation("Hi from api/Players");
             return await _context.Players.ToListAsync();
         }
 
