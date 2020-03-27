@@ -48,7 +48,8 @@
   fill: var(--icon-fill-color2);
 }
 .tabBtn .activeTab ellipse {
-  fill: var(--icon-fill-color);
+  fill: var(--gold-2);
+  /* fill: var(--icon-fill-color); */
 }
 .tabBtn .activeTab path,
 .tabBtn .activeTab ellipse {
@@ -68,7 +69,7 @@
   stroke: var(--icon-stroke-color);
 }
 .controlBtn ellipse {
-  fill: var(--icon-fill-color);
+  fill: var(--gold-2);
 }
 .iconBtn:hover {
   transition: 0.1s;
@@ -82,17 +83,29 @@
 }
 .controlInputNum,
 .controlSelect {
+<<<<<<< HEAD
+=======
+  /* color: var(--text-secondary-color); */
+  color: var(--blue-4);
+  font-size: 1.5em;
+  font-weight: Bold;
+>>>>>>> f5cb34d8dfebaf37f802194398e71e823e4d9172
   border: solid 5px var(--icon-stroke-color);
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
+<<<<<<< HEAD
   background-color: var(--gold02);
   color: var(--blue4);
+=======
+  background-color: var(--gold-02);
+  /* background: var(--icon-fill-color); */
+>>>>>>> f5cb34d8dfebaf37f802194398e71e823e4d9172
   text-align: center;
   font-weight: 700;
 }
 .controlInputNum {
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   width: 3rem;
   -moz-appearance: textfield;
 }
@@ -101,9 +114,9 @@
   -webkit-appearance: none;
   margin: 0;
 }
-.controlSelect {
+/* .controlSelect {
   font-size: 1.5em;
-}
+} */
 .reflectXBtn {
   transform: scaleX(-1);
 }
