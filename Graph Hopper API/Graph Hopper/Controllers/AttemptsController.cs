@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Graph_Hopper.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Graph_Hopper.Controllers
 {
@@ -13,10 +14,12 @@ namespace Graph_Hopper.Controllers
     public class AttemptsController : ControllerBase
     {
         private readonly GraphHopperContext _context;
+        private readonly ILogger _logger;
 
-        public AttemptsController(GraphHopperContext context)
+        public AttemptsController(GraphHopperContext context, ILogger<PlayersController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Attempts
@@ -78,6 +81,8 @@ namespace Graph_Hopper.Controllers
             var result = await joined
                 .Where(p => p.Difficulty == joined.Max(p => p.Difficulty))
                 .ToListAsync();
+            
+            _logger.LogInformation("result: Type is {0}", result.GetType());
 
             if (result.Count == 0)
             {
