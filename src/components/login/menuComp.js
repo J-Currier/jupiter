@@ -84,7 +84,8 @@ export default function Menu(props) {
     setMenuOpen(prev => !prev);
   }
   function handleClickRestart() {
-    props.handleRestart();
+    props.endAttempt(props.attemptId);
+    props.resetPlayer(props.user.id, props.levelId, props.playerPosition, props.targetPosition);
     setMenuOpen(false);
   }
   async function handleClickSignOut() {
