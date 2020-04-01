@@ -147,7 +147,11 @@
   padding: 1em 2em;
   border-bottom: 2px solid #fff;
 }
-#highScore .player {
+#highScore th {
+  background-color: var(--text-primary-color);
+  color: #fff;
+}
+#highScore .highlight {
   background-color: var(--green4);
   color: #fff;
 }

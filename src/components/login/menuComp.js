@@ -5,36 +5,48 @@ import { ReactComponent as MenuSvg } from "../..//images/Icon_menu.svg";
 import { fetchJson } from "../../scripts/fetch";
 
 
-function countMatchingObjects(array, compareKey, matchValue) {
+function countMatchingObjects(array, compareKey, matchValue, filter) {
   let count = 0;
+  let filteredCount = 0;
   for (const v of array) {
     if (v[compareKey] === matchValue) {
       count++;
     }
+    if (v[filter]) {
+      filteredCount++;
+    }
   }
-  return count;
+  return [count, filteredCount];
 }
 
-async function getScore() {
+async function getScore(playerId) {
   let attemptsJson = [];
-  attemptsJson = await fetchJson("Attempts", "GET");
+  attemptsJson = await fetchJson("Attempts" + (playerId? "/PlayerId=" + playerId : ""), "GET");
   let runsJson = [];
   runsJson = await fetchJson("FunctionsRuns", "GET");
-
   const scores = attemptsJson.reduce((cumulator, v) => {
-    const countRuns = countMatchingObjects(runsJson, "AttemptId", v.id);
-    if (countRuns > 0) {
-      const score = 100 - 10 * countRuns;
+    const [runCount, successCount] = countMatchingObjects(runsJson, "attemptId", v.id, "success");
+    const success = (successCount > 0) ? "Yes" : "No";
+    if (runCount > 0) {
+      const score = runCount;
       cumulator.push(
-        {playerId: v.playerId, levelId: v.levelId, score: score}
+        {playerId: v.playerId, levelId: v.levelId, score: score, success: success}
       );
     }
     return cumulator;
   }, []);
 
-  scores.sort((a, b) => Number(b.score) - Number(a.score));
-  // scores.sort((a, b) => Number(b.levelId) - Number(a.levelId));
-  return scores;
+  scores.sort((a, b) => Number(a.score) - Number(b.score));
+  scores.sort((a, b) => Number(b.levelId) - Number(a.levelId));
+
+  const emptyScores = [];
+  for (let i=0; i<10; i++) {
+    emptyScores.push(
+      {playerID: "", levelId: "", score: "", success: ""}
+    );
+  }
+
+  return scores.concat(emptyScores);
 }
 
 export default function Menu(props) {
@@ -54,18 +66,22 @@ export default function Menu(props) {
     setScoreOpen(false);
   }
   async function scoreTable() {
-    const scores = await getScore();
-    const scoreRows = scores.slice(0,5).map((v,i) => (
-      <tr key={i} className={v.playerId===props.user.id?"player":""}>
-        <td key="level">{v.levelId}</td>
-        <td key="runs">{v.score}</td>
+    const scores = await getScore(props.user.id);
+    const scoreRows = [];
+    for (let i=0; i<5; i++) {
+      scoreRows.push(
+      <tr key = {i} className = {scores[i].success ? "highlight" : ""}>
+        <td key = "level">{scores[i].levelId}</td>
+        <td key = "score">{scores[i].score}</td>
+        <td key = "success">{scores[i].success}</td>
       </tr>
-    ));
+    )};
     return (<table id="highScore">
       <thead>
         <tr key="head">
           <th>Level</th>
-          <th>Score</th>
+          <th>Runs</th>
+          <th>Success</th>
         </tr>
       </thead>
       <tbody>
