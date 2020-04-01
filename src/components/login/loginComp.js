@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
 import { fetchJson, tokenInfo } from "../../scripts/fetch";
+import loadScript from "../../scripts/loadScript";
 
 export default function Login(props) {
   const { setIsSignedIn, setUser, setCurrentLevel, online, setOnline } = props;
@@ -10,44 +11,43 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
-  const [loginMsg, setLoginMsg] = useState("");
+  const [loginMsg, setLoginMsg] = useState("Loading Google Sign-in...");
+  const [gapiLoaded, setGapiLoaded] = useState(false);
 
   useEffect(() => {
-    async function gapiSetup() {
-      // initialize google api
-      await window.gapi.load("auth2", async () => {
-        await gapi.auth2.init({
-          client_id: keys.clientId + ".apps.googleusercontent.com",
-          fetch_basic_profile: false,
-          scope: "profile"
-        });
-      });
-
-      // render google api button
-      window.gapi.load("signin2", () => {
-        const options = {
-          scope: "profile",
-          width: 300,
-          height: 50,
-          longtitle: true,
-          theme: "light",
-          onsuccess: handleSuccess,
-          onfailure: handleFailure
-        };
-        gapi.signin2.render("gLoginBtn", options);
-      });
+    if (window.gapi) {
+      gapiSetup();
+    } else {
+      loadScript("gapi", "https://apis.google.com/js/platform.js", gapiSetup);
     }
-    // timeout for in case gapi script has not finished loading
-    const interval = setInterval(() => {
-      if (window.gapi) {
-        gapiSetup();
-        clearInterval(interval);
-      }
-    }, 10);
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
+
+  async function gapiSetup() {
+    setGapiLoaded(true);
+    setLoginMsg("");
+    // initialize google api
+    await window.gapi.load("auth2", async () => {
+      await gapi.auth2.init({
+        client_id: keys.clientId + ".apps.googleusercontent.com",
+        fetch_basic_profile: false,
+        scope: "profile"
+      });
+    });
+
+    // render google api button
+    window.gapi.load("signin2", () => {
+      const options = {
+        scope: "profile",
+        width: 300,
+        height: 50,
+        longtitle: true,
+        theme: "light",
+        onsuccess: handleSuccess,
+        onfailure: handleFailure
+      };
+      gapi.signin2.render("gLoginBtn", options);
+    });
+  }
 
   async function getPlayerId(userObject) {
     let jsonPlayer;
@@ -123,6 +123,7 @@ export default function Login(props) {
   }
 
   async function handleSuccess(googleUser) {
+    setLoginMsg("Signing in...");
     const idToken = googleUser.getAuthResponse().id_token;
     // // get profile info
     // const profile = googleUser.getBasicProfile();
@@ -141,7 +142,11 @@ export default function Login(props) {
   }
 
   function handleFailure() {
-    setIsSignedIn(false); // component will unmount
+    setLoginMsg("Google sign-in cancelled.")
+    setIsSignedIn(false);
+  }
+
+  function handleGLoginClick() {
   }
 
   // --- Regular Login ---
@@ -229,7 +234,6 @@ export default function Login(props) {
         <label htmlFor="username" className="loginLabel">
           {`Username: ${usernameMsg}`}
         </label>
-        <br />
         <input
           type="text"
           autoComplete="username"
@@ -245,7 +249,6 @@ export default function Login(props) {
         <label htmlFor="password" className="loginLabel">
           {`Password: ${passwordMsg}`}
         </label>
-        <br />
         <input
           type="password"
           autoComplete="current-password"
@@ -273,8 +276,12 @@ export default function Login(props) {
       >
         Play as a Guest
       </button>
-      <button id="gLoginBtn"></button>
-      <div className="loginLabel">{loginMsg}</div>
+      <div className="loginItem">
+        {gapiLoaded &&
+          <button id="gLoginBtn" onClick={handleGLoginClick}></button>
+        }
+        <div className="loginLabel">{loginMsg}</div>
+      </div>
     </div>
   );
 }
