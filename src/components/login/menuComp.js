@@ -138,7 +138,6 @@ export default function Menu(props) {
       <div id="scoreTab" className={scoreOpen ? "open" : "closed"}>
         {scoreDisplay}
       </div>
-      }
     </div>
   );
 }
