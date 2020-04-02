@@ -8,7 +8,7 @@ namespace Graph_Hopper.Controllers
         // GET
         public string Greeting()
         {
-            var greeting = "Welcome to Graph Hopper API 35";
+            var greeting = "Welcome to Graph Hopper API";
             return greeting;
         }
     }

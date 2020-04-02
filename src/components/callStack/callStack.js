@@ -36,27 +36,29 @@ export function CallStack(props) {
     // }
     return(
         <div  className='call-stack'>
-            {props.callStackComps}
-            <div className='button-div'>
+            <div className='cards-div'>
+                {props.callStackComps}
+            </div>
+            <div className='buttons-div'>
             <button 
                 id='clear-button' 
                 name="clear-button"
                 key="clear-button" 
-                className="iconBtn" 
                 onClick={props.clearStack}
             >
-                <ClearSvg 
+                <ClearSvg
+                    className="clearIcon" 
                     alt="Clear Button"
                 />
             </button>
             <button 
                 id='run-button' 
                 name="run-button"
-                key="run-button" 
-                className="iconBtn" 
+                key="run-button"
                 onClick={props.runStack}
             >
-                <RunSvg 
+                <RunSvg
+                    className="runIcon" 
                     alt="Run Button"
                 />
             </button>
