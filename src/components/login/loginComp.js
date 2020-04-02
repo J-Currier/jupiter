@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
 import { fetchJson, tokenInfo } from "../../scripts/fetch";
+import loadScript from "../../scripts/loadScript";
 
 export default function Login(props) {
   const { setIsSignedIn, setUser, setCurrentLevel, online, setOnline } = props;
@@ -10,87 +11,96 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
-  const [loginMsg, setLoginMsg] = useState("");
+  const [loginMsg, setLoginMsg] = useState("Loading Google Sign-in...");
+  const [gapiLoaded, setGapiLoaded] = useState(false);
 
   useEffect(() => {
-    async function gapiSetup() {
-      // initialize google api
-      await window.gapi.load("auth2", async () => {
-        const auth2 = await gapi.auth2.init({
-          client_id: keys.clientId + ".apps.googleusercontent.com",
-          fetch_basic_profile: false,
-          scope: "profile"
-        });
-      });
-
-      // render google api button
-      window.gapi.load("signin2", () => {
-        const options = {
-          scope: "profile",
-          width: 300,
-          height: 50,
-          longtitle: true,
-          theme: "light",
-          onsuccess: handleSuccess,
-          onfailure: handleFailure
-        };
-        gapi.signin2.render("gLoginBtn", options);
-      });
+    if (window.gapi) {
+      gapiSetup();
+    } else {
+      loadScript("gapi", "https://apis.google.com/js/platform.js", gapiSetup);
     }
-    // timeout for in case gapi script has not finished loading
-    const interval = setInterval( async () => {
-      if (window.gapi) {
-        await gapiSetup();
-        clearInterval(interval);
-      }
-    }, 10);
-    return () => {
-      clearInterval(interval);
-    };
   }, []);
-  
 
-  async function startSession(userObject) {
+  async function gapiSetup() {
+    setGapiLoaded(true);
+    setLoginMsg("");
+    // initialize google api
+    await window.gapi.load("auth2", async () => {
+      await gapi.auth2.init({
+        client_id: keys.clientId + ".apps.googleusercontent.com",
+        fetch_basic_profile: false,
+        scope: "profile"
+      });
+    });
+
+    // render google api button
+    window.gapi.load("signin2", () => {
+      const options = {
+        scope: "profile",
+        width: 300,
+        height: 50,
+        longtitle: true,
+        theme: "light",
+        onsuccess: handleSuccess,
+        onfailure: handleFailure
+      };
+      gapi.signin2.render("gLoginBtn", options);
+    });
+  }
+
+  async function getPlayerId(userObject) {
     let jsonPlayer;
     try {
       if (userObject.type !== "guest") {
+        // todo: login password authentication
         jsonPlayer = await fetchJson("Players/=" + userObject.userName, "GET");
       }
       if (userObject.type === "guest" || !jsonPlayer.id) {
         jsonPlayer = await fetchJson("Players", "POST", userObject);
-        if (!jsonPlayer.id) {
-          // console.log("failed to post new user");
-          return;
-        }
       }
-    } catch(error) {
+      if (jsonPlayer.id) {
+        return jsonPlayer.id;
+      }
+    } catch (error) {
       setOnline(false);
       return;
     }
+  }
 
-    // password to be added to db
-    if ((userObject.type==="login") && jsonPlayer.password && (jsonPlayer.password !== userObject.password)) {
-      setPasswordMsg("Username and password do not match.");
+  async function getLevel(online, userType, playerId) {
+    if (!online || userType === "guest") {
+      return 1;
+    } else {
+      try {
+        const jsonLevel = await fetchJson(
+          "Attempts/LastLevel/PlayerId=" + playerId,
+          "GET"
+        );
+        return jsonLevel[0].levelId;
+      } catch (error) {
+        // console.log("fetching player's last level failed", error);
+        return 1;
+      }
+    }
+  }
+
+  async function startSession(userObject) {
+    const playerId = await getPlayerId(userObject);
+    if (!playerId) {
+      setPasswordMsg("Login Failed.")
       return;
     }
-    //
 
     setUser({
       userName: userObject.userName,
-      id: jsonPlayer.id,
+      id: playerId,
       type: userObject.type
     });
-    if (!online || userObject.type==="guest") {
-      setCurrentLevel(1);
-    } else {
-      try {
-        const jsonLevel = await fetchJson("Attempts/LastLevel/PlayerId="+jsonPlayer.id, "GET");
-        setCurrentLevel(jsonLevel[0].levelId);
-      } catch(error) {
-        // console.log("fetching player's last level failed", error);
-        setCurrentLevel(1);
-      }
-    }
+
+    const level = await getLevel(online, userObject.type, playerId);
+    setCurrentLevel(level);
+
     setIsSignedIn(true); // component will unmount
   }
 
@@ -113,6 +123,7 @@ export default function Login(props) {
   }
 
   async function handleSuccess(googleUser) {
+    setLoginMsg("Signing in...");
     const idToken = googleUser.getAuthResponse().id_token;
     // // get profile info
     // const profile = googleUser.getBasicProfile();
@@ -123,7 +134,7 @@ export default function Login(props) {
 
     const googleId = await verifyToken(idToken);
     if (googleId) {
-      await startSession({ 
+      await startSession({
         userName: googleId,
         type: "google"
       });
@@ -131,26 +142,33 @@ export default function Login(props) {
   }
 
   function handleFailure() {
+    setLoginMsg("Google sign-in cancelled.")
     setIsSignedIn(false);
+  }
+
+  function handleGLoginClick() {
   }
 
   // --- Regular Login ---
 
   function validateUsername(username) {
-    let valid = (
-      username.length >= 6 && username.length <= 128 && !username.includes(" ") && 
-      /^[a-zA-Z]/.test(username.charAt(0)) && username.indexOf("guest") !== 0
-    );
+    let valid =
+      username.length >= 6 &&
+      username.length <= 128 &&
+      !username.includes(" ") &&
+      /^[a-zA-Z]/.test(username.charAt(0)) &&
+      username.indexOf("guest") !== 0;
     if (!valid) {
-      setUsernameMsg("Must be 6 or more characters, starting with a letter, with no spaces.");
+      setUsernameMsg(
+        "Must be 6 or more characters, starting with a letter, with no spaces."
+      );
     }
     return valid;
   }
 
   function validatePassword(password) {
-    let valid = (
-      password.length >= 8 && password.length <= 128 && !password.includes(" ")
-    );
+    let valid =
+      password.length >= 8 && password.length <= 128 && !password.includes(" ");
     if (!valid) {
       setPasswordMsg("Must be 8 or more characters, with no spaces.");
     }
@@ -173,12 +191,12 @@ export default function Login(props) {
     const userObject = {
       userName: `guest${Date.now()}${Math.random()}`, // somewhat random unique id. consider npm uuid
       type: "guest"
-    }
-    if(online) {
+    };
+    if (online) {
       startSession(userObject);
     } else {
       setUser(userObject);
-      setIsSignedIn(true);
+      setIsSignedIn(true); // component will unmount
     }
   }
 
@@ -206,64 +224,64 @@ export default function Login(props) {
         </button>
       </div>
     </div>
-  )
+  );
 
-  return (
-    !online
-      ? offlineLogin
-      : <div id="login" className="overlay">
-        <div className="loginItem">
-          <label htmlFor="username" className="loginLabel">
-            {`Username: ${usernameMsg}`}
-          </label>
-          <br />
-          <input
-            type="text"
-            autoComplete="username"
-            id="username"
-            name="username"
-            key="username"
-            className="loginInput"
-            value={username}
-            onChange={handleUsername}
-          ></input>
-        </div>
-        <div className="loginItem">
-          <label htmlFor="password" className="loginLabel">
-            {`Password: ${passwordMsg}`}
-          </label>
-          <br />
-          <input
-            type="password"
-            autoComplete="current-password"
-            id="password"
-            name="password"
-            key="password"
-            className="loginInput"
-            value={password}
-            onChange={handlePassword}
-          ></input>
-        </div>
-        <button
-          id="loginBtn"
-          className="loginBtn"
-          key="loginBtn"
-          onClick={handleLogin}
-        >
-          Sign in
-        </button>
-        <button
-          id="guestBtn"
-          className="loginBtn"
-          key="guestBtn"
-          onClick={handleGuest}
-        >
-          Play as a Guest
-        </button>
-        <button id="gLoginBtn"></button>
-        <div className="loginLabel">
-          {loginMsg}
-        </div>
+  return !online ? (
+    offlineLogin
+  ) : (
+    <div id="login" className="overlay">
+      <div className="loginItem">
+        <label htmlFor="username" className="loginLabel">
+          {`Username: ${usernameMsg}`}
+        </label>
+        <input
+          type="text"
+          autoComplete="username"
+          id="username"
+          name="username"
+          key="username"
+          className="loginInput"
+          value={username}
+          onChange={handleUsername}
+        ></input>
       </div>
+      <div className="loginItem">
+        <label htmlFor="password" className="loginLabel">
+          {`Password: ${passwordMsg}`}
+        </label>
+        <input
+          type="password"
+          autoComplete="current-password"
+          id="password"
+          name="password"
+          key="password"
+          className="loginInput"
+          value={password}
+          onChange={handlePassword}
+        ></input>
+      </div>
+      <button
+        id="loginBtn"
+        className="loginBtn"
+        key="loginBtn"
+        onClick={handleLogin}
+      >
+        Sign in
+      </button>
+      <button
+        id="guestBtn"
+        className="loginBtn"
+        key="guestBtn"
+        onClick={handleGuest}
+      >
+        Play as a Guest
+      </button>
+      <div className="loginItem">
+        {gapiLoaded &&
+          <button id="gLoginBtn" onClick={handleGLoginClick}></button>
+        }
+        <div className="loginLabel">{loginMsg}</div>
+      </div>
+    </div>
   );
 }

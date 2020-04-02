@@ -72,6 +72,8 @@
 .cards-div {
     height: 90%;
     overflow-y: scroll;
+    flex-direction: column;
+
 }
 
 .buttons-div {

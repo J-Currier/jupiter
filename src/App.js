@@ -13,7 +13,7 @@ import { CallStack, CallCard } from './components/callStack/callStack';
 import Login from './components/login/loginComp';
 import Menu from './components/login/menuComp';
 import mathFunctions from "./scripts/math.js";
-import { fetchJson } from "./scripts/fetch";
+import { endAttempt, postAttempt, postRun } from "./scripts/fetchFunctions";
 
 
 function Game(props) {
@@ -65,18 +65,23 @@ function Game(props) {
   const [callStackComps, setCallStackComps] = useState([]);
   const [counter, setCounter] = useState(0)
 
-  // Login props
+  // -- Login hooks --
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [currentLevel, setCurrentLevel] = useState(1);
   const [online, setOnline] = useState(true);
-  const [attempt, setAttempt] = useState(null);
+  const [attemptId, setAttemptId] = useState(null);
   const [score, setScore] = useState(0);
   useEffect(() => {
-    if (online && isSignedIn) {
-      postAttempt();
+    async function startAttempt() {
+      if (online && isSignedIn) {
+        const newAttemptId = await postAttempt(user.id, currentLevel, playerPositionsArray[0], targetPosition);
+        setAttemptId(newAttemptId);
+      }
     }
+    startAttempt();
   }, [isSignedIn]);
+  // --
 
   let player = {
     id: "myStartPt",
@@ -100,6 +105,7 @@ function Game(props) {
     setShapeClassName(newName);
   };
 
+  // -- Shape Transformations --
   const translate = async (e, deltaX, deltaY) => {
     let currentPlayerPosition = playerAcceptablePositionsArray[playerAcceptablePositionsArray.length-1];
     let newPlayerPosition = mathFunctions.translate(
@@ -143,8 +149,7 @@ function Game(props) {
       changeClass("fade-in");
     }, 100);
   };
-
-
+  // end of Shape Transformations--
 
   const moveBack_shakeVertical = async () => {
     playerAcceptablePositionsArray.pop();
@@ -167,9 +172,25 @@ function Game(props) {
     transformFunctions[name](e.target.value)
   };
 
+  async function resetPlayer(userId, levelId, playerPosition, targetPosition) {
+    setPlayerPosition(playerPositionsArray[0]);
+    setPlayerPositionsArray(prev => [prev[0]]);
+    setPlayerAcceptablePositionsArray(prev => [prev[0]]);
+    clearStack();
+    
+    if (online) {
+      const newAttemptId = await postAttempt(userId, levelId, playerPosition, targetPosition);
+      setAttemptId(newAttemptId);
+    }
+  }
+
   const LevelCheck = (props) => {
     if (online) {
-      props.postRun(true)
+      props.postRun(props.callStackComps, props.attemptId, props.playerPositionsArray, props.playerAcceptablePositionsArray, props.score, true);
+      props.endAttempt(props.attemptId);
+    }
+    function handleReset() {
+      props.resetPlayer(props.userId, props.levelId, props.playerPositionsArray[0], props.targetPosition);
     }
     return (
       <div id="winner">
@@ -180,7 +201,7 @@ function Game(props) {
           key="restart" 
           name="restart" 
           className="levelCheckBtn" 
-          onClick={props.handleReset}
+          onClick={handleReset}
         >
           Restart
         </button>
@@ -214,33 +235,7 @@ function Game(props) {
     />
   );
 
-
-  async function postAttempt() {
-    const attemptBody = {
-      playerId: user.id,
-      levelId: currentLevel,
-      StartPosition: JSON.stringify(playerPositionsArray[0]),
-      TargetPosition: JSON.stringify(targetPosition)
-    }
-    const attemptJson = await fetchJson("Attempts", "POST", attemptBody);
-    setAttempt(attemptJson.id);
-  }
-
-  async function postRun(success=false) {
-    const callStackFunctions = callStackComps.map(v => {
-      return v.props.desc;
-    });
-    const runBody = {
-      AttemptId: attempt,
-      Functions: JSON.stringify(callStackFunctions),
-      PlayerPositions: JSON.stringify(playerPositionsArray),
-      PlayerAcceptablePositions: JSON.stringify(playerAcceptablePositionsArray),
-      score: score,
-      success: success
-    }
-    await fetchJson("FunctionsRuns", "POST", runBody);
-  }
-
+  // -- Stack Functions --
   function addToStack(image, desc, fx, para) {
 
     if (callStackComps.length < 10) {
@@ -262,7 +257,7 @@ function Game(props) {
   const runStack = async () => {
     
     if (online && callStackComps.length > 0) {
-      await postRun(false);
+      await postRun(callStackComps, attemptId, playerPositionsArray, playerAcceptablePositionsArray, score, false);
     }
 
     // maybe try recursive function?
@@ -283,17 +278,7 @@ function Game(props) {
   function clearStack() {
     setCallStackComps([])
   }
-
-  async function resetPlayer() {
-    setPlayerPosition(playerPositionsArray[0]);
-    setPlayerPositionsArray(prev => [prev[0]])
-    setPlayerAcceptablePositionsArray(prev => [prev[0]])
-    clearStack();
-    
-    if (online) {
-      await postAttempt();
-    }
-  }
+  // --
 
   return (
     <main>
@@ -309,10 +294,15 @@ function Game(props) {
       {isSignedIn && 
         <Menu
           setIsSignedIn = {setIsSignedIn}
-          handleRestart = {resetPlayer}
+          resetPlayer = {resetPlayer}
+          endAttempt = {endAttempt}
+          attemptId = {attemptId}
           setUser = {setUser}
           user = {user}
           online = {online}
+          levelId = {currentLevel}
+          playerPosition = {playerPositionsArray[0]}
+          targetPosition = {targetPosition}
         />
       }
       <div className="canvasWrapper">
@@ -342,8 +332,17 @@ function Game(props) {
       </div>
       {(JSON.stringify(playerPosition) === JSON.stringify(targetPosition)) &&
         <LevelCheck 
-          handleReset={resetPlayer}
+          resetPlayer={resetPlayer}
           postRun={postRun}
+          endAttempt={endAttempt}
+          attemptId={attemptId}
+          callStackComps={callStackComps}
+          playerPositionsArray={playerPositionsArray}
+          playerAcceptablePositionsArray={playerAcceptablePositionsArray}
+          score={score}
+          userId={user.id}
+          levelId={currentLevel}
+          targetPosition={targetPosition}
         />
       }
     </main>
