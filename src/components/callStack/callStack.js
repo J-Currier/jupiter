@@ -43,7 +43,8 @@ export function CallStack(props) {
             <button 
                 id='clear-button' 
                 name="clear-button"
-                key="clear-button" 
+                key="clear-button"
+                className="iconBtn"
                 onClick={props.clearStack}
             >
                 <ClearSvg
@@ -55,6 +56,7 @@ export function CallStack(props) {
                 id='run-button' 
                 name="run-button"
                 key="run-button"
+                className="iconBtn"
                 onClick={props.runStack}
             >
                 <RunSvg
