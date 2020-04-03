@@ -148,14 +148,14 @@ button {
 
 .canvasWrapper {
   position: relative;
-  margin: 40px 5px 0px 5px;
+  margin: 30px 5px 0px 5px;
   background-color: var(--game-background-color);
 }
 
 .controllerWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 40px 5px 0px 5px;
+  margin: 30px 5px 10px 5px;
 }
 
 main {
