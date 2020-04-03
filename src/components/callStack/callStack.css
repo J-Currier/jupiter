@@ -71,7 +71,7 @@
 
 .cards-div {
     height: 90%;
-    overflow-y: scroll;
+    overflow-y: auto;
     flex-direction: column;
 
 }
@@ -85,7 +85,7 @@
 
 .calling-card {
     display: grid;
-    height: 20%;
+    height: 12.5%;
     grid-template-columns: 1fr 4fr;
     justify-items: center;
     align-items: center;

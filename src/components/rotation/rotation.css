@@ -46,7 +46,7 @@
     align-content: center;
 }
 #rotation #rotate-left {
-    width: 50%;
+    width: 45%;
     height: 100%;
     justify-self: right;
 }
@@ -55,8 +55,7 @@
     height: 70%;
 }
 #rotation #rotate-right {
-    width: 50%;
+    width: 45%;
     height: 100%;
     justify-self: left;
-
 }
