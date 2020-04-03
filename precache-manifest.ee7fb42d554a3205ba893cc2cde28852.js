@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5a7fbbec7170143bef5c02f7c430e81c",
+    "revision": "b08a0002e0f6fed08ed457f19940ba98",
     "url": "/jupiter/index.html"
   },
   {
-    "revision": "b523f4a81d86aedc1e09",
-    "url": "/jupiter/static/css/main.8727cbf5.chunk.css"
+    "revision": "a4cb9bab716609ccc704",
+    "url": "/jupiter/static/css/main.43afa762.chunk.css"
   },
   {
     "revision": "c95aaef01640b9bfe7cd",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jupiter/static/js/2.be04cd12.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b523f4a81d86aedc1e09",
-    "url": "/jupiter/static/js/main.4d9b7a5b.chunk.js"
+    "revision": "a4cb9bab716609ccc704",
+    "url": "/jupiter/static/js/main.120f7428.chunk.js"
   },
   {
     "revision": "d15243fc1506ff95e327",
