@@ -32,7 +32,24 @@
   --text-emphasis-color: rgba(137, 235, 52, 1);
   --icon-fill-color: #e2ab0b;
   --icon-stroke-color: #1d219d;
+  --blue-4: #13157E /* rgb(19, 21, 126)*/;
+  --blue-5: #0B0D62 /* rgb(11, 13, 98) */;
+
   --icon-fill-color2: rgba(226, 171, 11, 0.7);
+  --gold-02: #ffecb3 /* rgb(255, 230, 153)*/;
+  --gold-1: #FFD763 /* rgb(255, 215, 99) */;
+  --gold-2: #F6C638 /* rgb(246, 198, 56) */;
+  --gold-3: #E2AB0B /* rgb(226, 171, 11) */;
+  --icon-fill-color: #e2ab0b;
+  --gold-4: #B58700 /* rgb(181, 135, 0)*/;
+  --gold-5: #8C6800 /* rgb(140, 104, 0)*/;
+
+  --red-1: #FF6B63 /* rgb(255, 107, 99)*/;
+  --red-2: #F64238 /* rgb(246, 66, 56)*/;
+  --red-3: /* #E2160B */ rgb(226, 22, 11);
+  --red-4: #B50900 /* rgb(181, 9, 0)*/;
+  --red-5: #8C0700 /* rgb(140, 7, 0)*/;
+
   --icon-stroke-color2: rgb(50, 50, 50, 0.7);
   --game-background-color: rgba(255, 255, 255, 0.2);
   --menu-background-color: rgb(240, 248, 255, 0.9);
@@ -122,10 +139,17 @@ button {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 850px) and (min-width: 750px) {
   .canvasWrapper, .controllerWrapper {
       width: 350px;
       height: 350px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .canvasWrapper, .controllerWrapper {
+      width: 300px;
+      height: 300px;
   }
 }
 
@@ -157,7 +181,8 @@ main {
 
 #winner {
   font-size: 500%;
-  color: var(--text-emphasis-color);
+  /* color: var(--text-emphasis-color); */
+  color: var(--green-2);
   font-family: "Bangers", cursive;
   height: 100%;
   padding: 60px 5px 0 5px;

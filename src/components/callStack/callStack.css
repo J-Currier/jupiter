@@ -54,11 +54,19 @@
     }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 850px) and (min-width: 750px) {
     .call-stack, #sideboard {
         width: 175px;
         height: 350px;
         font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .call-stack, #sideboard {
+        width: 150px;
+        height: 300px;
+        font-size: 8px;
     }
 }
 
