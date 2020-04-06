@@ -22,6 +22,8 @@ Azure: https://graphhopper.azurewebsites.net/
 
 * [React](https://reactjs.org) - JS framework
 * [Jest](https://jestjs.io/) - testing framework
+* [Visual Studio .Net C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - API App
+* [SQL Server](https://www.microsoft.com/en-ca/sql-server/sql-server-2019) - Database
 
 ## Authors
 
