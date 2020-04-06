@@ -10,6 +10,7 @@
   --menu-background-color: rgb(240, 248, 255, 0.9);
   --input-background-color: #ffe699;
   --input-font-color: #13157E;
+  --menu-highlight-color: #0f0f0f;
 }
 
 html, body {

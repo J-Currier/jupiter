@@ -75,7 +75,7 @@
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   background-color: var(--input-background-color);
-  color: var(--blue4);
+  color: var(--input-font-color);
   text-align: center;
 }
 .controlInputNum {

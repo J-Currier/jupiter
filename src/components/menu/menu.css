@@ -67,7 +67,7 @@
     color: var(--text-primary-color);
   }
   #menuNav .navBtn:hover {
-    background-color: var(--text-primary-color);
+    background-color: var(--menu-highlight-color);
     color: var(--text-secondary-color);
   }
   #menuNav .navBtn:active {
@@ -87,12 +87,12 @@
     border-bottom: 2px solid #fff;
   }
   #highScore th {
-    background-color: var(--text-primary-color);
+    background-color: var(--menu-highlight-color);
     color: #fff;
   }
   #highScore .highlight {
-    background-color: var(--green4);
-    color: #fff;
+    background-color: var(--menu-highlight-color);
+    color: var(--text-emphasis-color);
   }
   #noScore {
     font-size: 2em;
