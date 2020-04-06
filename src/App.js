@@ -222,6 +222,7 @@ function Game(props) {
       fx={fx}
       para = {para}
       desc = {desc}
+      deleteItem = {deleteItem}
       id={counter}
       key={counter} />;
       setCallStackComps((prev) => [...prev, newComp])
@@ -236,7 +237,6 @@ function Game(props) {
       await postRun(callStackComps, attemptId, playerPositionsArray, playerAcceptablePositionsArray, score, false);
     }
 
-    // maybe try recursive function?
     const recursiveFunc = async (array) => {
       if (array.length > 0) {
         await array[0].props.fx(...array[0].props.para)
@@ -253,6 +253,17 @@ function Game(props) {
 
   function clearStack() {
     setCallStackComps([])
+  }
+
+  function deleteItem(cardKey) {
+    // setCallStackComps((prev) => [...prev])
+    console.log("New Line")
+    const newArr = []
+    callStackComps.forEach((x) => {
+      console.log(x)
+      newArr.push(x)
+    })
+    setCallStackComps(newArr)
   }
   // --
 
@@ -304,6 +315,7 @@ function Game(props) {
           callStackComps={callStackComps}
           clearStack={clearStack}
           runStack = {runStack}
+          deleteItem = {deleteItem}
         />
       </div>
       {(JSON.stringify(playerPosition) === JSON.stringify(targetPosition)) &&
