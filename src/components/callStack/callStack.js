@@ -19,8 +19,8 @@ export function CallCard(props) {
                 className="cardIcon"
             />
             <p>{props.desc}</p>
-            <button className="delete-button" onClick={handleClick}>
-            <DeleteSvg className="delete-button">X</ DeleteSvg>
+            <button id="delete-button" className="iconBtn" onClick={handleClick}>
+            <DeleteSvg className="deleteIcon">X</ DeleteSvg>
             </button>
         </div>
     )

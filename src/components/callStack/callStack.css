@@ -93,33 +93,34 @@
 
 .calling-card {
     display: grid;
-    /* grid-column-start: 1;
-    grid-column-end: 3; */
-    min-height: 90px;
-    height: 90px;
-    grid-template-columns: 2fr 6fr 1fr;
-    padding: 7px;
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+    height: 12.5%;
+    width: 100%;
+    grid-template-columns: 2fr 12fr 1fr;
+    grid-template-rows: 1fr;
+}
+.calling-card #delete-button {
+    margin: 0;
+    width: 90%;
+    height: 27%;
+    align-self: start;
+    justify-self: end;
 }
 .calling-card .cardIcon {
-    height: 60%;
-    width: 60%;
+    margin: 0;
+    height: 55%;
+    width: 90%;
+    align-self: center;
+    justify-self: center;
+}
+.calling-card p {
+    margin: 0;
+    align-self: center;
+    justify-self: center;
 }
 
-.delete-button {
-    width: 20px;
-    height: 20px;
-    align-self: start;
-}
 
 .calling-card:nth-of-type(2n) {
     background: rgb(80, 80, 80, 0.5);
-}
-.calling-card p {
-    padding: 2px;
 }
 
 
@@ -131,13 +132,13 @@
 }
 
 #run-button {
-    height: 85%;
+    height: 90%;
     width: 30%;
     justify-self: start;
     margin: 4px;
 }
 
-.runIcon, .clearIcon {
+.runIcon, .clearIcon, .deleteIcon {
     height: 100%;
     width: 100%;
 }
