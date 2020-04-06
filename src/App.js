@@ -10,8 +10,9 @@ import { Triangle } from "./components/shapes/triangleComp.js";
 import { Star } from "./components/shapes/starComp.js";
 import { Rectangle } from "./components/shapes/rectangleComp.js";
 import { CallStack, CallCard } from './components/callStack/callStack';
-import Login from './components/login/loginComp';
-import Menu from './components/login/menuComp';
+import Login from "./components/login/loginComp";
+import Menu from "./components/menu/menuComp";
+import LevelCheck from "./components/levelCheck/levelCheckComp";
 import mathFunctions from "./scripts/math.js";
 import { endAttempt, postAttempt, postRun } from "./scripts/fetchFunctions";
 
@@ -184,31 +185,6 @@ function Game(props) {
     }
   }
 
-  const LevelCheck = (props) => {
-    if (online) {
-      props.postRun(props.callStackComps, props.attemptId, props.playerPositionsArray, props.playerAcceptablePositionsArray, props.score, true);
-      props.endAttempt(props.attemptId);
-    }
-    function handleReset() {
-      props.resetPlayer(props.userId, props.levelId, props.playerPositionsArray[0], props.targetPosition);
-    }
-    return (
-      <div id="winner">
-        <span>Portal Locked! <br />
-        You Win</span>
-        <button 
-          id="restartBtn" 
-          key="restart" 
-          name="restart" 
-          className="levelCheckBtn" 
-          onClick={handleReset}
-        >
-          Restart
-        </button>
-      </div>
-    );
-  };
-
   const shapeCompsObj = {
     circle: Circle,
     square: Square,
@@ -343,6 +319,7 @@ function Game(props) {
           userId={user.id}
           levelId={currentLevel}
           targetPosition={targetPosition}
+          online={online}
         />
       }
     </main>
