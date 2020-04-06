@@ -1,4 +1,4 @@
-/* global gapi */
+/* global gapi */ // Do not remove. Indicates predefined global variable.
 import React, { useState, useEffect } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
@@ -25,7 +25,7 @@ export default function Login(props) {
   async function gapiSetup() {
     setGapiLoaded(true);
     setLoginMsg("");
-    // initialize google api
+    // // initialize google api
     await window.gapi.load("auth2", async () => {
       await gapi.auth2.init({
         client_id: keys.clientId + ".apps.googleusercontent.com",
@@ -34,7 +34,7 @@ export default function Login(props) {
       });
     });
 
-    // render google api button
+    // // render google api button
     window.gapi.load("signin2", () => {
       const options = {
         scope: "profile",
@@ -53,7 +53,7 @@ export default function Login(props) {
     let jsonPlayer;
     try {
       if (userObject.type !== "guest") {
-        // todo: login password authentication
+        // // todo: login password authentication
         jsonPlayer = await fetchJson("Players/=" + userObject.userName, "GET");
       }
       if (userObject.type === "guest" || !jsonPlayer.id) {
@@ -79,7 +79,6 @@ export default function Login(props) {
         );
         return jsonLevel[0].levelId;
       } catch (error) {
-        // console.log("fetching player's last level failed", error);
         return 1;
       }
     }
@@ -106,10 +105,7 @@ export default function Login(props) {
 
   // --- Google Login ---
   async function verifyToken(idToken) {
-    // // verify from back-end
-    // let response = await fetchJson("tokensignin", "POST", {idToken: idToken});
-
-    // // verify from google api tokeninfo
+    // // verify from google api tokeninfo (not via backend)
     let response = await tokenInfo(idToken);
     const checkIssuer = iss =>
       iss === "accounts.google.com" || iss === "https://accounts.google.com";
@@ -127,10 +123,10 @@ export default function Login(props) {
     const idToken = googleUser.getAuthResponse().id_token;
     // // get profile info
     // const profile = googleUser.getBasicProfile();
-    // const googleId = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    // const googleId = profile.getId();
     // const name = profile.getGivenName();
     // const image = profile.getImageUrl();
-    // const email = profile.getEmail(); // This is null if the 'email' scope is not present.
+    // const email = profile.getEmail();
 
     const googleId = await verifyToken(idToken);
     if (googleId) {
@@ -148,9 +144,8 @@ export default function Login(props) {
 
   function handleGLoginClick() {
   }
-
+  // ---
   // --- Regular Login ---
-
   function validateUsername(username) {
     let valid =
       username.length >= 6 &&
@@ -187,9 +182,18 @@ export default function Login(props) {
     }
   }
 
+  function handleUsername(e) {
+    setUsername(e.target.value);
+  }
+
+  function handlePassword(e) {
+    setPassword(e.target.value);
+  }
+  // --- 
+  // --- Guest Login
   function handleGuest() {
     const userObject = {
-      userName: `guest${Date.now()}${Math.random()}`, // somewhat random unique id. consider npm uuid
+      userName: `guest${Date.now()}${Math.random()}`, // somewhat random unique id. todo: npm uuid
       type: "guest"
     };
     if (online) {
@@ -199,14 +203,7 @@ export default function Login(props) {
       setIsSignedIn(true); // component will unmount
     }
   }
-
-  function handleUsername(e) {
-    setUsername(e.target.value);
-  }
-
-  function handlePassword(e) {
-    setPassword(e.target.value);
-  }
+  // ---
 
   const offlineLogin = (
     <div id="login" className="overlay">
@@ -285,3 +282,10 @@ export default function Login(props) {
     </div>
   );
 }
+
+async function googleSignOut() {
+  const auth2 = await gapi.auth2.getAuthInstance();
+  await auth2.signOut();
+}
+
+export { googleSignOut };
