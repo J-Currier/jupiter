@@ -28,11 +28,13 @@
 #login .loginInput {
   padding: 0 20px;
   height: 40px;
+  color: var(--input-font-color);
+  font-weight: bold;
 }
 #login .loginBtn {
   height: 50px;
   background-color: #fff;
-  color: var(--text-primary-color);
+  color: var(--input-font-color);
   font-weight: bold;
 }
 #login .loginBtn:hover,

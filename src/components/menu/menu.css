@@ -91,8 +91,7 @@
     color: #fff;
   }
   #highScore .highlight {
-    background-color: var(--menu-highlight-color);
-    color: var(--text-emphasis-color);
+    font-weight: bold;
   }
   #noScore {
     font-size: 2em;
