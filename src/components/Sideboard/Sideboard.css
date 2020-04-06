@@ -74,7 +74,7 @@
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  background-color: var(--gold02);
+  background-color: var(--input-background-color);
   color: var(--blue4);
   text-align: center;
 }
