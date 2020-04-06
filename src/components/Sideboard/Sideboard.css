@@ -15,7 +15,7 @@
   justify-content: center;
   align-content: center;
 }
-.iconBtn {
+.iconBtn, .iconBtn svg {
   outline: none;
 }
 .tabBtn {
@@ -36,11 +36,11 @@
   fill: var(--icon-fill-color2);
 }
 .tabBtn .activeTab ellipse {
-  fill: var(--icon-fill-color);
+  fill: var(--icon-fill-color3);
 }
 .tabBtn .activeTab path,
 .tabBtn .activeTab ellipse {
-  stroke: var(--icon-stroke-color);
+  stroke: var(--icon-stroke-color3);
 }
 
 
@@ -56,15 +56,30 @@
 .controlBtn ellipse {
   fill: var(--icon-fill-color);
 }
-.iconBtn:hover {
+.iconBtn:hover, .controlInputNum:hover, .controlSelect:hover {
   transition: 0.1s;
-  outline: none;
   filter: drop-shadow(0px 0px 2px #fff);
 }
 .iconBtn:active {
   transition: .1s;
   transform: scale(1.05);
   transform-origin: center center;
+}
+/* Hide number arrows */
+.controlInputNum {
+  -moz-appearance: textfield;
+}
+.controlInputNum::-webkit-inner-spin-button,
+.controlInputNum::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Select dropdowns to match Chrome in Firefox */
+@supports (-moz-appearance:none) {
+  .controlSelect {
+    -moz-appearance:none;
+    background: url('data:image/gif;base64,R0lGODlhBgAGAKEDAFVVVX9/f9TU1CgmNyH5BAEKAAMALAAAAAAGAAYAAAIODA4hCDKWxlhNvmCnGwUAOw==') calc(100% - 5px) center no-repeat;
+  }
 }
 .controlInputNum,
 .controlSelect {
@@ -77,14 +92,8 @@
   background-color: var(--input-background-color);
   color: var(--input-font-color);
   text-align: center;
-}
-.controlInputNum {
-  -moz-appearance: textfield;
-}
-.controlInputNum::-webkit-inner-spin-button,
-.controlInputNum::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  /* Chrome */
+  text-align-last: center;
 }
 .reflectXBtn {
   transform: scaleX(-1);

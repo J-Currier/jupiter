@@ -1,11 +1,17 @@
+/* Variable usage: var(--my-variable) 
+  e.g. color: var(--text-primary-color);
+*/
+
 :root {
   --text-primary-color: #0f0f0f;
   --text-secondary-color: #f0f8ff;
   --text-emphasis-color: #2CBF3E;
   --icon-fill-color: #e2ab0b;
   --icon-stroke-color: #1d219d;
-  --icon-fill-color2: rgba(226, 171, 11, 0.7);
-  --icon-stroke-color2: rgb(50, 50, 50, 0.7);
+  --icon-fill-color2: #e2ab0b;
+  --icon-stroke-color2: #0f0f0f;
+  --icon-fill-color3: #73bd33;
+  --icon-stroke-color3: #0f0f0f;
   --game-background-color: rgba(255, 255, 255, 0.2);
   --menu-background-color: rgb(240, 248, 255, 0.9);
   --input-background-color: #ffe699;
