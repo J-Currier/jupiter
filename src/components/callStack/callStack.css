@@ -94,7 +94,7 @@
 .calling-card {
     display: grid;
     height: 12.5%;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 2fr 6fr 1fr;
     justify-items: center;
     align-items: center;
     justify-content: center;
@@ -109,6 +109,17 @@
 }
 .calling-card p {
     padding: 2px;
+}
+
+.delete-button {
+    height: 10px;
+    width: 10px;
+
+}
+
+.card-delete {
+    height: 10px;
+    width: 10px;
 }
 
 #clear-button {

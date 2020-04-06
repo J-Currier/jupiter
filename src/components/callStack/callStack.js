@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './callStack.css'
 import { ReactComponent as ClearSvg } from "../../images/btnClear.svg";
 import { ReactComponent as RunSvg } from "../../images/btnRun.svg";
+import { ReactComponent as DelSvg } from "../../images/btnDelete.svg";
+
 
 
 
@@ -14,7 +16,9 @@ export function CallCard(props) {
                 className="cardIcon"
             />
             <p>{props.desc}</p>
-            {/* <button>X</button> */}
+            <DelSvg 
+                classname="cardIcon"
+            />
         </div>
     )
 }
