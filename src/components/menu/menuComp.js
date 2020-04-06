@@ -105,8 +105,9 @@ export default function Menu(props) {
     setMenuOpen(false);
   }
   async function handleClickSignOut() {
-    googleSignOut();
-    
+    if (props.user.type !== "guest") {
+      googleSignOut();
+    }
     setMenuOpen(false);
     props.setUser(null);
     setTimeout(() => {
