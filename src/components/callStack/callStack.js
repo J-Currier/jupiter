@@ -10,7 +10,7 @@ export function CallCard(props) {
     const Svg = props.image
 
     function handleClick() {
-        props.deleteItem(props.id + 1)
+        props.deleteItem(props.id);
     }
     
     return(
