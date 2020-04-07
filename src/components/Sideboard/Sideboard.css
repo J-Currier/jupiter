@@ -9,11 +9,20 @@
 #sideboard nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: var(--game-background-color);
+  grid-template-rows: 1fr;
+  height: 100%;
+  width: 100%;
+  align-self: start;
   justify-items: center;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   align-content: center;
+}
+.activeDiv {
+  background-color: none;
+}
+.inactiveDiv {
+  background-color: var(--game-background-color);
 }
 .iconBtn, .iconBtn svg {
   outline: none;
