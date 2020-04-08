@@ -25,7 +25,6 @@ Azure: https://graphhopper.azurewebsites.net/
 * [Visual Studio .Net C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - API App
 * [SQL Server](https://www.microsoft.com/en-ca/sql-server/sql-server-2019) - Database
 
-
 ## Authors
 
 * **Mohsen Aghajani**
