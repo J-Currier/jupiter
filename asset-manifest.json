@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/jupiter/static/css/main.a8c682ed.chunk.css",
+    "main.css": "/jupiter/static/css/main.129caabe.chunk.css",
     "main.js": "/jupiter/static/js/main.bbbc1982.chunk.js",
     "main.js.map": "/jupiter/static/js/main.bbbc1982.chunk.js.map",
     "runtime-main.js": "/jupiter/static/js/runtime-main.ecdc097f.js",
@@ -8,9 +8,9 @@
     "static/js/2.8cafeb0d.chunk.js": "/jupiter/static/js/2.8cafeb0d.chunk.js",
     "static/js/2.8cafeb0d.chunk.js.map": "/jupiter/static/js/2.8cafeb0d.chunk.js.map",
     "index.html": "/jupiter/index.html",
-    "precache-manifest.4a9ae10793150833da670a5b77a0c5f4.js": "/jupiter/precache-manifest.4a9ae10793150833da670a5b77a0c5f4.js",
+    "precache-manifest.8e8ab2c028bd5b599d3d75da775ab5de.js": "/jupiter/precache-manifest.8e8ab2c028bd5b599d3d75da775ab5de.js",
     "service-worker.js": "/jupiter/service-worker.js",
-    "static/css/main.a8c682ed.chunk.css.map": "/jupiter/static/css/main.a8c682ed.chunk.css.map",
+    "static/css/main.129caabe.chunk.css.map": "/jupiter/static/css/main.129caabe.chunk.css.map",
     "static/js/2.8cafeb0d.chunk.js.LICENSE.txt": "/jupiter/static/js/2.8cafeb0d.chunk.js.LICENSE.txt",
     "static/media/Icon_menu.6edbce04.svg": "/jupiter/static/media/Icon_menu.6edbce04.svg",
     "static/media/btnClear.886a4983.svg": "/jupiter/static/media/btnClear.886a4983.svg",
@@ -29,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.ecdc097f.js",
     "static/js/2.8cafeb0d.chunk.js",
-    "static/css/main.a8c682ed.chunk.css",
+    "static/css/main.129caabe.chunk.css",
     "static/js/main.bbbc1982.chunk.js"
   ]
 }
