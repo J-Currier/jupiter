@@ -101,9 +101,9 @@
 .calling-card .delete-button {
     margin: 0;
     width: 80%;
-    height: 24%;
+    height: 50%;
     align-self: start;
-    justify-self: end;
+    justify-self: start;
 }
 .calling-card .cardIcon {
     margin: 0;
