@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Graph_Hopper.Models;
-using Microsoft.Extensions.Logging;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Graph_Hopper.Controllers
 {
@@ -43,7 +46,7 @@ namespace Graph_Hopper.Controllers
 
         // GET: api/Players/=msn
         [HttpGet("={username}")]
-        public async Task<ActionResult<Player>> GetPlayer(string username)
+        public async Task<ActionResult<Player>> GetPlayerByUserName(string username)
         {
             var players = await _context.Players.Where(p => p.UserName == username).ToListAsync();
 
@@ -61,6 +64,46 @@ namespace Graph_Hopper.Controllers
             return player;
         }
 
+        // POST: api/Players/idToken
+        [HttpPost("idToken")]
+        public async Task<ActionResult<object>> GetPlayerByIdToken(GoogleToken token)
+        {
+            string GoogleApiTokenInfoUrl = "https://oauth2.googleapis.com/tokeninfo?id_token=";
+            HttpClient client = new HttpClient();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(GoogleApiTokenInfoUrl + token.IdToken);
+                var result = await response.Content.ReadAsStringAsync();
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    return result; // returns the error received from google, i.e. "invalid_token"
+                }
+
+                GoogleTokenInfo tokenInfo = JsonConvert.DeserializeObject<GoogleTokenInfo>(result);
+               
+                if (tokenInfo.iss != "accounts.google.com" && tokenInfo.iss != "https://accounts.google.com")
+                {
+                    return "Not issued by google";
+                }
+
+                if (tokenInfo.aud != "381072268579-0jo9s6uk126vi0hsc6rk52okmdvmkucm.apps.googleusercontent.com")
+                {
+                    return "Not issued from GraphHopper";
+                }
+                token.IdToken = null;
+                token.UserName = tokenInfo.sub;
+                return token;
+
+            }
+            catch (Exception error)
+            {
+
+                return error;
+            }
+
+
+        }
         // PUT: api/Players/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
