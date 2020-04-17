@@ -13,18 +13,25 @@ function Star(props) {
   } = props.shapeInfo;
   let [anchorX, anchorY, size, orientation] = position;
   let anchorDotSize = props.anchorDotSize;
+
+  let e1 = Math.tan(Math.PI / 5) * (size / 2);
+  let f = size / (2 * Math.cos(Math.PI / 5));
+  let e2 = Math.sin(Math.PI / 10) * size;
+  let e4 = Math.sin(Math.PI / 10) * f;
+  let e5 = Math.cos(Math.PI / 10) * f;
+  let e3 = Math.sin(Math.PI / 2.5) * size;  
   
   let orientation1 = [
-    [anchorX, anchorY],
-    [anchorX + (size/525)*175, anchorY - (size/525)*125],
-    [anchorX + (size/525)*375, anchorY],
-    [anchorX + (size/525)*300, anchorY - (size/525)*200],
-    [anchorX + (size/525)*425, anchorY - (size/525)*350],
-    [anchorX + (size/525)*250, anchorY - (size/525)*350],
-    [anchorX + (size/525)*175, anchorY - (size/525)*525],
-    [anchorX + (size/525)*100, anchorY - (size/525)*350],
-    [anchorX - (size/525)*75, anchorY - (size/525)*350],
-    [anchorX + (size/525)*50, anchorY - (size/525)*200]
+    [anchorX , anchorY],
+    [anchorX + size/2 , anchorY - e1],
+    [anchorX + size , anchorY],
+    [anchorX + size - e4 , anchorY - e5],
+    [anchorX + size + e2 , anchorY - e3],
+    [anchorX + size + e2 - f , anchorY - e3],
+    [anchorX + size/2 , anchorY - e3 - f],
+    [anchorX - e2 + f , anchorY - e3],
+    [anchorX - e2 , anchorY - e3],
+    [anchorX + e4 , anchorY - e5]
   ]
 
   let cornerArray = shapesFunctions.determineCorners(
@@ -34,6 +41,7 @@ function Star(props) {
     orientation,
     orientation1
   );
+  console.log(cornerArray);
 
   for (let corner of cornerArray) {
     if (corner[1] < 0 || corner[1] > 2000) {

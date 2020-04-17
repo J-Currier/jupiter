@@ -1,14 +1,9 @@
 
 const mathFunctions = {
     shapeMaker: (size) => {
-        let anchorX = 0
-        while(anchorX < size || anchorX > 2000-size ) {
-            anchorX = (Math.floor(Math.random()*19)+1)*100
-        }
-        let anchorY = 0
-        while(anchorY < size || anchorY > 2000-size ) {
-            anchorY = (Math.floor(Math.random()*19)+1)*100
-        }
+        let margin = (size/100)+2
+        let anchorX = (Math.floor(Math.random()*(20-2*margin+1))+margin)*100
+        let anchorY = (Math.floor(Math.random()*(20-2*margin+1))+margin)*100
         return [anchorX, anchorY]
     },
 
