@@ -4,7 +4,6 @@ import "./login.css";
 import { keys } from "../../config.js";
 import { fetchJson } from "../../scripts/fetch";
 import loadScript from "../../scripts/loadScript";
-import LoadIcon from "../loadIcon/loadIcon";
 
 export default function Login(props) {
   const { setIsSignedIn, setUser, setCurrentLevel, online, setOnline } = props;
@@ -12,15 +11,8 @@ export default function Login(props) {
   const [password, setPassword] = useState("");
   const [usernameMsg, setUsernameMsg] = useState("");
   const [passwordMsg, setPasswordMsg] = useState("");
-  const [loading, setLoading] = useState(true);
   const [loginMsg, setLoginMsg] = useState("Loading Google Sign-in...");
   const [gapiLoaded, setGapiLoaded] = useState(false);
-
-  // Loading Icon
-  useEffect(() => {
-    setLoading(loginMsg.includes("...") ? true : false );
-    setLoginMsg(prev => prev.replace("...", "."))
-  }, [loginMsg]);
 
   // Display in case sign in never loads
   const gapiLoadedRef = useRef(false);
@@ -131,7 +123,6 @@ export default function Login(props) {
       return response.userName;
     } catch (e) {
       setLoginMsg("Google verification failed.");
-      setLoading(false);
     }
   }
 
@@ -291,7 +282,7 @@ export default function Login(props) {
           <button id="gLoginBtn" onClick={handleGLoginClick}></button>
         }
         <div className="loginLabel">
-          {loginMsg}{loading && <LoadIcon />}
+          {loginMsg}
         </div>
       </div>
     </div>
