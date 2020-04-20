@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./login.css";
 import { keys } from "../../config.js";
-import { fetchJson, tokenInfo } from "../../scripts/fetch";
+import { fetchJson } from "../../scripts/fetch";
 import loadScript from "../../scripts/loadScript";
 import LoadIcon from "../loadIcon/loadIcon";
 
@@ -123,28 +123,21 @@ export default function Login(props) {
 
   // --- Google Login ---
   async function verifyToken(idToken) {
-    // // verify from google api tokeninfo (not via backend)
-    let response = await tokenInfo(idToken);
-    const checkIssuer = iss =>
-      iss === "accounts.google.com" || iss === "https://accounts.google.com";
-    const checkAud = aud =>
-      aud === keys.clientId + ".apps.googleusercontent.com";
-    if (!checkIssuer(response.iss) || !checkAud(response.aud)) {
+    // // request that backend verify token from google api tokeninfo
+    try {
+      let response = await fetchJson("Players/idToken", "POST", {
+        idToken: idToken,
+      });
+      return response.userName;
+    } catch (e) {
       setLoginMsg("Google verification failed.");
-    } else {
-      return response.sub; // Google ID
+      setLoading(false);
     }
   }
 
   async function handleSuccess(googleUser) {
     setLoginMsg("Signing in...");
     const idToken = googleUser.getAuthResponse().id_token;
-    // // get profile info
-    // const profile = googleUser.getBasicProfile();
-    // const googleId = profile.getId();
-    // const name = profile.getGivenName();
-    // const image = profile.getImageUrl();
-    // const email = profile.getEmail();
 
     const googleId = await verifyToken(idToken);
     if (googleId) {
